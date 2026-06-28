@@ -1,0 +1,23 @@
+{
+  "name": "Imperium Italian Textile",
+  "short_name": "Imperium",
+  "description": "Premium Italian fabrics sourced directly from Italy's finest mills and delivered to Dubai's most discerning tailors and hospitality groups.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F3",
+  "theme_color": "#FAF8F3",
+  "lang": "en-AE",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+/* ==========================================================================
+   Imperium Italian Textile — Design Tokens & Base Styles
+   Source of truth:  DESIGN.md §2–3 · MOTION_SPEC.md §2 · TECHNICAL_ARCHITECTURE.md §5–6
+   No global class names are exported here except reset/base element styles.
+   Component styling lives colocated as CSS Modules.
+   ========================================================================== */
+
+/* --- CSS Logical Properties throughout (RTL-ready per Architecture §8) ---- */
+
+:root {
+  /* --- Colour Palette (DESIGN.md §3) ------------------------------------ */
+
+  /* Primary */
+  --color-carbone: #1a1a1a; /* primary text, headlines */
+  --color-pietra: #faf8f3; /* page background — raw Italian linen */
+  --color-gesso: #ffffff; /* cards, overlays, form fields */
+  --color-sabbia: #b8a99a; /* eyebrow text, secondary labels, dividers */
+  --color-ardesia: #4a4540; /* body text — softer than pure black */
+
+  /* Accent */
+  --color-blu-notte: #1b2a4a; /* CTA borders, active state, brand moments */
+  --color-oro-antico: #c4a76c; /* founder quote, "Est. 2026", hover accents */
+  --color-terracotta: #c47a5a; /* reserved: error states, map origin pin */
+
+  /* Functional */
+  --color-whatsapp: #25d366;
+  --color-error: #b83a2e;
+  --color-success: #2e7d4f;
+
+  /* Transparent overlays */
+  --color-hero-gradient: rgba(0, 0, 0, 0.4);
+
+  /* --- Typography (DESIGN.md §2) ---------------------------------------- */
+
+  --font-serif: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+  --font-sans: "DM Sans", "Helvetica Neue", "Arial", sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Modular scale (1:1.333 — perfect fourth) — desktop defaults */
+  --text-eyebrow: 11px;
+  --text-caption: 13px;
+  --text-body: 16px;
+  --text-body-large: 18px;
+  --text-subheadline: 21px;
+  --text-h4: 24px;
+  --text-h3: 32px;
+  --text-h2: 42px;
+  --text-h1: 56px;
+  --text-display: 72px;
+
+  --leading-body: 1.7;
+  --leading-subheadline: 1.5;
+  --leading-h4: 1.35;
+  --leading-h3: 1.3;
+  --leading-h2: 1.2;
+  --leading-h1: 1.1;
+  --leading-display: 1.05;
+
+  --tracking-eyebrow: 0.15em;
+  --tracking-caption: 0.02em;
+  --tracking-nav: 0.05em;
+  --tracking-label: 0.05em;
+
+  /* --- Spacing Scale ---------------------------------------------------- */
+
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 160px;
+
+  --section-padding-y: clamp(80px, 10vw, 160px);
+  --subsection-padding-y: clamp(48px, 6vw, 96px);
+  --element-padding-y: clamp(24px, 3vw, 40px);
+
+  /* --- Layout (DESIGN.md §4) -------------------------------------------- */
+
+  --max-content-width: 1200px;
+  --nav-height: 72px;
+  --nav-height-mobile: 56px;
+  --whatsapp-bar-height: 56px;
+
+  /* Grid */
+  --grid-columns: 12;
+  --grid-gutter-desktop-xl: 32px;
+  --grid-gutter-desktop: 24px;
+  --grid-gutter-tablet: 20px;
+  --grid-gutter-mobile: 16px;
+
+  --grid-margin-desktop-xl: 120px;
+  --grid-margin-desktop: 80px;
+  --grid-margin-tablet: 40px;
+  --grid-margin-mobile: 24px;
+
+  /* Breakpoints (mirrored in src/lib/constants.ts) */
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-desktop-xl: 1440px;
+
+  /* --- Motion Tokens (MOTION_SPEC.md §2) -------------------------------- */
+  /* Durations */
+  --motion-duration-instant: 150ms;
+  --motion-duration-fast: 250ms;
+  --motion-duration-base: 400ms;
+  --motion-duration-slow: 800ms;
+  --motion-duration-cinematic: 1200ms;
+
+  /* Easings */
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out, for entries */
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Distances */
+  --motion-distance-xs: 4px;
+  --motion-distance-sm: 8px;
+  --motion-distance-md: 16px;
+  --motion-distance-lg: 24px;
+  --motion-distance-xl: 48px;
+
+  /* Focus */
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 2px;
+
+  /* --- Z-index scale ---------------------------------------------------- */
+  --z-base: 1;
+  --z-nav: 100;
+  --z-whatsapp-bar: 90;
+  --z-overlay: 200;
+}
+
+/* --- Font-Face Declarations ---------------------------------------------- */
+/* Self-hosted WOFF2 (Architecture §5). Fallback metric overrides eliminate
+   cumulative layout shift when the custom font swaps in (Architecture §6). */
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/CormorantGaramond-Regular.woff2") format("woff2");
+  /* Fallback metrics matched to Cormorant to minimise CLS */
+  ascent-override: 96.22%;
+  descent-override: 29.89%;
+  line-gap-override: 0%;
+  size-adjust: 96.03%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/CormorantGaramond-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/CormorantGaramond-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/CormorantGaramond-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/CormorantGaramond-MediumItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/DMSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/DMSans-Medium.woff2") format("woff2");
+}
+
+/* --- CSS Reset (minimal, modern) ----------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100svh;
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  color: var(--color-ardesia);
+  background-color: var(--color-pietra);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* --- Base Element Styles ------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-carbone);
+  line-height: var(--leading-h2);
+}
+
+/* --- Accessibility ------------------------------------------------------- */
+
+:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-blu-notte);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* Visually hidden — for skip links, aria-live regions, etc. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Reduced-Motion Strategy (MOTION_SPEC.md §4) ------------------------- */
+/* All --motion-duration-* collapse to 0ms, so every CSS transition that
+   references a token respects the user's preference without per-component
+   overrides. Component-level Framer animations consume useReducedMotion(). */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-instant: 0ms;
+    --motion-duration-fast: 0ms;
+    --motion-duration-base: 0ms;
+    --motion-duration-slow: 0ms;
+    --motion-duration-cinematic: 0ms;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Mobile Type Scale (DESIGN.md §2) ----------------------------------- */
+
+@media (max-width: 767px) {
+  :root {
+    --text-display: 40px;
+    --text-h1: 36px;
+    --text-h2: 30px;
+    /* Body stays at 16px — never smaller (prevents iOS auto-zoom) */
+  }
+}
