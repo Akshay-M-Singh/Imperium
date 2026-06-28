@@ -1,0 +1,21 @@
+.next
+node_modules
+public/fonts
+public/video
+public/images
+playwright-report
+test-results
+coverage
+pnpm-lock.yaml
+package-lock.json
+*.woff2
+*.mp4
+
+# Planning documents — authored, not formatter-managed.
+DESIGN.md
+MOTION_SPEC.md
+TECHNICAL_ARCHITECTURE.md
+DEVELOPMENT_ROADMAP.md
+
+# Skill packs vendored under .agents/ — not part of this repo's formatting.
+.agents/**
