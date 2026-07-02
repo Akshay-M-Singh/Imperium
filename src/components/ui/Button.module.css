@@ -1,1 +1,60 @@
-/* Button — DESIGN.md §9.01, §9.02. */
+/* Button — DESIGN.md §9.01, §9.02. Pill shape; ghost fills Blu Notte on
+   hover, filled darkens 10%. Focus ring comes from :focus-visible in
+   globals.css. Transitions read motion tokens (reduced-motion safe). */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-block-size: 56px; /* touch target — DESIGN.md §8.6 */
+  padding-inline: var(--space-lg);
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ghost {
+  border: 1px solid var(--color-blu-notte);
+  color: var(--color-blu-notte);
+  background-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--color-blu-notte);
+  color: var(--color-gesso);
+}
+
+.filled {
+  border: 1px solid var(--color-blu-notte);
+  background-color: var(--color-blu-notte);
+  color: var(--color-gesso);
+}
+
+.filled:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+  border-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+}
+
+.whatsapp {
+  border: 1px solid var(--color-whatsapp);
+  background-color: var(--color-whatsapp);
+  color: var(--color-gesso);
+}
+
+.whatsapp:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+  border-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+}
