@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { isIndexingAllowed } from "@/app/robots";
 
 // NOTE: Font wiring is a placeholder. Phase 1 task 1.8 replaces this with
 // self-hosted Cormorant Garamond + DM Sans via <link> preload in <head>,
@@ -30,8 +31,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   robots: {
-    index: true,
-    follow: true,
+    index: isIndexingAllowed(),
+    follow: isIndexingAllowed(),
   },
 };
 
