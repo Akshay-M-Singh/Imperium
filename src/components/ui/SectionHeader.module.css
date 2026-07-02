@@ -1,1 +1,22 @@
-/* SectionHeader. */
+/* SectionHeader — eyebrow → headline → subline stack (DESIGN.md §9). */
+
+.header {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.headlineH2 {
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+}
+
+.headlineH3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+}
+
+.subline {
+  font-size: var(--text-body-large);
+  color: var(--color-ardesia);
+  max-inline-size: 540px;
+}
