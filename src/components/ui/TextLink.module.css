@@ -1,1 +1,19 @@
-/* TextLink — underline grows 0% → 100% on hover. */
+/* TextLink — underline draws left-to-right via background-size
+   (DESIGN.md §5: width 0% → 100%, 300ms). Uses currentColor so the link
+   adapts to light-on-dark contexts (hero) without variants. */
+
+.link {
+  color: var(--color-blu-notte);
+  font-weight: var(--font-weight-medium);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  padding-block-end: 2px;
+  transition: background-size var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.link:hover,
+.link:focus-visible {
+  background-size: 100% 1px;
+}
