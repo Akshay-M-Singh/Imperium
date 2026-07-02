@@ -1,1 +1,11 @@
-/* Eyebrow — 11px DM Sans 500, uppercase, +0.15em tracking. */
+/* Eyebrow — DESIGN.md §2 typographic rules: always uppercase, tracked wide. */
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+}
