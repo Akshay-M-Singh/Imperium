@@ -23,7 +23,8 @@ const nextConfig: NextConfig = {
           "default-src 'self'",
           "img-src 'self' data: blob:",
           `script-src 'self' 'unsafe-inline' https://plausible.io`,
-          `connect-src 'self' https://plausible.io https://api.resend.com`,
+          // Resend is called server-side only — the browser must never reach it (PRD §9).
+          `connect-src 'self' https://plausible.io`,
           "style-src 'self' 'unsafe-inline'",
           "font-src 'self' data:",
           "media-src 'self'",
@@ -45,9 +46,6 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
     ];
-  },
-  async redirects() {
-    return [{ source: "/ar", destination: "/ar/", permanent: false }];
   },
 };
 
