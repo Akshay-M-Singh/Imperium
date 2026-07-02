@@ -1,1 +1,47 @@
-/* Section wrapper — max-width, responsive margins, vertical rhythm. */
+/* Section wrapper — max-width, responsive margins, vertical rhythm
+   (DESIGN.md §4: grid margins 24/40/80/120, whitespace over dividers). */
+
+.section {
+  padding-block: var(--section-padding-y);
+}
+
+.dense {
+  padding-block: var(--subsection-padding-y);
+}
+
+.pietra {
+  background-color: var(--color-pietra);
+}
+
+.gesso {
+  background-color: var(--color-gesso);
+}
+
+.carbone {
+  background-color: var(--color-carbone);
+  color: var(--color-gesso);
+}
+
+.inner {
+  max-inline-size: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin-mobile);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding-inline: var(--grid-margin-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    padding-inline: var(--grid-margin-desktop);
+  }
+}
+
+@media (min-width: 1440px) {
+  .inner {
+    padding-inline: var(--grid-margin-desktop-xl);
+  }
+}

@@ -3,6 +3,8 @@
 // Reads spacing tokens from globals.css.
 
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import styles from "./Section.module.css";
 
 export interface SectionProps {
   children: ReactNode;
@@ -18,8 +20,23 @@ export interface SectionProps {
   dense?: boolean;
 }
 
-export function Section(_: SectionProps): ReactNode {
-  return null;
+export function Section({
+  children,
+  id,
+  ariaLabelledby,
+  as: Tag = "section",
+  background = "pietra",
+  dense = false,
+}: SectionProps): ReactNode {
+  return (
+    <Tag
+      id={id}
+      aria-labelledby={ariaLabelledby}
+      className={cn(styles.section, styles[background], dense && styles.dense)}
+    >
+      <div className={styles.inner}>{children}</div>
+    </Tag>
+  );
 }
 
 export default Section;
