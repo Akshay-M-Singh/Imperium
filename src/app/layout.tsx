@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { isIndexingAllowed } from "@/app/robots";
-
-// NOTE: Font wiring is a placeholder. Phase 1 task 1.8 replaces this with
-// self-hosted Cormorant Garamond + DM Sans via <link> preload in <head>,
-// per Architecture §5. The local font files live in /public/fonts/.
-const inter = Inter({ subsets: ["latin"], variable: "--font-placeholder" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com"),
@@ -44,8 +38,26 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+    <html lang="en">
+      <body>
+        {/* React 19 hoists these to <head>. Preload only the two dominant
+            text faces (Architecture §6.6); the rest load on demand. */}
+        <link
+          rel="preload"
+          href="/fonts/CormorantGaramond-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/DMSans-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        {children}
+      </body>
     </html>
   );
 }
