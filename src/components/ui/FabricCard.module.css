@@ -1,1 +1,72 @@
-/* FabricCard — DESIGN.md §9.04. 4:5 portrait. Hover scale per DESIGN.md §5. */
+/* FabricCard — DESIGN.md §9.04. 4:5 portrait image + tag + italic title + body + CTA. */
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--color-sabbia);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--motion-duration-slow) var(--motion-ease-out);
+}
+
+.card:hover .image,
+.card:focus-within .image {
+  transform: scale(1.03);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-block-start: var(--space-sm);
+}
+
+.tags {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: var(--leading-subheadline);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+}
+
+.tagsAccent {
+  color: var(--color-oro-antico);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-style: italic;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-h4);
+  color: var(--color-carbone);
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-body);
+  color: var(--color-ardesia);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cta {
+  margin-block-start: var(--space-xs);
+  font-size: 14px;
+}

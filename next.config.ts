@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
   async headers() {
+    const isDev = process.env.NODE_ENV === "development";
+
     const securityHeaders = [
       { key: "X-Frame-Options", value: "SAMEORIGIN" },
       { key: "X-Content-Type-Options", value: "nosniff" },
@@ -22,7 +24,9 @@ const nextConfig: NextConfig = {
         value: [
           "default-src 'self'",
           "img-src 'self' data: blob:",
-          `script-src 'self' 'unsafe-inline' https://plausible.io`,
+          // Next.js dev mode (React Fast Refresh) requires 'unsafe-eval'.
+          // Production builds do not, so we keep the stricter policy there.
+          `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://plausible.io`,
           // Resend is called server-side only — the browser must never reach it (PRD §9).
           `connect-src 'self' https://plausible.io`,
           "style-src 'self' 'unsafe-inline'",
