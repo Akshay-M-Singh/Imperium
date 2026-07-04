@@ -1,7 +1,7 @@
 import type { CollectionsData } from "@/types/collections";
 
 // Collections — Tessuti Italiani, Pezzi Unici, Ospitalità di Lusso
-// (DESIGN.md §9.04, PRD copy). Image paths point to /public/images/fabrics/.
+// (DESIGN.md §9.04, PRD §6.5). Image paths point to /public/images/fabrics/.
 
 export const collections: CollectionsData = [
   {
@@ -9,9 +9,12 @@ export const collections: CollectionsData = [
     tags: ["LINEN", "SILK", "WOOL", "COTTON"],
     title: "Tessuti Italiani",
     titleItalic: true,
-    body: "Placeholder copy. Final copy from the PRD lands here during the content pass.",
-    cta: { label: "View collection", href: "#collections" },
-    image: { src: "/images/fabrics/tessuti-italiani.jpg", alt: "" },
+    body: "The foundation of the house: linens, silks, wools and cottons sourced from Italian mills we know by name. Fabric for work that carries your label.",
+    cta: { label: "View collection →", href: "/fabrics" },
+    image: {
+      src: "/images/fabrics/tessuti-italiani.svg",
+      alt: "Close-up of Italian linen fabric showing natural weave texture.",
+    },
   },
   {
     id: "pezzi-unici",
@@ -19,17 +22,23 @@ export const collections: CollectionsData = [
     tagAccent: "oro-antico",
     title: "Pezzi Unici",
     titleItalic: true,
-    body: "Placeholder copy.",
-    cta: { label: "View collection", href: "#collections" },
-    image: { src: "/images/fabrics/pezzi-unici.jpg", alt: "" },
+    body: "Small runs, discontinued weaves, single bolts. When a piece is gone, it is gone — which is precisely the point.",
+    cta: { label: "View collection →", href: "/fabrics" },
+    image: {
+      src: "/images/fabrics/pezzi-unici.svg",
+      alt: "Rare Italian silk shantung with subtle slub texture and warm sheen.",
+    },
   },
   {
     id: "ospitalita-di-lusso",
     tags: ["HOSPITALITY", "BESPOKE"],
     title: "Ospitalità di Lusso",
     titleItalic: true,
-    body: "Placeholder copy.",
-    cta: { label: "Talk to us about your project", href: "#contact" },
-    image: { src: "/images/fabrics/ospitalita-di-lusso.jpg", alt: "" },
+    body: "Contract-grade fabric for hotels and restaurants that refuse to look like it. Specified with you, sampled fast.",
+    cta: { label: "Talk to us about your project →", href: "#contact" },
+    image: {
+      src: "/images/fabrics/ospitalita-di-lusso.svg",
+      alt: "Close-up of durable Italian wool upholstery fabric with tight twill weave.",
+    },
   },
 ];

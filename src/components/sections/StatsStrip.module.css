@@ -1,1 +1,42 @@
 /* StatsStrip — DESIGN.md §9.03. */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: var(--space-md);
+  padding-inline: var(--space-sm);
+}
+
+/* Mobile 2×2: vertical divider between columns, horizontal divider between rows. */
+.cell:nth-child(odd) {
+  border-inline-end: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
+}
+
+.cell:nth-child(n + 3) {
+  border-block-start: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cell {
+    border-block-start: none;
+    border-inline-end: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
+  }
+
+  .cell:nth-child(n + 3) {
+    border-block-start: none;
+  }
+
+  .cell:last-child {
+    border-inline-end: none;
+  }
+}

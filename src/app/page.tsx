@@ -1,5 +1,5 @@
 import { Navigation } from "@/components/layout";
-import { Hero } from "@/components/sections";
+import { Hero, OriginMap, StatsStrip, Collections } from "@/components/sections";
 
 export default function HomePage() {
   return (
@@ -7,6 +7,9 @@ export default function HomePage() {
       <Navigation />
       <main id="main">
         <Hero />
+        <OriginMap />
+        <StatsStrip />
+        <Collections />
       </main>
     </>
   );
