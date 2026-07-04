@@ -1,1 +1,300 @@
-/* Navigation — DESIGN.md §9.01. Placeholder. */
+/* Navigation — DESIGN.md §9.01 + §8. Transparent → opaque on scroll.
+   Tokens: colours, motion, layout from globals.css. */
+
+.header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: var(--nav-height-mobile);
+  z-index: var(--z-nav);
+  background-color: transparent;
+  border-block-end: 1px solid transparent;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-out),
+    border-color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.scrolled {
+  background-color: var(--color-pietra);
+  /* Sabbia at 30% opacity. */
+  border-block-end-color: rgba(184, 169, 154, 0.3);
+}
+
+.row {
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 120px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+/* --- Wordmark ------------------------------------------------------------- */
+
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wordmarkName {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-medium);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-carbone);
+}
+
+.wordmarkEst {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+}
+
+@media (max-width: 767px) {
+  .wordmarkName {
+    font-size: 16px;
+  }
+}
+
+/* --- Desktop -------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .header {
+    block-size: var(--nav-height);
+  }
+}
+
+.desktopNav {
+  flex: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: flex;
+  }
+}
+
+.desktopLink {
+  position: relative;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-caption); /* 13px */
+  color: var(--color-ardesia);
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.desktopLink::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -4px;
+  inset-inline-start: 0;
+  inline-size: 0;
+  block-size: 1px;
+  background-color: currentColor;
+  transition: inline-size var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .desktopLink:hover {
+    color: var(--color-carbone);
+  }
+
+  .desktopLink:hover::after {
+    inline-size: 100%;
+  }
+}
+
+.desktopActions {
+  display: none;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .desktopActions {
+    display: flex;
+  }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xxs);
+  min-block-size: 40px;
+  padding: 10px 20px;
+  border: 1px solid var(--color-blu-notte);
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption); /* 13px */
+  color: var(--color-blu-notte);
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-out),
+    color var(--motion-duration-fast) var(--motion-ease-out),
+    transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.cta:hover {
+  background-color: var(--color-blu-notte);
+  color: var(--color-gesso);
+}
+
+.cta:active {
+  transform: scale(0.97);
+}
+
+/* --- Language toggle ------------------------------------------------------ */
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 12px;
+  color: var(--color-sabbia);
+}
+
+.langActive {
+  color: var(--color-carbone);
+}
+
+/* --- Mobile hamburger ----------------------------------------------------- */
+
+.hamburger {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  block-size: var(--nav-height-mobile);
+  inline-size: var(--nav-height-mobile);
+  min-block-size: 48px;
+  min-inline-size: 48px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  /* Above the overlay so the morphed X remains visible & clickable. */
+  z-index: calc(var(--z-overlay) + 1);
+  touch-action: manipulation;
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+.lineTop,
+.lineBottom {
+  display: block;
+  inline-size: 22px;
+  block-size: 1.5px;
+  background-color: var(--color-carbone);
+  transform-origin: center;
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.hamburger[data-open="true"] .lineTop {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.hamburger[data-open="true"] .lineBottom {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+/* --- Mobile overlay ------------------------------------------------------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100dvh;
+  min-block-size: 100svh;
+  background-color: var(--color-pietra);
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  padding-block: calc(var(--nav-height-mobile) + var(--space-xl));
+  padding-inline: var(--space-sm);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity var(--motion-duration-base) var(--motion-ease-out),
+    transform var(--motion-duration-base) var(--motion-ease-out);
+}
+
+@media (min-width: 768px) {
+  .overlay {
+    display: none;
+  }
+}
+
+.overlay[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mobileNav {
+  margin-block: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md); /* 24px */
+}
+
+.mobileLink {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-h3); /* 32px */
+  line-height: var(--leading-h3);
+  color: var(--color-carbone);
+  text-align: center;
+}
+
+.whatsappCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xxs);
+  min-block-size: 56px;
+  padding-inline: var(--space-lg);
+  margin-block-end: var(--space-lg);
+  border-radius: 100px;
+  background-color: var(--color-whatsapp);
+  color: var(--color-gesso);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: 14px;
+  touch-action: manipulation;
+  transition: background-color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.whatsappCta:hover {
+  background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+}
+
+.whatsappCta:active {
+  transform: scale(0.98);
+}
