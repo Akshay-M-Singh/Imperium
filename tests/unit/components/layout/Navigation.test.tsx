@@ -14,10 +14,10 @@ describe("Navigation", () => {
     document.body.style.overflow = "";
   });
 
-  it("renders the wordmark and the Est. 2026 subline", () => {
-    render(<Navigation />);
+  it("renders the wordmark without an establishment year", () => {
+    const { container } = render(<Navigation />);
     expect(screen.getByText("Imperium Italian Textile")).toBeInTheDocument();
-    expect(screen.getByText("Est. 2026")).toBeInTheDocument();
+    expect(container.textContent).not.toMatch(/Est\.|20\d\d/);
   });
 
   it("renders all five nav links in both the desktop nav and mobile overlay", () => {
