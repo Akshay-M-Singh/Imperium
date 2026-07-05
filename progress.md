@@ -186,10 +186,12 @@ Phase 6.B is production-only:
 These must be resolved before launch:
 
 - [ ] Hero video MP4 (desktop + mobile) and poster JPEG
-- [ ] Commissioned origin map illustration
-- [ ] Real fabric photography ×3 for collection cards
+- [ ] Client wordmark logo PNG staged at `public/images/logo/imperium-wordmark.png` and `SITE.logoSrc` pointed at it (hero currently renders the typographic wordmark)
+- [ ] Commissioned Italy→Gulf route illustration for the Why Imperium map slot (replaces `MediaSlot` inner markup in `WhyImperium.tsx`)
+- [ ] Official Made in Italy stamp artwork for the Why Imperium stamp slot
+- [ ] Real fabric photography ×4 for collection cards (incl. Interior & Exterior Design)
 - [ ] Sofia’s professional 3:4 portrait
-- [ ] Made in Italy certification scan
+- [ ] Made in Italy certification scan display approval → set `founder.certification.src`
 - [ ] ≥1 real testimonial
 - [ ] Real WhatsApp Business number
 - [ ] `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_TO` environment variables

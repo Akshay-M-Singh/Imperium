@@ -3,6 +3,8 @@
 > **Purpose:** You are a planning, strategy, and security partner for the Imperium Italian Textile website. This file is your context. Default mode: understand → surface unknowns → recommend decisions → confirm → only then execute. Do not build unless the current phase calls for it.
 >
 > **Provenance:** v3, rewritten 2026-07-05 after `git pull origin main` brought in commit `dadcd1f` (three feature commits dated 2026-07-05: Collections/StatsStrip/OriginMap, Phase 4, Phase 5). It supersedes v2 (2026-07-02), whose central claim — "it's a scaffold, all 28 components are stubs" — **is now materially out of date**. Facts below are labeled **[verified]** (checked against code, `npm run test`/`typecheck`/`build`, or the live site on 2026-07-05) or **[reported]** (claims from `progress.md` / commit messages not independently re-derived, or client/user statements not verifiable in the repo).
+>
+> **Addendum (2026-07-05/06):** the client's homepage copy pass (plan `docs/superpowers/plans/2026-07-05-homepage-refinement-client-copy.md`, branch `feat/homepage-refinement-client-copy`) has been executed on top of this ground truth. It resolves several items §7/§12 called out as founder-unvalidated (collections fork, hero copy, founder story, stats claims, trust-pillar claims) with real client decisions, removes every "2026" reference site-wide, and replaces OriginMap/TrustPillars with a new `WhyImperium` section. See the inline "Amended (2026-07-05/06)" notes below for what changed; real asset gaps (logo PNG, photography, video, certification scan, WhatsApp number, domain) are unchanged and still open.
 
 ---
 
@@ -55,9 +57,11 @@ v2 said this was a scaffold where "all 28 UI components are stubs." **That is no
 - Live site (`https://imperium-opal.vercel.app`) returns HTTP 200 with the real `<title>`, a rendered OriginMap (alt text present), and correct `<h1>`-down structure — **not** the old "Scaffold placeholder" text.
 - Live `robots.txt` → `Disallow: /` (confirmed **not** indexable right now — see §10).
 
-**What's actually built:** Navigation (desktop + mobile overlay), Hero (100dvh, lazy video hook, entry animation), OriginMap, StatsStrip (with `CountUp`), Collections (Embla carousel, `TiltCard`-wrapped `FabricCard`s), TrustPillars, Founder (with `PullQuote`), Testimonials (correctly renders `null` — array is empty), Contact (full form: `FormField` with floating labels, `AnimatedFocusRing`, `ValidationMorph`, working React Server Action), Footer, `WhatsAppButton` (inline + fixed mobile bar), `/privacy` page. Motion layer (`ScrollReveal`, `CountUp`, `TiltCard`, `MagneticButton`, `AnimatedFocusRing`, `ValidationMorph`, `EmblaContainer`/`CarouselSlide`) is implemented and wired in, not just installed.
+**What's actually built:** Navigation (desktop + mobile overlay), Hero (100dvh, lazy video hook, entry animation), StatsStrip (with `CountUp`), Collections (Embla carousel, `TiltCard`-wrapped `FabricCard`s), Founder (with `PullQuote`), Testimonials (correctly renders `null` — array is empty), Contact (full form: `FormField` with floating labels, `AnimatedFocusRing`, `ValidationMorph`, working React Server Action), Footer, `WhatsAppButton` (inline + fixed mobile bar), `/privacy` page. Motion layer (`ScrollReveal`, `CountUp`, `TiltCard`, `MagneticButton`, `AnimatedFocusRing`, `ValidationMorph`, `EmblaContainer`/`CarouselSlide`) is implemented and wired in, not just installed.
 
-**What's still explicitly NOT built:** `/about`, `/contact`, `/fabrics` routes remain one-line `"V2 stub"` pages (`<h1>About</h1>` etc.) **[verified]** — the real experience is the single-page homepage with anchor-based sections. Read this as the IA decision having been _made_ (single-page for V1), not as an oversight — but it was made in code, not by the founder (§7).
+**Amended (2026-07-05/06):** `OriginMap` and `TrustPillars` are **deleted** (recoverable via git history) and replaced by a single new `WhyImperium` section — three alternating editorial rows with reserved map/stamp media placeholders, mounted between Collections and Founder. Hero is now logo-led (typographic wordmark inside the `h1`, `SITE.tagline` beneath — `SITE.logoSrc` stays `null` until the client PNG is provided). `/fabrics` is **no longer a one-line stub** — it's a real light detail page with four alternating collection blocks at deep anchors (`/fabrics#tessuti-italiani` etc.), backing the homepage's "View Collection" CTAs.
+
+**What's still explicitly NOT built:** `/about` and `/contact` routes remain one-line `"V2 stub"` pages (`<h1>About</h1>` etc.) **[verified]** — the real experience is the single-page homepage with anchor-based sections plus the new light `/fabrics` page. Read this as the IA decision having been _made_ (single-page for V1, `/fabrics` as the one exception), not as an oversight — but it was made in code, not by the founder (§7).
 
 **Still true from v2, unchanged:** all content is placeholder and founder-unvalidated (§7, §8); domain unregistered (§10); logo/real photography not in the repo.
 
@@ -119,14 +123,14 @@ Everything below is rendering on the production deployment today (even though it
 
 **Business & content claims**
 
-1. **Three curated named collections** — _Tessuti Italiani_, _Pezzi Unici_, _Ospitalità di Lusso_ — vs. the demo's material-filter library. **Unchanged, unresolved, and now fully built out with an Embla carousel** — the more code sits on top of this decision, the more expensive it is to reverse.
-2. Hero headline/tagline/eyebrow copy — placeholder-authored, unchanged from v2.
-3. Founder quote _"Every fabric I source is one I would stake my name on."_ and full bio paragraphs — placeholder-authored, now rendering live in the Founder section with `PullQuote` styling.
-4. "**Certified Made in Italy Expert**" caption — still rendering as **text-only** (`certification.src: null`), correctly waiting on a real scan.
-5. Four trust pillars ("Direct from the source," "Built for the Gulf," etc.) — plausible-sounding, still unvalidated claims, now live with numbered-manifesto styling.
-6. **Stats strip now renders four specific invented numbers**: "12+ Italian mills," "120+ fabrics in library," "15 years of expertise," "4 cities served" **[verified in `StatsStrip.tsx`]**. These are concrete, checkable, quotable claims — the highest-risk item in this list to ship un-confirmed, because they read as facts, not brand copy.
-7. Origin-map markets: Dubai, Riyadh, London, Mumbai (dashed = future expansion) — still unvalidated.
-8. SEO keyword set, meta descriptions, `locale: en_AE` — unchanged.
+1. ✅ **RESOLVED (client, 2026-07-04) — collections fork.** Curated named collections confirmed, **now four**: _Tessuti Italiani_, _Pezzi Unici_, _Ospitalità di Lusso_, and a new _Interior & Exterior Design_. Material tags stay in the data model for a possible V2 filterable library. This closes the biggest fork from v2/§12.1.
+2. ✅ **RESOLVED (client) — hero copy.** The old placeholder headline/subline/eyebrow-with-year are retired. Hero is now logo-led: eyebrow "Made in Italy" (no year), wordmark in the `h1`, tagline "Premium Italian fabrics · Delivered to the Gulf" beneath, sample CTA now routes to `#contact` instead of `#collections`.
+3. ✅ **RESOLVED (client) — founder story.** New headline "Proudly Italian. Purposefully Global.", three client-approved bio paragraphs, and a new quote ("Every fabric I select represents not only Italian craftsmanship, but my own commitment to excellence.") are live in `src/data/founder.ts`.
+4. **"Made in Italy Certification"** (renamed from "Certified Made in Italy Expert") — now rendered with a **visible dashed placeholder container** (`data-testid="certification-placeholder"`) below the story, not just bare text, so the eventual scan drop-in causes no layout shift. Still correctly waiting on the real scan (`certification.src: null`).
+5. ✅ **RESOLVED (client) — trust pillars replaced.** The four-pillar band is gone; `WhyImperium` now has **exactly three** client-approved rows ("Direct From the Source," "Made in Italy Expertise," "For the Gulf's Luxury Market") with reserved Italy→Gulf map and Made in Italy stamp placeholders. The old 4th pillar ("A partner, not a catalogue") was dropped by client decision, not replaced.
+6. ✅ **MOSTLY RESOLVED (client) — stats strip.** "12+ Italian mills," "120+ fabrics in library," "15 years of expertise," "4 cities served" are **gone**. New strip leads with client-confirmed **"40+ Fabrics"**; two companion stats ("4 Curated collections," "100% Italian fabrics") are 🟡 team-proposed and true-by-construction, but still technically unvalidated by Sofia — lowest-risk item left in this list since they're not checkable factual claims the way the old numbers were.
+7. ✅ **RESOLVED (client) — origin map removed.** The `OriginMap` section and its unvalidated Dubai/Riyadh/London/Mumbai market list are **deleted** (recoverable via git); the provenance idea moved into `WhyImperium` row 01 as a route-placeholder graphic with no specific cities named.
+8. SEO keyword set, meta descriptions now say "the Gulf" instead of "Dubai," `locale: en_AE` — copy updated, still otherwise unvalidated by Sofia.
 
 **Identity & channels**
 
@@ -138,9 +142,9 @@ Everything below is rendering on the production deployment today (even though it
 
 **Design & tech**
 
-14. Cormorant Garamond + DM Sans, full palette, no dark mode, numbered-manifesto pillars, no icons — all now genuinely shipped, not just planned.
-15. **The single-page IA decision has effectively been made in code**: `/about`, `/contact`, `/fabrics` are explicit one-line `"V2 stub"` pages; the homepage is the real site with anchor sections. This resolves v2's "IA tension" item — flag it to the user as a decision that happened without an explicit go-ahead, and confirm it's the intended V1 scope.
-16. Form fields now include **email (required)** and **phone (optional)** — v2's "no email/phone field" gap is closed.
+14. Cormorant Garamond + DM Sans, full palette, no dark mode, no icons — all now genuinely shipped, not just planned. The "numbered-manifesto pillars" pattern moved from the deleted `TrustPillars` into `WhyImperium`'s alternating rows.
+15. **The single-page IA decision has effectively been made in code, with one exception**: `/about` and `/contact` are still one-line `"V2 stub"` pages, but `/fabrics` is **now a real light detail page** (Decision D-J) backing the Collections cards' "View Collection" CTAs — a scope decision made in code, not by the founder; confirm it's the intended V1 shape.
+16. Form fields now include **email (required)** and **phone (optional)** — v2's "no email/phone field" gap is closed. (Unchanged by this pass — carried forward from v3.)
 
 ---
 
@@ -193,6 +197,8 @@ From `.env.example` + `src/lib/env.ts` **[verified]**. No secrets committed anyw
 
 **Verified clean (re-confirmed):** no secrets in files or git history; `.gitignore` covers env files; security headers live (CSP, HSTS w/ preload, XFO, nosniff, Referrer-Policy, Permissions-Policy); no third-party scripts beyond the CSP-allowed Plausible domain (which isn't even wired in yet); fonts are local-only; CI uses `npm ci` with lockfile.
 
+**New (2026-07-05/06) — every "2026" removed site-wide.** `SITE.established` field deleted; the Nav "Est." subline, Hero eyebrow/corner caption, and Footer's `new Date().getFullYear()` runtime year are all gone; `sitemap.ts` no longer serialises a `lastModified` date. Verified via `grep -rn "2026" src public` (clean except two now-fixed Hero.tsx lines) and a build+serve `curl | grep -c 2026` returning 0 on `/`, `/fabrics`, and `/sitemap.xml`. This was a client hard requirement, not a security finding, but it removes a "looks half-finished / wrong year" credibility risk from the live (if ever indexed) site.
+
 ---
 
 ## 11. Roadmap Reconciliation & Current Position
@@ -206,21 +212,24 @@ Two roadmaps exist. Keep them straight — and note they have now diverged hard:
 
 `progress.md`'s own Phase 6 list is localhost-testable work (Lighthouse audit, CLS check, cross-browser/device testing, SEO metadata/JSON-LD, wiring Plausible, skip-link, keyboard/focus audit, alt-text audit, custom 404) plus production-only work gated to Phase 6.B (deploy, custom domain, Resend domain verification, sitemap submission to Search Console). None of that closes the content gap — it's execution polish on top of content that hasn't been through Discovery.
 
-**Discovery still closes when we have:** business-model summary (done — B2B) · ranked priority industries (top 2–3, still missing) · founder's real story (raw notes, still missing) · content & asset inventory (still missing — logo/photography not reviewed) · language + inquiry-handling decisions (still missing). The founder discovery questionnaire is still reported as awaiting Sofia's answers.
+**Discovery still closes when we have:** business-model summary (done — B2B) · ranked priority industries (top 2–3, still missing) · founder's real story (now landed — see §7 items 1–7, resolved 2026-07-04) · content & asset inventory (still missing — logo/photography/certification scan not in the repo) · language + inquiry-handling decisions (still missing). The founder discovery questionnaire is still reported as awaiting Sofia's answers.
+
+**Update (2026-07-05/06):** a real client copy pass landed and closed several §7 items that were flagged as "founder-unvalidated decisions baked into the build" — the collections fork, hero copy, founder story, trust-pillar replacement, and most of the stats strip now carry actual client sign-off rather than team placeholder text. This is good news for the "code raced ahead of discovery" risk above — the gap is narrowing on content, even though it's still wide open on assets (logo, photography, video, certification scan) and operational facts (domain, WhatsApp number, real testimonial).
 
 ---
 
 ## 12. Open Decisions (prioritized)
 
-1. **⭐ The collections fork — still the biggest open decision, now more expensive to change.** Curated named collections (built, with a full Embla carousel) vs. material-filterable library (Sofia's demo). Ask Sofia directly: _"Do you picture your fabrics as a few curated named collections, or as a browsable library you filter by material?"_ The longer this stays open, the more carousel/data-model work potentially gets thrown away.
+1. ~~The collections fork~~ — **resolved (client, 2026-07-04):** four curated named collections confirmed (Tessuti Italiani, Pezzi Unici, Ospitalità di Lusso, Interior & Exterior Design); material-filter library kept as a V2 option since tags stay in the data model.
 2. **Domain registration** — still deferred, still a hard launch gate (PRD D-07). Re-verify registration status before treating this as unchanged much longer; it's been open since at least 2026-07-02.
-3. **Real content sign-off** — this is now urgent, not hypothetical: the stats strip's four invented numbers, the founder quote/bio, the four trust-pillar claims, the origin-map markets, and the certification caption are all live. Get Sofia to confirm or replace each one before any launch conversation starts.
+3. **Remaining real-content sign-off** — narrower than before but not closed: two 🟡 team-proposed stats ("4 Curated collections," "100% Italian fabrics") still need an explicit Sofia veto/approval; the Made in Italy certification scan is still pending (placeholder container now visible, not just bare text); Pezzi Unici's tagline is still 🟡 team-derived. The bigger items (hero copy, founder story, trust-pillar replacement) are now client-approved.
 4. **Language: EN only or EN+AR?** Still undecided. Note the `/ar` redirect groundwork was removed (§10), so there's no half-built AR infrastructure creating pressure either way right now — a clean decision point.
 5. **Inquiry channel operational readiness:** the form and email pipeline are technically ready; still missing: destination inbox confirmation, real WhatsApp Business number, and who actually answers within the promised "one business day" (`contact.ts` copy).
-6. **Founder visibility:** front-and-centre vs. understated — the Founder section is now built with a portrait slot and pull-quote treatment, making this a more concrete question than before (does Sofia want her name and photo this prominent?).
-7. **`PRD.md` founder validation** — the PRD is written and pushed; it needs Sofia's sign-off on its flagged (🔴/🟡) items, several of which (D-07 domain, D-08 form fields, F-1 single entry point, F-5 indexing switch) have already been implemented in code as if pre-approved.
-8. **Ownership & maintainability** — unchanged from v2: the stack is senior-level; decide what the user owns vs. Akshay, and how Sofia edits content post-launch (currently: hand-editing `src/data/*.ts` files).
-9. **Constraints** — unchanged: launch date, budget (photography, video, map illustration, logo refinement, domain/hosting; fonts are free OFL), final sign-off.
+6. **Founder visibility:** front-and-centre vs. understated — the Founder section now carries a full client-approved story, portrait slot, and pull-quote, making this a more concrete question than before (does Sofia want her name and photo this prominent?).
+7. **`PRD.md` founder validation** — the PRD is written, pushed, and now annotated with resolution notes for the items this copy pass closed (D-01, §6.2–6.7); it still needs Sofia's sign-off on what remains open (D-07 domain, D-06 WhatsApp/inbox, D-05 language, D-04 founder visibility weight).
+8. **Client logo/photography/certification assets** — asked and confirmed still unavailable as of 2026-07-06; `SITE.logoSrc` stays `null` (typographic wordmark renders instead) and all collection images remain SVG placeholders. One-line swap once assets arrive (`src/lib/site.ts` and `src/data/collections.ts`).
+9. **Ownership & maintainability** — unchanged from v2: the stack is senior-level; decide what the user owns vs. Akshay, and how Sofia edits content post-launch (currently: hand-editing `src/data/*.ts` files).
+10. **Constraints** — unchanged: launch date, budget (photography, video, map illustration, logo refinement, domain/hosting; fonts are free OFL), final sign-off.
 
 ---
 
@@ -245,5 +254,5 @@ Two roadmaps exist. Keep them straight — and note they have now diverged hard:
 - **Stack:** Next.js 15.5.19 · React 19 · TS strict · CSS Modules + tokens · Framer Motion/Embla (now wired in) · Resend (now integrated) · self-hosted Cormorant Garamond + DM Sans · Vitest (61/61 passing) · Vercel
 - **Palette:** Pietra/Gesso/Sabbia base · Carbone/Ardesia text · Blu Notte navy · Oro Antico gold · Terracotta reserved
 - **Type:** Cormorant Garamond + DM Sans, both self-hosted and live (Inter placeholder is gone)
-- **References:** Effe Hospitality (philosophy) · Sofia's "Maison des Tissus" demo (theme + the filter-catalog idea only — still the open fork, §7.1/§12.1)
-- **State:** Discovery still in progress at the process level, **but Phases 1–5 of the build are done and verified working** · all content still placeholder and founder-unvalidated · `PRD.md` written and pushed, awaiting Sofia's sign-off · Phase 6 (Polish + Launch) is next
+- **References:** Effe Hospitality (philosophy) · Sofia's "Maison des Tissus" demo (theme + the filter-catalog idea only — the collections-fork question this raised is now resolved, §7.1/§12.1)
+- **State:** Discovery still in progress at the process level, **but Phases 1–5 of the build are done and verified working**, and a client copy pass (2026-07-05/06) has landed real, founder-approved content for the hero, collections, founder story, and most of the trust/stats sections · remaining gaps are real assets (logo, photography, video, certification scan), the WhatsApp number, and operational facts (domain, inbox, language) · `PRD.md` written, pushed, and annotated with resolution notes · Phase 6 (Polish + Launch) is next
