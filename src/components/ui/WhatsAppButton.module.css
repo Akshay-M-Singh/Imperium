@@ -19,13 +19,25 @@
   text-decoration: none;
   transition:
     background-color var(--motion-duration-fast) var(--motion-ease-standard),
-    border-color var(--motion-duration-fast) var(--motion-ease-standard);
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform 100ms var(--motion-ease-out);
   touch-action: manipulation;
 }
 
-.button:hover {
-  background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
-  border-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+.button:active {
+  transform: scale(0.97);
+}
+
+.button:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-gesso);
+  outline-offset: var(--focus-outline-offset);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+    border-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+  }
 }
 
 .inline {

@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Button } from "@/components/ui/Button";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import styles from "./Hero.module.css";
 
 const DESKTOP_POSTER = "/images/hero/hero-desktop.svg";
@@ -82,9 +84,11 @@ export function Hero() {
         </p>
 
         <div className={styles.ctaGroup}>
-          <a href="#collections" className={styles.cta}>
-            Explore our fabrics
-          </a>
+          <MagneticButton>
+            <Button variant="ghost-light" href="#collections">
+              Explore our fabrics
+            </Button>
+          </MagneticButton>
           <a href="#collections" className={styles.textLink}>
             Request a sample →
           </a>

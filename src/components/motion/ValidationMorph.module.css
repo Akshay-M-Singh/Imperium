@@ -1,0 +1,25 @@
+/* ValidationMorph — error/success state transitions (MOTION_SPEC.md §3.4). */
+
+.error {
+  color: var(--color-error);
+  font-size: var(--text-caption);
+  margin-block-start: var(--space-xs);
+}
+
+.success {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  color: currentColor;
+}
+
+.checkmark {
+  inline-size: 20px;
+  block-size: 20px;
+  flex-shrink: 0;
+}
+
+.successText {
+  font-size: inherit;
+}

@@ -1,0 +1,11 @@
+/* AnimatedFocusRing — shared morphing focus indicator (MOTION_SPEC.md §3.3). */
+
+.ring {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 2px;
+  background-color: var(--color-blu-notte);
+  pointer-events: none;
+  z-index: var(--z-base);
+}

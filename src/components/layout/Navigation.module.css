@@ -102,10 +102,12 @@
   position: absolute;
   inset-block-end: -4px;
   inset-inline-start: 0;
-  inline-size: 0;
+  inline-size: 100%;
   block-size: 1px;
   background-color: currentColor;
-  transition: inline-size var(--motion-duration-fast) var(--motion-ease-out);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -114,7 +116,7 @@
   }
 
   .desktopLink:hover::after {
-    inline-size: 100%;
+    transform: scaleX(1);
   }
 }
 
@@ -146,16 +148,19 @@
   transition:
     background-color var(--motion-duration-fast) var(--motion-ease-out),
     color var(--motion-duration-fast) var(--motion-ease-out),
-    transform var(--motion-duration-fast) var(--motion-ease-out);
-}
-
-.cta:hover {
-  background-color: var(--color-blu-notte);
-  color: var(--color-gesso);
+    transform 160ms var(--motion-ease-out);
 }
 
 .cta:active {
   transform: scale(0.97);
+  transition: transform 100ms var(--motion-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover {
+    background-color: var(--color-blu-notte);
+    color: var(--color-gesso);
+  }
 }
 
 /* --- Language toggle ------------------------------------------------------ */
@@ -288,13 +293,17 @@
   font-weight: var(--font-weight-medium);
   font-size: 14px;
   touch-action: manipulation;
-  transition: background-color var(--motion-duration-fast) var(--motion-ease-out);
-}
-
-.whatsappCta:hover {
-  background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-out),
+    transform 100ms var(--motion-ease-out);
 }
 
 .whatsappCta:active {
   transform: scale(0.98);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsappCta:hover {
+    background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+  }
 }

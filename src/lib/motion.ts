@@ -5,7 +5,8 @@
 import type { Transition, Variants } from "framer-motion";
 
 export const springs = {
-  soft: { type: "spring", stiffness: 120, damping: 20 },
+  // MOTION_SPEC.md §3.3 uses `soft` for the focus-ring morph and label float.
+  soft: { type: "spring", stiffness: 200, damping: 22 },
   standard: { type: "spring", stiffness: 150, damping: 18 },
   firm: { type: "spring", stiffness: 260, damping: 26 },
   snap: { type: "spring", stiffness: 400, damping: 30 },

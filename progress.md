@@ -2,8 +2,8 @@
 
 **Project root:** `/Users/akshaymsingh/Documents/Liberate/Imperium`  
 **Last updated:** 2026-07-05  
-**Completed phases:** 1, 2, 3, 4  
-**Next phase:** 5 — Premium Touchpoint Layer
+**Completed phases:** 1, 2, 3, 4, 5  
+**Next phase:** 6 — Polish + Performance + Launch
 
 ## Quality gate status (last verified)
 
@@ -11,19 +11,19 @@
 | ----------------------------- | --------------------------- |
 | `npm run typecheck`           | ✅ Pass                     |
 | `npm run lint`                | ✅ Pass                     |
-| `npm run test`                | ✅ 48/48 pass               |
+| `npm run test`                | ✅ 61/61 pass               |
 | `npm run build`               | ✅ Success                  |
 | Dev server (`localhost:3000`) | ✅ 200, all sections render |
 
-Build output: `/` route 49.3 kB, First Load JS 155 kB (uncompressed). Gzipped JS contribution is currently under the 130 kB budget, but this must be re-measured after Phase 5 motion integration.
+Build output: `/` route 25.2 kB (gzipped), First Load JS 169 kB (uncompressed). Shared JS chunks total ~102 kB gzipped; combined first-load JS is ~127 kB gzipped, under the 130 kB budget.
 
 ---
 
 ## Executive summary
 
-Phases 1–4 are functionally complete. The site is feature-complete on localhost: navigation, hero, origin map, stats, collections, trust pillars, founder, testimonials (hidden until real data), contact form, WhatsApp CTAs, and footer all render and pass validation.
+Phases 1–5 are complete. The site now includes the full premium touchpoint layer on localhost: cursor-aware TiltCards, MagneticButton CTAs, animated form focus ring, ValidationMorph feedback, and the Embla carousel for collections. All motion respects `prefers-reduced-motion` and touch devices.
 
-Phase 5 is the most complex remaining block. It is not a small polish pass: five motion components exist only as stubs, and several sections need to be refactored to integrate them. This document exists so the Phase 5 executor can start with full context.
+Phase 6 is the final polish, performance audit, and launch block.
 
 ---
 
@@ -115,66 +115,75 @@ Phase 5 is the most complex remaining block. It is not a small polish pass: five
 
 ---
 
-## Phase 5 — Premium Touchpoint Layer: Readiness
+## Phase 5 — Premium Touchpoint Layer: Complete ✓
 
-### Already implemented
+### Motion components implemented
 
-| Component      | File                                     | Status  |
-| -------------- | ---------------------------------------- | ------- |
-| `ScrollReveal` | `src/components/motion/ScrollReveal.tsx` | ✅ Done |
-| `CountUp`      | `src/components/motion/CountUp.tsx`      | ✅ Done |
-
-### Stubbed — must be implemented
-
-| Component           | File                                                | Spec reference        |
-| ------------------- | --------------------------------------------------- | --------------------- |
-| `TiltCard`          | `src/components/motion/TiltCard.tsx`                | `MOTION_SPEC.md` §3.1 |
-| `MagneticButton`    | `src/components/motion/MagneticButton.tsx`          | `MOTION_SPEC.md` §3.2 |
-| `AnimatedFocusRing` | `src/components/motion/AnimatedFocusRing.tsx`       | `MOTION_SPEC.md` §3.3 |
-| `ValidationMorph`   | `src/components/motion/ValidationMorph.tsx`         | `MOTION_SPEC.md` §3.4 |
-| `EmblaContainer`    | `src/components/motion/Carousel/EmblaContainer.tsx` | `MOTION_SPEC.md` §3.5 |
-| `CarouselSlide`     | `src/components/motion/Carousel/CarouselSlide.tsx`  | `MOTION_SPEC.md` §3.5 |
+| Component           | File                                                | Status  | Spec reference        |
+| ------------------- | --------------------------------------------------- | ------- | --------------------- |
+| `ScrollReveal`      | `src/components/motion/ScrollReveal.tsx`            | ✅ Done | `MOTION_SPEC.md` §3.6 |
+| `CountUp`           | `src/components/motion/CountUp.tsx`                 | ✅ Done | `MOTION_SPEC.md` §3.7 |
+| `TiltCard`          | `src/components/motion/TiltCard.tsx`                | ✅ Done | `MOTION_SPEC.md` §3.1 |
+| `MagneticButton`    | `src/components/motion/MagneticButton.tsx`          | ✅ Done | `MOTION_SPEC.md` §3.2 |
+| `AnimatedFocusRing` | `src/components/motion/AnimatedFocusRing.tsx`       | ✅ Done | `MOTION_SPEC.md` §3.3 |
+| `ValidationMorph`   | `src/components/motion/ValidationMorph.tsx`         | ✅ Done | `MOTION_SPEC.md` §3.4 |
+| `EmblaContainer`    | `src/components/motion/Carousel/EmblaContainer.tsx` | ✅ Done | `MOTION_SPEC.md` §3.5 |
+| `CarouselSlide`     | `src/components/motion/Carousel/CarouselSlide.tsx`  | ✅ Done | `MOTION_SPEC.md` §3.5 |
 
 ### Integration tasks
 
-| Roadmap | Task                                                        | Notes                                                                        |
-| ------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| 5.6     | Wrap `FabricCard` with `TiltCard`                           | Remove current CSS-only 1.03 hover scale                                     |
-| 5.7     | Integrate `AnimatedFocusRing` + `ValidationMorph` into form | Refactor `FormField` focus state; wire `ValidationMorph` to `Contact` states |
-| 5.8     | Replace `Collections` grid with `EmblaContainer`            | See design decision below                                                    |
-| 5.9     | Apply `MagneticButton` to primary CTAs                      | Hero "Explore", WhatsApp button, form submit                                 |
-| 5.10    | Verify `CountUp` spring easing                              | Already implemented; confirm against spec                                    |
-| 5.11    | Add `touch-action: manipulation` globally                   | Audit buttons, links, cards, form fields, carousel track                     |
-| 5.12    | Replace `100vh` with `100dvh`                               | Already done in Hero and mobile nav                                          |
+| Roadmap | Task                                                        | Status  | Notes                                                                        |
+| ------- | ----------------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| 5.6     | Wrap `FabricCard` with `TiltCard`                           | ✅ Done | Static hover scale removed; image scale driven by `TiltCardImage`            |
+| 5.7     | Integrate `AnimatedFocusRing` + `ValidationMorph` into form | ✅ Done | `FormField` converted to client; floating labels + focus ring + error states |
+| 5.8     | Replace `Collections` grid with `EmblaContainer`            | ✅ Done | Full-bleed, viewport-relative slides; pagination dots with `layoutId`        |
+| 5.9     | Apply `MagneticButton` to primary CTAs                      | ✅ Done | Hero "Explore", inline WhatsApp; form submit kept static for success morph   |
+| 5.10    | Verify `CountUp` spring easing                              | ✅ Done | RAF + critically-damped spring; no React re-renders                          |
+| 5.11    | Add `touch-action: manipulation` globally                   | ✅ Done | Added to globals.css; carousel track uses `pan-y` override                   |
+| 5.12    | Replace `100vh` with `100dvh`                               | ✅ Done | Hero and mobile nav overlay already use `100dvh` / `100svh` fallback         |
+
+### Phase 5 design decisions applied
+
+1. **Carousel layout on desktop:** single-slide draggable carousel on both mobile and desktop, full-bleed viewport-relative slide widths.
+2. **Form label behaviour:** floating labels with 16 px rise and 12 px final size, Blu Notte on focus.
+3. **Hero "Explore" CTA:** uses shared `Button` with a new `ghost-light` variant wrapped by `MagneticButton`.
+4. **Bundle strategy:** `EmblaContainer` is lazy-loaded via `next/dynamic` (SSR enabled); remaining motion components are small enough to ship in the main chunk. First-load JS stays under the 130 kB gzip budget.
+
+### Quality notes
+
+- All hover-only motion is gated behind `@media (hover: hover) and (pointer: fine)` to avoid false hover states on touch.
+- Press feedback added to `Button` and the navigation CTAs with asymmetric 100 ms press / 160 ms release timing.
+- `useReducedMotion` now initializes from `window.matchMedia` to avoid a one-frame motion flash for reduced-motion users.
+- `springs.soft` updated to `{ stiffness: 200, damping: 22 }` to match `MOTION_SPEC.md` §3.3.
 
 ---
 
-## Decisions already made for Phase 5
+## Phase 6 — Polish + Performance + Launch: Readiness
 
-These were confirmed by the project owner on 2026-07-05:
+### Next work
 
-1. **Carousel layout on desktop:** Follow `MOTION_SPEC.md` — single-slide draggable carousel on both mobile and desktop (roadmap 5.8 / `MOTION_SPEC.md` §3.5). This overrides `DESIGN.md` §9.04 which shows three cards in a row.
-2. **Form label behaviour:** Follow `MOTION_SPEC.md` — labels float up from inside the input to above on focus (`MOTION_SPEC.md` §3.3). This overrides `DESIGN.md` §9.08 which says labels are positioned above inputs statically.
-3. **Hero "Explore" CTA:** Refactor `Hero.tsx` to use the shared `Button` component so `MagneticButton` can wrap it cleanly (roadmap 5.9).
-4. **Bundle strategy:** Apply lazy-loading from the start of Phase 5. Use `next/dynamic` for below-fold motion components (`TiltCard`, `MagneticButton`, `EmblaContainer`) and prefer Framer’s `m` over `motion` for non-layout animations to stay under the 130 kB gzip budget.
+Phase 6.A is entirely localhost-testable:
 
----
+1. Run Lighthouse audits (target > 95 across Performance, Accessibility, SEO, Best Practices).
+2. Audit CLS across all sections.
+3. Cross-browser testing (Chrome, Safari, Firefox; mobile Safari + Chrome).
+4. Real-device mobile testing (iPhone Safari, Android Chrome).
+5. Implement SEO metadata, sitemap, robots.txt, JSON-LD, canonical/OG tags.
+6. Add Plausible Analytics script + custom events (form submit, WhatsApp click, Instagram click).
+7. Add skip-to-content link.
+8. Keyboard navigation and focus audit.
+9. Image alt-text audit.
+10. Final content review.
+11. Security headers in `next.config.ts`.
+12. Custom 404 page.
 
-## Risks / blockers for Phase 5
+Phase 6.B is production-only:
 
-| #   | Risk                                                                                      | Mitigation                                                                    |
-| --- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| 1   | All Phase 5 motion components are empty stubs                                             | Treat Phase 5 as a full implementation wave, not a polish pass                |
-| 2   | Bundle budget may be exceeded after Embla + Framer springs added                          | Lazy-load below-fold components; use Framer `m`; re-measure after integration |
-| 3   | Hero "Explore" CTA is currently a plain `<a>`, not `Button`                               | Refactor as part of Phase 5.9 before applying `MagneticButton`                |
-| 4   | `Collections` grid uses CSS scroll-snap; replacing with Embla may affect layout           | Test responsive behaviour carefully; ensure `touch-action: pan-y` on track    |
-| 5   | Form focus ring requires shared `layoutId="form-focus-ring"` across `FormField` instances | Coordinate component structure so the ring morphs correctly between fields    |
+- Deploy to Vercel, connect custom domain, configure Resend domain verification, submit sitemap to Search Console.
 
----
+### Placeholder / fine-tune backlog
 
-## Placeholder / fine-tune backlog
-
-These do not block Phase 5 but must be resolved before launch:
+These must be resolved before launch:
 
 - [ ] Hero video MP4 (desktop + mobile) and poster JPEG
 - [ ] Commissioned origin map illustration
@@ -187,16 +196,14 @@ These do not block Phase 5 but must be resolved before launch:
 - [ ] Final legal entity name for Footer copyright
 - [ ] Custom 404 page styling (Phase 6.12)
 
----
+### Risks / blockers for Phase 6
 
-## Recommended Phase 5 execution order
-
-1. Implement `MagneticButton` and refactor Hero CTA to use `Button`.
-2. Implement `TiltCard` and integrate into `FabricCard`.
-3. Implement `AnimatedFocusRing` + `ValidationMorph`; refactor `FormField` and `Contact` form.
-4. Implement `EmblaContainer` + `CarouselSlide`; replace `Collections` grid.
-5. Add `touch-action: manipulation` globally.
-6. Re-run full verification: `typecheck`, `lint`, `test`, `build`, dev-server walk, bundle audit.
+| #   | Risk                                                   | Mitigation                                                               |
+| --- | ------------------------------------------------------ | ------------------------------------------------------------------------ |
+| 1   | Lighthouse Performance may drop after motion additions | Audit images, fonts, third-party scripts; lazy-load below-fold media     |
+| 2   | Real-device touch behaviour may differ from DevTools   | Test on actual iPhone and Android devices before approving Phase 6.B     |
+| 3   | Domain / Resend verification may delay launch          | Begin domain registration and DNS setup as soon as Phase 6.A is approved |
+| 4   | External assets still placeholders                     | Swap in real assets during Phase 6.A fine-tune pass                      |
 
 ---
 
