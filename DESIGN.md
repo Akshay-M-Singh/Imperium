@@ -278,6 +278,8 @@ Minimum 48×48px for all interactive elements. CTAs have minimum 56px height. Fo
 
 **Why this approach:** The transparent-to-opaque transition lets the hero video breathe beneath the navigation on first load. The wordmark is in serif because it is a name, not a UI element. The nav links are in sans-serif because they are functional. This contrast reinforces the hierarchy.
 
+**Amended:** Retired — no establishment year appears anywhere on the site (client decision).
+
 ### 02 — Hero Section
 
 **Structure:** Full viewport height (100vh). The video fills the entire section as a background. Content is centred vertically and horizontally.
@@ -295,6 +297,8 @@ Minimum 48×48px for all interactive elements. CTAs have minimum 56px height. Fo
 **Why this works:** The hero is a full-screen film still with words on it. It doesn't sell; it establishes atmosphere. The visitor's first impression is texture, light, and craft — the message arrives second, through the headline. This is how luxury hospitality brands (including Effe) open their story.
 
 **PRD Challenge:** The PRD suggests the headline at 36–48px. This is too timid for a full-viewport hero. At 48px on a 1440px-wide screen, the headline would look lost in the space. 72px fills the frame with the confidence the brand requires. It can be reduced on tablet (56px) and mobile (40px) without losing impact.
+
+**Amended:** V1 hero is logo-led (wordmark inside the h1 + tagline beneath); eyebrow reads "Made in Italy" with no year; the corner caption is retired.
 
 ### 03 — Origin Map Section
 
@@ -336,6 +340,8 @@ Minimum 48×48px for all interactive elements. CTAs have minimum 56px height. Fo
 
 **Ospitalità di Lusso card enhancement:** The CTA for this card reads "Talk to us about your project →" — it's intentionally longer and more consultative, signalling that hospitality orders are bespoke conversations, not transactions.
 
+**Amended:** four cards; a short promise line replaces the material-tag strip beneath the image.
+
 ### 05 — Why Imperium (Trust Pillars)
 
 **Layout:** Full-width Gesso band. Four pillars in a row, each occupying 3 columns.
@@ -350,6 +356,8 @@ Minimum 48×48px for all interactive elements. CTAs have minimum 56px height. Fo
 **PRD Challenge:** The PRD doesn't number the pillars. Adding numbers transforms them from marketing bullet points into principles — an ordered declaration of values. This is how architecture firms and fashion houses present their ethos.
 
 **Separation between pillars:** A 1px vertical line in Sabbia at 15% opacity between each column on desktop. On mobile, they stack vertically with a 1px horizontal line between them.
+
+**Amended:** three alternating 5/7 editorial rows with reserved map/stamp media slots replace the four-column band.
 
 ### 06 — About / Founder Section
 
@@ -417,6 +425,8 @@ Minimum 48×48px for all interactive elements. CTAs have minimum 56px height. Fo
 - Bottom row: Legal line "© 2026 Imperium Italian Textile. All rights reserved." in DM Sans 400, 11px, Sabbia. Same row: Instagram handle and WhatsApp line.
 
 **Why dark footer:** The dark background creates a clear visual full-stop. After scrolling through warm linen tones, the dark footer signals "you've reached the end." It also provides the strongest contrast for contact information and links — the last opportunity to convert.
+
+**Amended:** Legal line carries no year (client decision); legal entity name pending PRD B-1.
 
 ---
 

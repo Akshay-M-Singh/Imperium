@@ -60,7 +60,12 @@ export function Founder() {
                   <p className={styles.certCaption}>{founder.certification.caption}</p>
                 </>
               ) : (
-                <p className={styles.certCaption}>{founder.certification.caption}</p>
+                <>
+                  <div className={styles.certPlaceholder} data-testid="certification-placeholder">
+                    <span className={styles.certPlaceholderLabel}>Image to follow</span>
+                  </div>
+                  <p className={styles.certCaption}>{founder.certification.caption}</p>
+                </>
               )}
             </div>
           </div>

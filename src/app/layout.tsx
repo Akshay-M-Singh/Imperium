@@ -7,18 +7,18 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com"),
   title: {
-    default: "Imperium Italian Textile — Premium Italian Fabrics, Delivered to Dubai",
+    default: "Imperium Italian Textile — Premium Italian Fabrics, Delivered to the Gulf",
     template: "%s · Imperium Italian Textile",
   },
   description:
-    "Premium Italian fabrics sourced directly from Italy's finest mills and delivered to Dubai's most discerning tailors and hospitality groups.",
+    "Premium Italian fabrics sourced from Italy's finest mills and delivered to the Gulf's most discerning tailors, designers and hospitality groups.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Imperium Italian Textile",
     description:
-      "Premium Italian fabrics sourced directly from Italy's finest mills and delivered to Dubai's most discerning tailors and hospitality groups.",
+      "Premium Italian fabrics sourced from Italy's finest mills and delivered to the Gulf's most discerning tailors, designers and hospitality groups.",
     type: "website",
     locale: "en_AE",
     siteName: "Imperium Italian Textile",

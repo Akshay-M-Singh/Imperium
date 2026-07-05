@@ -1,4 +1,7 @@
 // Founder — Sofia Mazza bio, quote, certification (DESIGN.md §9.06).
+// Copy is client-approved. Set certification.src to the scan path
+// (public/images/certifications/made-in-italy-certificate.png, staged
+// when available) once the founder approves showing it.
 
 export interface FounderData {
   eyebrow: string;
@@ -12,21 +15,22 @@ export interface FounderData {
 
 export const founder: FounderData = {
   eyebrow: "The story behind Imperium",
-  headline: "A love for Italy, built into every thread.",
+  headline: "Proudly Italian. Purposefully Global.",
   bioParagraphs: [
-    "Sofia Mazza founded Imperium on a simple conviction: the best Italian fabrics deserve to be handled by people who understand them.",
-    "Born from years spent between Milanese mills and Dubai showrooms, the company connects Italian craft with the Gulf's most exacting clients — tailors who measure in millimetres and hospitality groups who think in decades.",
-    "Every bolt is chosen by hand. Every relationship is built on trust. And every delivery carries the promise that the fabric is exactly what it claims to be.",
+    "Born and raised in Italy, Sofia Mazza is an Italian entrepreneur with a legal and business background and a certified Made in Italy expert. Now based in Dubai, she founded Imperium to create a direct bridge between Italy's finest textile manufacturers and the Gulf's most discerning designers, architects and fashion houses.",
+    "Deeply proud of her heritage, Sofia believes that authentic Italian craftsmanship deserves to be represented with the same integrity with which it is created. She personally travels across Italy to meet mills, evaluate collections and build long-term relationships with manufacturers whose values reflect her own.",
+    "Imperium is more than a textile supplier. It's a carefully curated expression of Italian excellence.",
   ],
   portrait: {
     src: "/images/about/sofia-portrait.svg",
     alt: "Sofia Mazza, Founder of Imperium Italian Textile",
     caption: "Sofia Mazza, Founder",
   },
-  quote: "Every fabric I source is one I would stake my name on.",
+  quote:
+    "Every fabric I select represents not only Italian craftsmanship, but my own commitment to excellence.",
   quoteAttribution: "Sofia Mazza, Founder",
   certification: {
-    src: null, // null until certification scan is provided (Phase 4 fine-tune)
-    caption: "Certified Made in Italy Expert",
+    src: null, // null until the founder approves displaying the scan
+    caption: "Made in Italy Certification",
   },
 };

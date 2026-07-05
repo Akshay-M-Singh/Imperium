@@ -1,0 +1,88 @@
+/* Fabrics page — alternating 5/7 collection blocks reusing the card
+   imagery at editorial scale (DESIGN.md §4 asymmetry). */
+
+.pageHeader {
+  display: grid;
+  gap: var(--space-sm);
+  padding-block-start: var(--nav-height);
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-h1);
+  line-height: var(--leading-h1);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-carbone);
+}
+
+.row {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .row {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter-desktop);
+  }
+
+  .imageFrame {
+    grid-column: span 5;
+  }
+
+  .text {
+    grid-column: span 7;
+  }
+
+  .reversed .imageFrame {
+    order: 1;
+  }
+}
+
+.imageFrame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--color-sabbia);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.text {
+  display: grid;
+  gap: var(--space-sm);
+  align-content: center;
+  justify-items: start;
+}
+
+.tagline {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h2);
+  line-height: var(--leading-h2);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-carbone);
+}
+
+.titleItalic {
+  font-style: italic;
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-ardesia);
+  max-inline-size: 60ch;
+}

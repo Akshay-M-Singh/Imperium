@@ -1,8 +1,9 @@
-/* StatsStrip — DESIGN.md §9.03. */
+/* StatsStrip — DESIGN.md §9.03. Single column on mobile, three columns
+   from tablet up; hairline Sabbia dividers between cells. */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 
 .cell {
@@ -13,30 +14,17 @@
   padding-inline: var(--space-sm);
 }
 
-/* Mobile 2×2: vertical divider between columns, horizontal divider between rows. */
-.cell:nth-child(odd) {
-  border-inline-end: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
-}
-
-.cell:nth-child(n + 3) {
+.cell + .cell {
   border-block-start: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
 }
 
 @media (min-width: 768px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .cell {
+  .cell + .cell {
     border-block-start: none;
-    border-inline-end: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
-  }
-
-  .cell:nth-child(n + 3) {
-    border-block-start: none;
-  }
-
-  .cell:last-child {
-    border-inline-end: none;
+    border-inline-start: 1px solid color-mix(in srgb, var(--color-sabbia) 20%, transparent);
   }
 }
