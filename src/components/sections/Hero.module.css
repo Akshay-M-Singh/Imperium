@@ -49,36 +49,58 @@
   animation-delay: 0ms;
 }
 
-.headline {
-  font-family: var(--font-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--text-display);
-  line-height: var(--leading-display);
-  color: #fff;
-  max-inline-size: 14ch;
-}
-
-.headline span {
-  display: block;
+.logo {
+  margin: 0;
   opacity: 0;
-  animation: hero-enter-headline 1000ms var(--motion-ease-out) both;
+  animation: hero-enter 1000ms var(--motion-ease-out) both;
   animation-delay: 80ms;
 }
 
-.headline span:nth-child(2) {
-  animation-delay: 160ms;
+.logoImage {
+  display: block;
+  inline-size: min(420px, 78vw, 42dvh);
+  block-size: auto;
+  /* Client PNG is dark-on-transparent; render it white over the dark
+     video/poster ground. Remove this line if the artwork is already light
+     (visual check in Step 6). */
+  filter: brightness(0) invert(1);
 }
 
-.subline {
+.wordmark {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-xs);
+  color: #fff;
+}
+
+.wordmarkPrimary {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.wordmarkSecondary {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tagline {
   font-family: var(--font-sans);
   font-size: var(--text-body-large);
   font-weight: var(--font-weight-regular);
   line-height: var(--leading-body);
+  letter-spacing: var(--tracking-caption);
   color: rgba(255, 255, 255, 0.8);
   max-inline-size: 540px;
   opacity: 0;
   animation: hero-enter 800ms var(--motion-ease-out) both;
-  animation-delay: 240ms;
+  animation-delay: 200ms;
 }
 
 .ctaGroup {
@@ -137,32 +159,10 @@
   animation: hero-pulse 2s ease-in-out infinite;
 }
 
-.caption {
-  position: absolute;
-  inset-block-end: 24px;
-  inset-inline-end: 24px;
-  z-index: calc(var(--z-base) + 2);
-  font-family: var(--font-sans);
-  font-size: var(--text-eyebrow);
-  font-weight: var(--font-weight-regular);
-  color: rgba(255, 255, 255, 0.6);
-}
-
 @keyframes hero-enter {
   from {
     opacity: 0;
     transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes hero-enter-headline {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
   }
   to {
     opacity: 1;
