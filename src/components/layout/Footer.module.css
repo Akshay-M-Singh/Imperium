@@ -1,1 +1,155 @@
-/* Footer — DESIGN.md §9.09. Placeholder. */
+.footer {
+  /* Footer-specific tokens scoped as private custom properties. */
+  --_footer-bg: var(--color-carbone);
+  --_footer-text: var(--color-gesso);
+  --_footer-muted: var(--color-sabbia);
+  --_footer-link-opacity: 0.7;
+
+  background-color: var(--_footer-bg);
+  color: var(--_footer-text);
+  padding-block-start: 80px;
+  padding-block-end: 40px;
+}
+
+.inner {
+  max-inline-size: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.topRow,
+.middleRow,
+.bottomRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-medium);
+  font-size: 18px;
+  color: var(--_footer-text);
+  line-height: 1.2;
+}
+
+.tagline {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-caption);
+  color: var(--_footer-muted);
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.link {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-nav);
+  color: var(--_footer-text);
+  opacity: var(--_footer-link-opacity);
+  text-decoration: none;
+  transition: opacity var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.link:hover,
+.link:focus-visible {
+  opacity: 1;
+}
+
+.legal {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-eyebrow);
+  color: var(--_footer-muted);
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.socialLink {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-eyebrow);
+  color: var(--_footer-muted);
+  text-decoration: none;
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  color: var(--_footer-text);
+}
+
+.divider {
+  color: var(--_footer-muted);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding-inline: var(--grid-margin-tablet);
+    gap: var(--space-xl);
+  }
+
+  .topRow,
+  .bottomRow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: start;
+  }
+
+  .middleRow {
+    align-items: center;
+  }
+
+  .linkList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    padding-inline: var(--grid-margin-desktop);
+  }
+
+  .linkList {
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .inner {
+    padding-inline: var(--grid-margin-desktop-xl);
+  }
+}
+
+/* Prevent the fixed mobile WhatsApp bar from covering footer content.
+   The bar is 56px tall and fixed to the bottom of the viewport. */
+@media (max-width: 767px) {
+  .footer {
+    padding-block-end: var(--whatsapp-bar-height);
+  }
+}

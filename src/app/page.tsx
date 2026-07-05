@@ -1,5 +1,14 @@
 import { Navigation } from "@/components/layout";
-import { Hero, OriginMap, StatsStrip, Collections } from "@/components/sections";
+import {
+  Hero,
+  OriginMap,
+  StatsStrip,
+  Collections,
+  TrustPillars,
+  Founder,
+  Testimonials,
+  Contact,
+} from "@/components/sections";
 
 export default function HomePage() {
   return (
@@ -10,6 +19,10 @@ export default function HomePage() {
         <OriginMap />
         <StatsStrip />
         <Collections />
+        <TrustPillars />
+        <Founder />
+        <Testimonials />
+        <Contact />
       </main>
     </>
   );

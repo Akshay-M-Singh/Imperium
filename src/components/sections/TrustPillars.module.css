@@ -1,1 +1,63 @@
-/* TrustPillars — DESIGN.md §9.05. */
+/* TrustPillars — DESIGN.md §9.05. Four numbered pillars with dividers. */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-block-start: var(--space-xl);
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--space-md);
+  padding-inline: var(--space-md);
+  border-block-end: 1px solid color-mix(in srgb, var(--color-sabbia) 15%, transparent);
+}
+
+.pillar:last-child {
+  border-block-end: none;
+}
+
+.number {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+  margin-block-end: var(--space-sm);
+}
+
+.label {
+  font-family: var(--font-serif);
+  font-size: var(--text-subheadline);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-subheadline);
+  color: var(--color-carbone);
+  margin-block-end: var(--space-xs);
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-body);
+  color: var(--color-ardesia);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pillar {
+    padding-block: 0;
+    border-block-end: none;
+    border-inline-end: 1px solid color-mix(in srgb, var(--color-sabbia) 15%, transparent);
+  }
+
+  .pillar:last-child {
+    border-inline-end: none;
+  }
+}

@@ -1,1 +1,87 @@
 /* FormField — DESIGN.md §9.08. Underline-only inputs. */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-sabbia);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--color-sabbia);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-carbone);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  transition: border-color var(--motion-duration-fast) var(--motion-ease-out);
+  touch-action: manipulation;
+}
+
+.input:focus-visible {
+  border-bottom-color: var(--color-blu-notte);
+}
+
+.input::placeholder {
+  color: var(--color-sabbia);
+  opacity: 0.7;
+}
+
+/* Text, email, tel inputs share a 56 px touch height. */
+input.input {
+  min-block-size: 56px;
+  padding-block: var(--space-sm);
+}
+
+/* Textarea keeps newlines and grows with content. */
+textarea.input {
+  min-block-size: 120px;
+  resize: vertical;
+  padding-block: var(--space-sm);
+}
+
+/* Custom-styled select with a small downward chevron. */
+select.input {
+  min-block-size: 56px;
+  padding-block: var(--space-sm);
+  padding-inline-end: 24px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23B8A99A' stroke-width='1.5' d='M1 4l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 2px center;
+  cursor: pointer;
+}
+
+.inputError,
+.inputError:focus-visible {
+  border-bottom-color: var(--color-error);
+}
+
+.error {
+  color: var(--color-error);
+  font-size: var(--text-caption);
+  margin-block-start: var(--space-xs);
+  animation: errorIn var(--motion-duration-instant) var(--motion-ease-out) forwards;
+}
+
+@keyframes errorIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

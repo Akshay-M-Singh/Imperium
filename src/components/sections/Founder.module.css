@@ -1,1 +1,93 @@
-/* Founder — DESIGN.md §9.06. */
+/* Founder — DESIGN.md §9.06. Asymmetric 5/7 portrait + bio + pull quote + certification. */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--color-sabbia);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-sabbia);
+  margin-block-start: var(--space-sm);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.bioParagraph {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.7;
+  color: var(--color-ardesia);
+}
+
+.certification {
+  text-align: center;
+}
+
+.certImageWrap {
+  position: relative;
+  max-inline-size: 200px;
+  aspect-ratio: 3 / 2;
+  margin-inline: auto;
+  margin-block-end: var(--space-sm);
+  overflow: hidden;
+  background-color: var(--color-sabbia);
+}
+
+.certImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.certCaption {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-sabbia);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--grid-gutter-desktop);
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid {
+    gap: var(--grid-gutter-desktop-xl);
+  }
+}
