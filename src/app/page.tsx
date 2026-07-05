@@ -4,7 +4,7 @@ import {
   OriginMap,
   StatsStrip,
   Collections,
-  TrustPillars,
+  WhyImperium,
   Founder,
   Testimonials,
   Contact,
@@ -19,7 +19,7 @@ export default function HomePage() {
         <OriginMap />
         <StatsStrip />
         <Collections />
-        <TrustPillars />
+        <WhyImperium />
         <Founder />
         <Testimonials />
         <Contact />
