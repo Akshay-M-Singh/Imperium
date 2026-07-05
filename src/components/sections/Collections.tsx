@@ -1,4 +1,4 @@
-// Collections — three collection cards / Embla carousel on all viewports
+// Collections — four collection cards / Embla carousel on all viewports
 // (DESIGN.md §9.04, MOTION_SPEC.md §3.5, Roadmap Phase 5.5 / 5.8).
 
 import dynamic from "next/dynamic";
@@ -22,7 +22,7 @@ export function Collections() {
           <SectionHeader
             eyebrow="Our collections"
             headline="Fabric with a story."
-            subline="Three curated collections — each one a different way of working with Italian craft."
+            subline="Four curated collections — each one a different way of working with Italian craft."
             id="collections-heading"
           />
         </div>

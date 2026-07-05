@@ -49,15 +49,6 @@
   color: var(--color-carbone);
 }
 
-.wordmarkEst {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-regular);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-sabbia);
-}
-
 @media (max-width: 767px) {
   .wordmarkName {
     font-size: 16px;

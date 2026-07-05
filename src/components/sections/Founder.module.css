@@ -79,6 +79,26 @@
   color: var(--color-sabbia);
 }
 
+.certPlaceholder {
+  display: grid;
+  place-content: center;
+  max-inline-size: 200px;
+  aspect-ratio: 3 / 2;
+  margin-inline: auto;
+  margin-block-end: var(--space-sm);
+  border: 1px dashed color-mix(in srgb, var(--color-sabbia) 40%, transparent);
+}
+
+.certPlaceholderLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+  padding: var(--space-sm);
+  text-align: center;
+}
+
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: 5fr 7fr;

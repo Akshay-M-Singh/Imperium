@@ -158,6 +158,8 @@ The forks that shape everything else. Each has an ID used throughout this docume
 | **D-12** | Privacy policy approval                          | see §4.3                                                                                                                                                                                                                                                                                                                                                                                          | draft 🟡 by team, Sofia approves                                                                                                                                                                                                                                                                                                                                           | Sofia                              | Footer, form consent line, launch                                               |
 | **D-13** | Constraints                                      | launch date · budget (photography, video, map illustration, logo refinement, domain/hosting — fonts are free OFL) · final sign-off ritual                                                                                                                                                                                                                                                         | set at next founder session                                                                                                                                                                                                                                                                                                                                                | Sofia                              | Everything downstream                                                           |
 
+**D-01 — Resolved (client, 2026-07-04):** curated named collections confirmed; a fourth collection — Interior & Exterior Design — added. Material-filter library remains a V2 option (tags kept in the data model).
+
 ---
 
 ## 6. Information Architecture & Section Content Contract
@@ -185,6 +187,8 @@ Each block below: purpose → content inputs → proposed copy → acceptance cr
   - CTAs: **"Explore our fabrics"** (scrolls to Collections) + text link **"Request a sample →"** (scrolls to Contact).
 - **Accept when:** exactly one `<h1>`; headline legible over the visual at all breakpoints; CTAs functional; eyebrow contains no unvalidated year.
 
+**Amended (client, 2026-07-04):** hero is logo-led — the wordmark renders large inside the `<h1>` with the tagline directly beneath; the headline candidates above are retired for V1. No establishment year anywhere.
+
 ### 6.3 Origin Map ("Our reach")
 
 - **Purpose:** provenance made visual — Italy at the centre, the Gulf as destination.
@@ -192,12 +196,16 @@ Each block below: purpose → content inputs → proposed copy → acceptance cr
 - **Proposed copy 🟡:** eyebrow _"Our reach"_; headline _"Born in Italy. Delivered to Dubai."_ (extend to "…and the Gulf" only if B-5 supports it); subline drafted after B-3/B-5 answers.
 - **Accept when:** every city on the map is a validated market; the map reads as illustration, not infographic (`DESIGN.md` §9.03).
 
+**Superseded (client, 2026-07-04):** the provenance visual moved into Why Imperium row 01 as an Italy → UAE + Gulf route placeholder; the OriginMap section (and its city-list claims) was removed from V1.
+
 ### 6.4 Stats Strip
 
 - **Purpose:** scale and credibility in four numbers.
 - **Inputs:** 🔴 B-6 — four true, defensible, durable numbers. Proposed _shape_ 🟡 (Sofia fills values or vetoes the stat): _mills we source from · fabrics in the library · years of textile experience (Sofia's, if the company is young) · cities served_.
 - **Rule:** any stat that needs a caveat is the wrong stat. If only two honest numbers exist, ship two — or cut the strip entirely. A luxury brand with fake numbers is dead on discovery.
 - **Accept when:** every number has a source Sofia can defend in a client meeting; count-up respects reduced motion.
+
+**Updated (client, 2026-07-04):** "40+ Fabrics" confirmed; "12+ mills", "120+ fabrics", "15 years", "4 cities served" removed as unvalidated. Companion stats "4 curated collections" and "100% Italian fabrics" are team-proposed 🟡 pending Sofia's veto (see `src/data/stats.ts`).
 
 ### 6.5 Collections (structure gated by D-01)
 
@@ -208,6 +216,8 @@ Each block below: purpose → content inputs → proposed copy → acceptance cr
   - _Pezzi Unici_ — tags RARE · LIMITED · ONE OF A KIND — _"Small runs, discontinued weaves, single bolts. When a piece is gone, it is gone — which is precisely the point."_
   - _Ospitalità di Lusso_ — tags HOSPITALITY · BESPOKE — _"Contract-grade fabric for hotels and restaurants that refuse to look like it. Specified with you, sampled fast."_ CTA: _"Talk to us about your project →"_.
 - **Accept when:** grouping matches Sofia's answer to D-01; every card has a real photograph (no stock at launch — stock is a build-time placeholder only); tags reflect actual materials on offer.
+
+**Updated (client, 2026-07-04):** four collections; per-card promise line ("tagline") renders beneath the image; Pezzi Unici's CTA is "Contact Us" → #contact; the other cards link to /fabrics deep anchors.
 
 ### 6.6 Trust Pillars ("Why Imperium")
 
@@ -220,12 +230,16 @@ Each block below: purpose → content inputs → proposed copy → acceptance cr
   - 04 — the scaffold's _"Always available"_ is an operational promise nobody has committed to. Propose instead: _A partner, not a catalogue_ — _"Tell us the project; we'll bring the options. Sourcing is a conversation, not a search bar."_
 - **Accept when:** four pillars, numbered, no icons; every claim survivable in due diligence.
 
+**Updated (client, 2026-07-04):** three alternating rows — Direct From the Source (+route-map slot), Made in Italy Expertise (+stamp slot), For the Gulf's Luxury Market. The fourth pillar was removed permanently.
+
 ### 6.7 Founder ("The story behind Imperium")
 
 - **Purpose:** the human guarantee behind the brand (weight per D-04).
 - **Inputs:** 🔴 Sofia's real story in her own words — the discovery questionnaire gathers: why fabrics, why Italy, why Dubai, one formative detail. Portrait (A-3), pull-quote, certification (B-4).
 - **Proposed structure 🟡:** eyebrow _"The story behind Imperium"_; headline _"A love for Italy, built into every thread."_ (candidate; offer alternatives after her story lands); three bio paragraphs assembled **from her answers, edited — never authored from nothing**; pull-quote must be a sentence she actually says (the scaffold's _"Every fabric I source is one I would stake my name on."_ may be offered to her for adoption, clearly framed as a draft she can reject).
 - **Accept when:** bio contains zero team-invented biography; quote is hers; portrait is a real photograph (fabric-texture placeholder acceptable only pre-launch).
+
+**Resolved (client, 2026-07-04):** headline "Proudly Italian. Purposefully Global.", three bio paragraphs and the pull-quote are client-approved and live in `src/data/founder.ts`. Certification container sits below the story; caption "Made in Italy Certification".
 
 ### 6.8 Testimonials
 

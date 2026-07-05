@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Hero } from "@/components/sections/Hero";
+import { SITE } from "@/lib/site";
 
 function installMatchMedia(matches: boolean) {
   const listeners = new Set<(e: MediaQueryListEvent) => void>();
@@ -30,38 +31,33 @@ describe("Hero", () => {
     vi.unstubAllGlobals();
   });
 
-  it("renders the headline as a single h1", () => {
+  it("leads with the brand as the page's only h1", () => {
     render(<Hero />);
-    const heading = screen.getByRole("heading", { level: 1 });
-    expect(heading).toHaveTextContent("Where Italian craft");
-    expect(heading).toHaveTextContent("meets the world.");
-    const allH1 = screen.getAllByRole("heading", { level: 1 });
-    expect(allH1).toHaveLength(1);
+    const headings = screen.getAllByRole("heading", { level: 1 });
+    expect(headings).toHaveLength(1);
+    expect(headings[0]).toHaveAccessibleName(/Imperium/i);
+    if (SITE.logoSrc) {
+      expect(screen.getByRole("img", { name: SITE.name })).toBeInTheDocument();
+    }
   });
 
-  it("renders the eyebrow", () => {
+  it("places the tagline directly beneath the logo", () => {
     render(<Hero />);
-    expect(screen.getByText("Made in Italy · Est. 2026")).toBeInTheDocument();
+    expect(screen.getByText(SITE.tagline)).toBeInTheDocument();
   });
 
-  it("renders the subline", () => {
-    render(<Hero />);
-    expect(
-      screen.getByText(/Premium Italian fabrics — sourced from the finest mills of Italy/i),
-    ).toBeInTheDocument();
+  it("renders the Made in Italy eyebrow without a year", () => {
+    const { container } = render(<Hero />);
+    expect(screen.getByText("Made in Italy")).toBeInTheDocument();
+    expect(container.textContent).not.toMatch(/2026|Est\./);
   });
 
-  it("renders the primary CTA and the sample text link", () => {
+  it("renders the primary CTA and routes the sample link to contact", () => {
     render(<Hero />);
     const cta = screen.getByRole("link", { name: "Explore our fabrics" });
     expect(cta).toHaveAttribute("href", "#collections");
     const sample = screen.getByRole("link", { name: /Request a sample/i });
-    expect(sample).toHaveAttribute("href", "#collections");
-  });
-
-  it("renders the Italia · 2026 caption", () => {
-    render(<Hero />);
-    expect(screen.getByText("Italia · 2026")).toBeInTheDocument();
+    expect(sample).toHaveAttribute("href", "#contact");
   });
 
   it("renders a video element with a poster pointing at a hero image", () => {

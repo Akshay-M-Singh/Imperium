@@ -1,13 +1,17 @@
 "use client";
 
-// Hero — full-viewport brand opening (DESIGN.md §9.02, Roadmap Phase 2.3).
+// Hero — full-viewport brand opening (DESIGN.md §9.02, amended by client
+// direction: the wordmark logo leads inside the h1, with the brand
+// tagline directly beneath). Video/poster lazy-load logic unchanged.
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { SITE } from "@/lib/site";
 import styles from "./Hero.module.css";
 
 const DESKTOP_POSTER = "/images/hero/hero-desktop.svg";
@@ -71,17 +75,27 @@ export function Hero() {
       <div className={styles.overlay} aria-hidden="true" />
 
       <div className={styles.content}>
-        <span className={styles.eyebrow}>Made in Italy · Est. 2026</span>
+        <span className={styles.eyebrow}>Made in Italy</span>
 
-        <h1 id="hero-heading" className={styles.headline}>
-          <span>Where Italian craft</span>
-          <span>meets the world.</span>
+        <h1 id="hero-heading" className={styles.logo}>
+          {SITE.logoSrc ? (
+            <Image
+              src={SITE.logoSrc}
+              alt={SITE.name}
+              width={500}
+              height={500}
+              priority
+              className={styles.logoImage}
+            />
+          ) : (
+            <span className={styles.wordmark}>
+              <span className={styles.wordmarkPrimary}>Imperium</span>
+              <span className={styles.wordmarkSecondary}>Italian Textile</span>
+            </span>
+          )}
         </h1>
 
-        <p className={styles.subline}>
-          Premium Italian fabrics — sourced from the finest mills of Italy, delivered to
-          Dubai&apos;s most discerning tailors and hospitality groups.
-        </p>
+        <p className={styles.tagline}>{SITE.tagline}</p>
 
         <div className={styles.ctaGroup}>
           <MagneticButton>
@@ -89,7 +103,7 @@ export function Hero() {
               Explore our fabrics
             </Button>
           </MagneticButton>
-          <a href="#collections" className={styles.textLink}>
+          <a href="#contact" className={styles.textLink}>
             Request a sample →
           </a>
         </div>
@@ -98,10 +112,6 @@ export function Hero() {
       <div className={styles.scrollIndicator} aria-hidden="true">
         <span className={styles.scrollLine} />
       </div>
-
-      <span className={styles.caption} aria-hidden="true">
-        Italia · 2026
-      </span>
     </section>
   );
 }
