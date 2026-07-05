@@ -1,0 +1,130 @@
+/* WhyImperium — alternating 5/7 rows on the Gesso band. Whitespace over
+   dividers (DESIGN.md §4); numbered labels keep the manifesto DNA of
+   §9.05. */
+
+.rows {
+  margin-block-start: var(--space-xl);
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.row {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.text {
+  display: grid;
+  gap: var(--space-sm);
+  align-content: center;
+}
+
+.number {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: var(--text-subheadline);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-subheadline);
+  color: var(--color-carbone);
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-ardesia);
+  max-inline-size: 60ch;
+}
+
+@media (min-width: 1024px) {
+  .row {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter-desktop);
+  }
+
+  .text {
+    grid-column: span 5;
+  }
+
+  .media {
+    grid-column: span 7;
+  }
+
+  .reversed .media {
+    order: -1;
+  }
+
+  .textOnly .text {
+    grid-column: 6 / -1;
+  }
+}
+
+/* --- Map placeholder (Italy → UAE + Gulf) -------------------------------- */
+
+.mapPlaceholder {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--space-sm);
+  aspect-ratio: 4 / 3;
+  border: 1px solid color-mix(in srgb, var(--color-sabbia) 30%, transparent);
+  background-color: var(--color-pietra);
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+.mapPoint {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  line-height: var(--leading-h3);
+  color: var(--color-carbone);
+}
+
+.mapArrow {
+  font-size: var(--text-subheadline);
+  color: var(--color-oro-antico);
+}
+
+/* --- Stamp placeholder ---------------------------------------------------- */
+
+.stampSlot {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-sm);
+}
+
+.stampCircle {
+  display: grid;
+  place-content: center;
+  inline-size: 180px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-sabbia) 40%, transparent);
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-sabbia);
+  padding: var(--space-sm);
+}
+
+/* --- Shared placeholder caption -------------------------------------------- */
+
+.placeholderCaption {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-sabbia);
+}
