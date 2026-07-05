@@ -1,21 +1,15 @@
 "use client";
 
-// StatsStrip — horizontal stat band bridging OriginMap and Collections
-// (DESIGN.md §9.03 elevation, Roadmap Phase 3.3).
+// StatsStrip — horizontal stat band between Hero and Collections
+// (DESIGN.md §9.03 elevation, Roadmap Phase 3.3). Reads src/data/stats.ts.
 
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { StatBlock } from "@/components/ui/StatBlock";
+import { stats } from "@/data/stats";
 import styles from "./StatsStrip.module.css";
-
-const stats = [
-  { value: 12, suffix: "+", label: "Italian mills" },
-  { value: 120, suffix: "+", label: "Fabrics in library" },
-  { value: 15, suffix: "", label: "Years of expertise" },
-  { value: 4, suffix: "", label: "Cities served" },
-];
 
 export function StatsStrip() {
   const ref = useRef<HTMLDivElement>(null);
