@@ -1,4 +1,4 @@
-/* FabricCard — DESIGN.md §9.04. 4:5 portrait image + tag + italic title + body + CTA. */
+/* FabricCard — DESIGN.md §9.04. 4:5 portrait image + tagline + italic title + body + CTA. */
 
 .card {
   display: flex;
@@ -29,7 +29,7 @@
   padding-block-start: var(--space-sm);
 }
 
-.tags {
+.tagline {
   font-family: var(--font-sans);
   font-size: var(--text-eyebrow);
   font-weight: var(--font-weight-medium);
@@ -40,16 +40,16 @@
   transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
-.tagsAccent {
+.taglineAccent {
   color: var(--color-oro-antico);
 }
 
-.card:focus-within .tags {
+.card:focus-within .tagline {
   color: var(--color-oro-antico);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .card:hover .tags {
+  .card:hover .tagline {
     color: var(--color-oro-antico);
   }
 }
