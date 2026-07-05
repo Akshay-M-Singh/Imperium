@@ -8,21 +8,28 @@ const collection: CollectionCard = {
   tags: ["LINEN", "SILK"],
   title: "Tessuti Italiani",
   titleItalic: true,
+  tagline: "For those who don't compromise.",
   body: "The foundation of the house.",
-  cta: { label: "View collection →", href: "/fabrics" },
+  cta: { label: "View Collection", href: "/fabrics#tessuti-italiani" },
   image: { src: "/images/fabrics/tessuti-italiani.svg", alt: "Italian linen texture" },
 };
 
 describe("FabricCard", () => {
+  it("renders the tagline beneath the image instead of the tag strip", () => {
+    render(<FabricCard collection={collection} />);
+
+    expect(screen.getByText("For those who don't compromise.")).toBeInTheDocument();
+    expect(screen.queryByText("LINEN · SILK")).not.toBeInTheDocument();
+  });
+
   it("renders the collection title, body and CTA", () => {
     render(<FabricCard collection={collection} />);
 
     expect(screen.getByRole("heading", { name: "Tessuti Italiani" })).toBeInTheDocument();
     expect(screen.getByText("The foundation of the house.")).toBeInTheDocument();
-    expect(screen.getByText("LINEN · SILK")).toBeInTheDocument();
 
-    const link = screen.getByRole("link", { name: "View collection →" });
-    expect(link).toHaveAttribute("href", "/fabrics");
+    const link = screen.getByRole("link", { name: /View Collection/ });
+    expect(link).toHaveAttribute("href", "/fabrics#tessuti-italiani");
   });
 
   it("renders the collection image with alt text", () => {

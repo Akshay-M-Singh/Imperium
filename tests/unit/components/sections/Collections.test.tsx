@@ -28,10 +28,21 @@ describe("Collections", () => {
     expect(screen.getByRole("heading", { name: "Fabric with a story." })).toBeInTheDocument();
   });
 
-  it("renders all three collection cards", async () => {
+  it("renders all four collection cards", async () => {
     render(<Collections />);
     expect(await screen.findByRole("heading", { name: "Tessuti Italiani" })).toBeInTheDocument();
     expect(await screen.findByRole("heading", { name: "Pezzi Unici" })).toBeInTheDocument();
     expect(await screen.findByRole("heading", { name: "Ospitalità di Lusso" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "Interior & Exterior Design" }),
+    ).toBeInTheDocument();
+  });
+
+  it("routes Pezzi Unici to the contact section", async () => {
+    render(<Collections />);
+    expect(await screen.findByRole("link", { name: /Contact Us/ })).toHaveAttribute(
+      "href",
+      "#contact",
+    );
   });
 });
