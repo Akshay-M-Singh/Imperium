@@ -46,7 +46,6 @@ export function Navigation() {
         <div className={styles.row}>
           <Link href="/" className={styles.wordmark} aria-label="Imperium Italian Textile — home">
             <span className={styles.wordmarkName}>{SITE.name}</span>
-            <span className={styles.wordmarkEst}>Est. {SITE.established}</span>
           </Link>
 
           <nav aria-label="Primary" className={styles.desktopNav}>

@@ -1,5 +1,6 @@
 // Footer — site-wide dark full-stop (DESIGN.md §9.09).
 // Full-width Carbone band with wordmark, footer links, legal line, and socials.
+// The legal line carries no year by client decision (no year anywhere on the site).
 
 import { SITE } from "@/lib/site";
 import { navigation } from "@/data/navigation";
@@ -8,8 +9,6 @@ import styles from "./Footer.module.css";
 const footerLinks = [...navigation.links, { label: "Privacy Policy", href: "/privacy" }];
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -31,9 +30,7 @@ export function Footer() {
         </nav>
 
         <div className={styles.bottomRow}>
-          <p className={styles.legal}>
-            © {currentYear} {SITE.name}. All rights reserved.
-          </p>
+          <p className={styles.legal}>© {SITE.name}. All rights reserved.</p>
           <div className={styles.socials}>
             <a
               href={SITE.instagram}

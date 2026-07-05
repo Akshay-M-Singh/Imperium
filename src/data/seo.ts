@@ -4,16 +4,17 @@ import type { SeoData } from "@/types/seo";
 
 export const seo: SeoData = {
   home: {
-    title: "Imperium Italian Textile — Premium Italian Fabrics, Delivered to Dubai",
+    title: "Imperium Italian Textile — Premium Italian Fabrics, Delivered to the Gulf",
     description:
-      "Premium Italian fabrics sourced directly from Italy's finest mills and delivered to Dubai's most discerning tailors and hospitality groups.",
+      "Premium Italian fabrics sourced from Italy's finest mills and delivered to the Gulf's most discerning tailors, designers and hospitality groups.",
     canonical: "/",
     ogTitle: "Imperium Italian Textile",
     ogDescription: "Premium Italian fabrics sourced from the finest mills of Italy.",
   },
   fabrics: {
     title: "Fabric Collections",
-    description: "Tessuti Italiani, Pezzi Unici, and hospitality fabrics.",
+    description:
+      "Tessuti Italiani, Pezzi Unici, Ospitalità di Lusso and Interior & Exterior Design — four collections of premium Italian fabric.",
     canonical: "/fabrics",
   },
   about: {
