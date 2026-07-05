@@ -13,10 +13,14 @@ export interface FounderData {
 export const founder: FounderData = {
   eyebrow: "The story behind Imperium",
   headline: "A love for Italy, built into every thread.",
-  bioParagraphs: ["Placeholder — PRD bio paragraph 1.", "Placeholder 2.", "Placeholder 3."],
+  bioParagraphs: [
+    "Sofia Mazza founded Imperium on a simple conviction: the best Italian fabrics deserve to be handled by people who understand them.",
+    "Born from years spent between Milanese mills and Dubai showrooms, the company connects Italian craft with the Gulf's most exacting clients — tailors who measure in millimetres and hospitality groups who think in decades.",
+    "Every bolt is chosen by hand. Every relationship is built on trust. And every delivery carries the promise that the fabric is exactly what it claims to be.",
+  ],
   portrait: {
-    src: "/images/about/sofia-portrait.jpg",
-    alt: "Sofia Mazza, Founder",
+    src: "/images/about/sofia-portrait.svg",
+    alt: "Sofia Mazza, Founder of Imperium Italian Textile",
     caption: "Sofia Mazza, Founder",
   },
   quote: "Every fabric I source is one I would stake my name on.",

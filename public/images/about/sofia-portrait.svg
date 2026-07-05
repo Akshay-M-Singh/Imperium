@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <rect width="600" height="800" fill="#B8A99A"/>
+  <defs>
+    <pattern id="weave" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 4h8M4 0v8" stroke="#A89A8C" stroke-width="0.5" fill="none"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="800" fill="url(#weave)"/>
+  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="14" fill="#4A4540" letter-spacing="0.1em" text-transform="uppercase">Portrait coming soon</text>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="28" font-style="italic" fill="#1A1A1A">Sofia Mazza, Founder</text>
+</svg>

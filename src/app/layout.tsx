@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { isIndexingAllowed } from "@/app/robots";
+import { Footer } from "@/components/layout";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com"),
@@ -57,6 +59,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
         {children}
+        <Footer />
+        <WhatsAppButton fixedMobile />
       </body>
     </html>
   );

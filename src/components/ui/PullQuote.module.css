@@ -1,1 +1,32 @@
-/* PullQuote — DESIGN.md §9.06. */
+/* PullQuote — DESIGN.md §9.06. Centred Cormorant italic quote + Oro Antico attribution. */
+
+.pullQuote {
+  margin: 0;
+  text-align: center;
+  padding-block: 80px;
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3;
+  color: var(--color-carbone);
+}
+
+.attribution {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-oro-antico);
+  margin-block-start: 24px;
+}
+
+@media (max-width: 767px) {
+  .quote {
+    font-size: 28px;
+  }
+}

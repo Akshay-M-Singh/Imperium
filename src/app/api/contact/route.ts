@@ -10,6 +10,8 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  // TODO(Phase 4): parse form, validate, send via Resend, return result.
-  return NextResponse.json({ ok: false, message: "Not implemented" }, { status: 501 });
+  // The primary submission path is the React Server Action in
+  // src/app/actions/contact.ts. This REST endpoint is kept closed until a
+  // third-party integration genuinely needs it (PRD F-1).
+  return NextResponse.json({ ok: false, message: "Method not allowed" }, { status: 405 });
 }
