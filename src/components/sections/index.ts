@@ -1,5 +1,4 @@
 export { Hero } from "./Hero";
-export { OriginMap } from "./OriginMap";
 export { StatsStrip } from "./StatsStrip";
 export { Collections } from "./Collections";
 export { WhyImperium } from "./WhyImperium";
