@@ -257,6 +257,18 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+  touch-action: manipulation;
+}
+
+/* Global touch-action parity (MOTION_SPEC.md §5.11).
+   Carousel tracks explicitly override this with touch-action: pan-y. */
+[role="button"],
+[role="link"],
+[role="tab"],
+input,
+textarea,
+select {
+  touch-action: manipulation;
 }
 
 p,

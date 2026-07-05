@@ -1,0 +1,23 @@
+/* MagneticButton — invisible 100px hit area around the child.
+   Outer wrapper stays put and captures mouse events; inner motion
+   element carries the spring translate (MOTION_SPEC.md §3.2). */
+
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Extend the interactive area ~100px in every direction. */
+.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -100px;
+  z-index: 0;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+}

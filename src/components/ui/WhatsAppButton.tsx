@@ -3,6 +3,7 @@ import { SITE } from "@/lib/site";
 import { contact } from "@/data/contact";
 import { waLink } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import styles from "./WhatsAppButton.module.css";
 
 export interface WhatsAppButtonProps {
@@ -35,15 +36,17 @@ export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): Re
   }
 
   return (
-    <a
-      href={href}
-      className={cn(styles.button, styles.inline)}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={contact.whatsappButtonLabel}
-    >
-      {label}
-    </a>
+    <MagneticButton>
+      <a
+        href={href}
+        className={cn(styles.button, styles.inline)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={contact.whatsappButtonLabel}
+      >
+        {label}
+      </a>
+    </MagneticButton>
   );
 }
 

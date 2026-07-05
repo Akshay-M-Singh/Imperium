@@ -13,7 +13,12 @@
   transition: background-size var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
-.link:hover,
 .link:focus-visible {
   background-size: 100% 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    background-size: 100% 1px;
+  }
 }

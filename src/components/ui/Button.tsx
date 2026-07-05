@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./Button.module.css";
 
-export type ButtonVariant = "ghost" | "filled" | "whatsapp";
+export type ButtonVariant = "ghost" | "ghost-light" | "filled" | "whatsapp";
 
 export interface ButtonProps {
   children: ReactNode;

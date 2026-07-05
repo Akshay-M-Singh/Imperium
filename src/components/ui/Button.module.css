@@ -18,12 +18,18 @@
   transition:
     background-color var(--motion-duration-fast) var(--motion-ease-standard),
     color var(--motion-duration-fast) var(--motion-ease-standard),
-    border-color var(--motion-duration-fast) var(--motion-ease-standard);
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform 160ms var(--motion-ease-out);
 }
 
 .button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+  transition-duration: 100ms;
 }
 
 .ghost {
@@ -32,9 +38,24 @@
   background-color: transparent;
 }
 
-.ghost:hover:not(:disabled) {
-  background-color: var(--color-blu-notte);
+@media (hover: hover) and (pointer: fine) {
+  .ghost:hover:not(:disabled) {
+    background-color: var(--color-blu-notte);
+    color: var(--color-gesso);
+  }
+}
+
+.ghost-light {
+  border: 1px solid var(--color-gesso);
   color: var(--color-gesso);
+  background-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ghost-light:hover:not(:disabled) {
+    background-color: var(--color-gesso);
+    color: var(--color-carbone);
+  }
 }
 
 .filled {
@@ -43,9 +64,11 @@
   color: var(--color-gesso);
 }
 
-.filled:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
-  border-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+@media (hover: hover) and (pointer: fine) {
+  .filled:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+    border-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+  }
 }
 
 .whatsapp {
@@ -54,7 +77,9 @@
   color: var(--color-gesso);
 }
 
-.whatsapp:hover:not(:disabled) {
-  background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
-  border-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+    border-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
+  }
 }

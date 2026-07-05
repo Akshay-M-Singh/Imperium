@@ -1,4 +1,4 @@
-/* FormField — DESIGN.md §9.08. Underline-only inputs. */
+/* FormField — DESIGN.md §9.08. Underline-only inputs with floating labels. */
 
 .field {
   display: flex;
@@ -6,13 +6,31 @@
   gap: var(--space-xs);
 }
 
+.controlWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-block-start: var(--space-sm);
+}
+
 .label {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: var(--space-sm);
   font-family: var(--font-sans);
-  font-size: var(--text-eyebrow);
+  font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   color: var(--color-sabbia);
   text-transform: uppercase;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: var(--leading-body);
+  pointer-events: none;
+  transform-origin: left center;
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.label[data-floating="true"] {
+  color: var(--color-blu-notte);
 }
 
 .input {
@@ -31,6 +49,11 @@
 
 .input:focus-visible {
   border-bottom-color: var(--color-blu-notte);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .input::placeholder {
@@ -63,25 +86,36 @@ select.input {
   cursor: pointer;
 }
 
+select.input:disabled {
+  cursor: not-allowed;
+}
+
 .inputError,
 .inputError:focus-visible {
   border-bottom-color: var(--color-error);
 }
 
-.error {
-  color: var(--color-error);
-  font-size: var(--text-caption);
-  margin-block-start: var(--space-xs);
-  animation: errorIn var(--motion-duration-instant) var(--motion-ease-out) forwards;
+/* One-time pulse line that runs when an error appears. */
+.errorPulse {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 2px;
+  background-color: var(--color-error);
+  transform-origin: left center;
+  animation: errorPulse 0.6s var(--motion-ease-out) forwards;
 }
 
-@keyframes errorIn {
+@keyframes errorPulse {
   from {
+    transform: scaleX(0);
     opacity: 0;
-    transform: translateY(8px);
+  }
+  50% {
+    opacity: 1;
   }
   to {
+    transform: scaleX(1);
     opacity: 1;
-    transform: translateY(0);
   }
 }

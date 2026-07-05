@@ -28,10 +28,10 @@ describe("Collections", () => {
     expect(screen.getByRole("heading", { name: "Fabric with a story." })).toBeInTheDocument();
   });
 
-  it("renders all three collection cards", () => {
+  it("renders all three collection cards", async () => {
     render(<Collections />);
-    expect(screen.getByRole("heading", { name: "Tessuti Italiani" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Pezzi Unici" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Ospitalità di Lusso" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Tessuti Italiani" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Pezzi Unici" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Ospitalità di Lusso" })).toBeInTheDocument();
   });
 });

@@ -71,6 +71,13 @@
   overflow: hidden;
 }
 
+.buttonContent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
 .loadingLine {
   position: absolute;
   inset-inline: 0;
@@ -96,29 +103,20 @@
   transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
-.instagram:hover,
 .instagram:focus-visible {
   color: var(--color-carbone);
   text-decoration: underline;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .instagram:hover {
+    color: var(--color-carbone);
+    text-decoration: underline;
+  }
 }
 
 .formNote {
   font-size: var(--text-caption);
   color: var(--color-sabbia);
   line-height: var(--leading-body);
-}
-
-.topError {
-  color: var(--color-error);
-  font-size: var(--text-caption);
-}
-
-.success {
-  display: grid;
-  gap: var(--space-sm);
-  min-block-size: 320px;
-  place-content: center;
-  text-align: center;
-  color: var(--color-carbone);
-  font-size: var(--text-body-large);
 }

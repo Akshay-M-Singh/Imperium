@@ -1,12 +1,18 @@
-// Collections — three collection cards / desktop grid, mobile scroll-snap
-// (DESIGN.md §9.04, Roadmap Phase 3.5 / Phase 5.8).
+// Collections — three collection cards / Embla carousel on all viewports
+// (DESIGN.md §9.04, MOTION_SPEC.md §3.5, Roadmap Phase 5.5 / 5.8).
 
+import dynamic from "next/dynamic";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FabricCard } from "@/components/ui/FabricCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { collections } from "@/data/collections";
+import { CarouselSlide } from "@/components/motion/Carousel/CarouselSlide";
 import styles from "./Collections.module.css";
+
+// Lazy-load the Embla wrapper (the heavier dependency) without disabling SSR.
+// CarouselSlide stays static so it can render immediately during tests.
+const EmblaContainer = dynamic(() => import("@/components/motion/Carousel/EmblaContainer"));
 
 export function Collections() {
   return (
@@ -20,13 +26,13 @@ export function Collections() {
             id="collections-heading"
           />
         </div>
-        <ul className={styles.grid}>
-          {collections.map((collection) => (
-            <li key={collection.id} className={styles.item}>
+        <EmblaContainer>
+          {collections.map((collection, index) => (
+            <CarouselSlide key={collection.id} index={index}>
               <FabricCard collection={collection} />
-            </li>
+            </CarouselSlide>
           ))}
-        </ul>
+        </EmblaContainer>
       </Section>
     </ScrollReveal>
   );

@@ -68,9 +68,14 @@
   transition: opacity var(--motion-duration-fast) var(--motion-ease-out);
 }
 
-.link:hover,
 .link:focus-visible {
   opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    opacity: 1;
+  }
 }
 
 .legal {
@@ -95,9 +100,14 @@
   transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
-.socialLink:hover,
 .socialLink:focus-visible {
   color: var(--_footer-text);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .socialLink:hover {
+    color: var(--_footer-text);
+  }
 }
 
 .divider {

@@ -1,49 +1,11 @@
-/* Collections — DESIGN.md §9.04. Three collection cards, desktop grid / mobile scroll-snap. */
+/* Collections — DESIGN.md §9.04. Three collection cards in an Embla carousel. */
 
 .header {
   margin-block-end: var(--space-md);
 }
 
-.grid {
-  display: flex;
-  gap: var(--grid-gutter-mobile);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.grid::-webkit-scrollbar {
-  display: none;
-}
-
-.item {
-  flex: 0 0 auto;
-  inline-size: 85vw;
-  scroll-snap-align: start;
-}
-
 @media (min-width: 768px) {
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--grid-gutter-tablet);
-    overflow-x: visible;
-    scroll-snap-type: none;
-  }
-
-  .item {
-    inline-size: auto;
-    scroll-snap-align: none;
-  }
-
   .header {
     margin-block-end: var(--space-lg);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    gap: var(--grid-gutter-desktop);
   }
 }

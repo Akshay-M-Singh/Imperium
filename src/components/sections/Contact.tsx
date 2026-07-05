@@ -8,13 +8,17 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FormField } from "@/components/ui/FormField";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { TextLink } from "@/components/ui/TextLink";
 import { Button } from "@/components/ui/Button";
+import { ValidationMorph } from "@/components/motion/ValidationMorph";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { springs } from "@/lib/motion";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { contact } from "@/data/contact";
 import { SITE } from "@/lib/site";
 import { submitContactForm } from "@/app/actions/contact";
@@ -57,13 +61,19 @@ function validateClient(formData: FormData): FieldErrors {
   return errors;
 }
 
+function vibrateOnSubmit() {
+  if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+    navigator.vibrate(8);
+  }
+}
+
 export function Contact(): ReactNode {
   const [state, formAction, isPending] = useActionState<ContactFormResult | null, FormData>(
     async (_prevState, formData) => submitContactForm(_prevState, formData),
     null,
   );
   const [clientErrors, setClientErrors] = useState<FieldErrors>({});
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const reduced = useReducedMotion();
 
   const success = state?.ok === true;
   const serverErrors = state && !state.ok ? (state.fieldErrors ?? {}) : ({} as FieldErrors);
@@ -78,6 +88,7 @@ export function Contact(): ReactNode {
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      vibrateOnSubmit();
       const form = event.currentTarget;
       const formData = new FormData(form);
       const errors = validateClient(formData);
@@ -89,7 +100,6 @@ export function Contact(): ReactNode {
         return;
       }
 
-      setHasSubmitted(true);
       formAction(formData);
     },
     [formAction],
@@ -97,6 +107,11 @@ export function Contact(): ReactNode {
 
   const getFieldError = (name: keyof FieldErrors): string | undefined => {
     return clientErrors[name];
+  };
+
+  const buttonVariants = {
+    idle: { scale: 1 },
+    success: { scale: reduced ? 1 : [1, 1.03, 1], transition: springs.snap },
   };
 
   return (
@@ -127,59 +142,96 @@ export function Contact(): ReactNode {
           </div>
 
           <div className={styles.formCard}>
-            {success && hasSubmitted ? (
-              <div className={styles.success} role="status" aria-live="polite">
-                <p>{contact.successText}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className={styles.form} noValidate>
-                {Object.entries(contact.formFields).map(([name, config]) => (
-                  <FormField
-                    key={name}
-                    name={name}
-                    label={config.label}
-                    type={config.type}
-                    required={config.required}
-                    options={config.options}
-                    error={getFieldError(name)}
-                  />
-                ))}
-
-                <input
-                  type="hidden"
-                  name="formTimestamp"
-                  defaultValue={Date.now()}
-                  suppressHydrationWarning
+            <form onSubmit={handleSubmit} className={styles.form} noValidate>
+              {Object.entries(contact.formFields).map(([name, config]) => (
+                <FormField
+                  key={name}
+                  name={name}
+                  label={config.label}
+                  type={config.type}
+                  required={config.required}
+                  options={config.options}
+                  error={getFieldError(name)}
+                  disabled={success}
                 />
-                <input
-                  type="text"
-                  name={HONEYPOT_NAME}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  className={styles.honeypot}
-                  defaultValue=""
-                />
+              ))}
 
-                {topError ? (
-                  <p className={styles.topError} role="alert">
-                    {topError}
-                  </p>
-                ) : null}
+              <input
+                type="hidden"
+                name="formTimestamp"
+                defaultValue={Date.now()}
+                suppressHydrationWarning
+              />
+              <input
+                type="text"
+                name={HONEYPOT_NAME}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className={styles.honeypot}
+                defaultValue=""
+              />
 
-                <div className={styles.submit}>
-                  <Button variant="filled" type="submit" loading={isPending}>
-                    {isPending ? contact.loadingText : "Send inquiry"}
-                    {isPending ? <span className={styles.loadingLine} aria-hidden="true" /> : null}
+              {topError ? <ValidationMorph state="error" message={topError} /> : null}
+
+              <div className={styles.submit}>
+                <motion.div
+                  animate={success ? "success" : "idle"}
+                  variants={buttonVariants}
+                  style={{ width: "100%" }}
+                >
+                  <Button
+                    variant="filled"
+                    type="submit"
+                    loading={isPending && !success}
+                    disabled={success}
+                  >
+                    <AnimatePresence mode="sync" initial={false}>
+                      {success ? (
+                        <motion.span
+                          key="success"
+                          className={styles.buttonContent}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={reduced ? { duration: 0 } : { duration: 0.3 }}
+                        >
+                          <ValidationMorph state="success" message="Thank you" />
+                        </motion.span>
+                      ) : isPending ? (
+                        <motion.span
+                          key="pending"
+                          className={styles.buttonContent}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={reduced ? { duration: 0 } : { duration: 0.3 }}
+                        >
+                          {contact.loadingText}
+                          <span className={styles.loadingLine} aria-hidden="true" />
+                        </motion.span>
+                      ) : (
+                        <motion.span
+                          key="idle"
+                          className={styles.buttonContent}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={reduced ? { duration: 0 } : { duration: 0.3 }}
+                        >
+                          Send inquiry
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
                   </Button>
-                </div>
+                </motion.div>
+              </div>
 
-                <p className={styles.formNote}>
-                  {contact.consentMicrocopy.split("Privacy Policy")[0]}
-                  <TextLink href="/privacy">Privacy Policy</TextLink>. {contact.formNote}
-                </p>
-              </form>
-            )}
+              <p className={styles.formNote}>
+                {contact.consentMicrocopy.split("Privacy Policy")[0]}
+                <TextLink href="/privacy">Privacy Policy</TextLink>. {contact.formNote}
+              </p>
+            </form>
           </div>
         </div>
       </Section>

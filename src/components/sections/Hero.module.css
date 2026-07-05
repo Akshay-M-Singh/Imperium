@@ -92,32 +92,6 @@
   animation-delay: 320ms;
 }
 
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-block-size: 48px;
-  padding-inline: var(--space-lg);
-  border: 1px solid #fff;
-  border-radius: 100px;
-  font-family: var(--font-sans);
-  font-size: var(--text-caption);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: #fff;
-  background-color: transparent;
-  transition:
-    background-color var(--motion-duration-fast) var(--motion-ease-standard),
-    color var(--motion-duration-fast) var(--motion-ease-standard);
-}
-
-.cta:hover,
-.cta:focus-visible {
-  background-color: #fff;
-  color: var(--color-carbone);
-}
-
 .textLink {
   display: inline-flex;
   align-items: center;
@@ -136,9 +110,14 @@
   transition: background-size var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
-.textLink:hover,
 .textLink:focus-visible {
   background-size: 100% 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .textLink:hover {
+    background-size: 100% 1px;
+  }
 }
 
 .scrollIndicator {
