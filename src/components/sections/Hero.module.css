@@ -58,11 +58,10 @@
 
 .logoImage {
   display: block;
-  inline-size: min(420px, 78vw, 42dvh);
+  inline-size: min(480px, 80vw);
   block-size: auto;
-  /* Client PNG is dark-on-transparent; render it white over the dark
-     video/poster ground. Remove this line if the artwork is already light
-     (visual check in Step 6). */
+  /* The derived wordmark is brown-on-transparent; render it white over
+     the dark video/poster ground. */
   filter: brightness(0) invert(1);
 }
 

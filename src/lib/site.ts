@@ -6,10 +6,10 @@ export const SITE = {
   name: "Imperium Italian Textile",
   shortName: "Imperium",
   tagline: "Premium Italian fabrics · Delivered to the Gulf",
-  // Hero wordmark logo. Point at the staged asset
-  // ("/images/logo/imperium-wordmark.png") once the client logo is in
-  // public/images/logo/; null renders the typographic wordmark instead.
-  logoSrc: null as string | null,
+  // Hero wordmark logo, derived from the client source by
+  // scripts/derive-brand-assets.mjs; null falls back to the typographic
+  // wordmark.
+  logoSrc: "/images/logo/imperium-wordmark.png" as string | null,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com",
   email: "hello@imperiumitaliantextile.com",
   // Placeholder until Sofia's WhatsApp Business number is confirmed (Phase 4.17).
