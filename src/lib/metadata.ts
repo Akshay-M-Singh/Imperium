@@ -3,7 +3,7 @@
 
 import type { Metadata } from "next";
 
-export type PageKey = "home" | "fabrics" | "about" | "contact";
+export type PageKey = "home" | "about" | "contact";
 
 export function generatePageMetadata(_page: PageKey): Metadata {
   return {};

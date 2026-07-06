@@ -11,12 +11,6 @@ export const seo: SeoData = {
     ogTitle: "Imperium Italian Textile",
     ogDescription: "Premium Italian fabrics sourced from the finest mills of Italy.",
   },
-  fabrics: {
-    title: "Fabric Collections",
-    description:
-      "Tessuti Italiani, Pezzi Unici, Ospitalità di Lusso and Interior & Exterior Design — four collections of premium Italian fabric.",
-    canonical: "/fabrics",
-  },
   about: {
     title: "About — Sofia Mazza, Founder",
     description: "The story behind Imperium Italian Textile.",

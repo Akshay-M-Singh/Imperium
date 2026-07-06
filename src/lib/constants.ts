@@ -10,7 +10,6 @@ export const BREAKPOINTS = {
 
 export const ROUTES = {
   home: "/",
-  fabrics: "/fabrics",
   about: "/about",
   contact: "/contact",
 } as const;
