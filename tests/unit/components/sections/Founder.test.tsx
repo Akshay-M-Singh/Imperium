@@ -26,9 +26,10 @@ describe("Founder", () => {
     expect(screen.getAllByText(/Sofia Mazza, Founder/).length).toBeGreaterThan(0);
   });
 
-  it("shows the certification placeholder container below the story", () => {
+  it("renders the certification scan below the story", () => {
     render(<Founder />);
-    expect(screen.getByTestId("certification-placeholder")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Made in Italy Certification" })).toBeInTheDocument();
+    expect(screen.queryByTestId("certification-placeholder")).toBeNull();
     expect(screen.getByText("Made in Italy Certification")).toBeInTheDocument();
   });
 

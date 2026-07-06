@@ -58,8 +58,10 @@
 
 .certImageWrap {
   position: relative;
-  max-inline-size: 200px;
-  aspect-ratio: 3 / 2;
+  max-inline-size: 220px;
+  /* Matches the scan (2502×1770) so object-fit: cover crops nothing —
+     it's a document; its border must stay intact. */
+  aspect-ratio: 2502 / 1770;
   margin-inline: auto;
   margin-block-end: var(--space-sm);
   overflow: hidden;
