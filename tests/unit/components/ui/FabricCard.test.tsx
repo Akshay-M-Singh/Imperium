@@ -10,8 +10,8 @@ const collection: CollectionCard = {
   titleItalic: true,
   tagline: "For those who don't compromise.",
   body: "The foundation of the house.",
-  cta: { label: "View Collection", href: "/fabrics#tessuti-italiani" },
-  image: { src: "/images/fabrics/tessuti-italiani.svg", alt: "Italian linen texture" },
+  cta: { label: "Contact Us Now", href: "#contact" },
+  image: { src: "/images/fabrics/tessuti-italiani.png", alt: "Italian linen texture" },
 };
 
 describe("FabricCard", () => {
@@ -28,8 +28,8 @@ describe("FabricCard", () => {
     expect(screen.getByRole("heading", { name: "Tessuti Italiani" })).toBeInTheDocument();
     expect(screen.getByText("The foundation of the house.")).toBeInTheDocument();
 
-    const link = screen.getByRole("link", { name: /View Collection/ });
-    expect(link).toHaveAttribute("href", "/fabrics#tessuti-italiani");
+    const link = screen.getByRole("link", { name: /Contact Us Now/ });
+    expect(link).toHaveAttribute("href", "#contact");
   });
 
   it("renders the collection image with alt text", () => {
