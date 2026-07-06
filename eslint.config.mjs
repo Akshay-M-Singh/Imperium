@@ -3,6 +3,7 @@ import nextPlugin from "@next/eslint-plugin-next";
 import tseslint from "typescript-eslint";
 import prettierConfig from "eslint-config-prettier";
 import prettierPlugin from "eslint-plugin-prettier";
+import globals from "globals";
 
 // Flat config. We use @next/eslint-plugin-next's native flatConfig export
 // (instead of `eslint-config-next`, which depends on the @rushstack/eslint-patch
@@ -56,6 +57,14 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-empty-function": "off",
+    },
+  },
+  {
+    files: ["scripts/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
     },
   },
   prettierConfig,
