@@ -82,8 +82,8 @@ export function Hero() {
             <Image
               src={SITE.logoSrc}
               alt={SITE.name}
-              width={500}
-              height={500}
+              width={756}
+              height={143}
               priority
               className={styles.logoImage}
             />
