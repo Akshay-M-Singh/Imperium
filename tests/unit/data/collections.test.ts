@@ -20,13 +20,9 @@ describe("collections data", () => {
     );
   });
 
-  it("routes Pezzi Unici to contact and the rest to the fabrics page", () => {
+  it("routes every collection CTA to the contact section", () => {
     for (const c of collections) {
-      if (c.id === "pezzi-unici") {
-        expect(c.cta).toEqual({ label: "Contact Us", href: "#contact" });
-      } else {
-        expect(c.cta).toEqual({ label: "View Collection", href: `/fabrics#${c.id}` });
-      }
+      expect(c.cta).toEqual({ label: "Contact Us Now", href: "#contact" });
     }
   });
 

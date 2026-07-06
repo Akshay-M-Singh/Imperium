@@ -38,11 +38,12 @@ describe("Collections", () => {
     ).toBeInTheDocument();
   });
 
-  it("routes Pezzi Unici to the contact section", async () => {
+  it("routes every collection card to the contact section", async () => {
     render(<Collections />);
-    expect(await screen.findByRole("link", { name: /Contact Us/ })).toHaveAttribute(
-      "href",
-      "#contact",
-    );
+    const links = await screen.findAllByRole("link", { name: /Contact Us Now/ });
+    expect(links).toHaveLength(4);
+    for (const link of links) {
+      expect(link).toHaveAttribute("href", "#contact");
+    }
   });
 });
