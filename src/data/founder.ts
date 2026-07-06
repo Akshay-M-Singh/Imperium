@@ -1,7 +1,6 @@
 // Founder — Sofia Mazza bio, quote, certification (DESIGN.md §9.06).
-// Copy is client-approved. Set certification.src to the scan path
-// (public/images/certifications/made-in-italy-certificate.png, staged
-// when available) once the founder approves showing it.
+// Copy is client-approved; portrait and certification scan are the real
+// client assets (see the asset-integration spec in docs/superpowers/specs/).
 
 export interface FounderData {
   eyebrow: string;
@@ -30,7 +29,10 @@ export const founder: FounderData = {
     "Every fabric I select represents not only Italian craftsmanship, but my own commitment to excellence.",
   quoteAttribution: "Sofia Mazza, Founder",
   certification: {
-    src: null, // null until the founder approves displaying the scan
+    // Client scan, integrated as-is by user decision (asset-integration
+    // spec): DOB and issue date are visible — Sofia's explicit OK
+    // recommended before launch.
+    src: "/images/certifications/made-in-italy-certification.png",
     caption: "Made in Italy Certification",
   },
 };
