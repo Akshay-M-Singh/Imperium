@@ -15,10 +15,17 @@ describe("WhyImperium", () => {
     expect(screen.queryByText(/always available/i)).toBeNull();
   });
 
-  it("reserves the Italy→Gulf map and stamp placeholders", () => {
+  it("renders the real Italy→Gulf route map and Made in Italy stamp", () => {
     render(<WhyImperium />);
-    expect(screen.getByTestId("map-placeholder")).toBeInTheDocument();
-    expect(screen.getByTestId("stamp-placeholder")).toBeInTheDocument();
+    expect(screen.getByTestId("map-media")).toBeInTheDocument();
+    expect(screen.getByTestId("stamp-media")).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: /route map from Italy to the UAE and the Gulf/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: /Made in Italy certification stamp/i }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/in production|to follow/i)).toBeNull();
   });
 
   it("alternates media placement between rows", () => {
