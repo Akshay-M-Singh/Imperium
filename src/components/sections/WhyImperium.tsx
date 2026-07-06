@@ -2,11 +2,12 @@
 // (client direction; replaces the DESIGN.md §9.05 four-in-a-row manifesto
 // and absorbs §9.03's provenance story). Rows with media split 5/7 and
 // alternate sides; the text-only closing row sits right to continue the
-// rhythm. Placeholder containers reserve space for the Italy→Gulf route
-// map and the Made in Italy stamp artwork (NOT the certification image —
-// that container lives in the Founder section).
+// rhythm. Media slots carry the client's Italy→Gulf route artwork and the
+// Made in Italy stamp (NOT the certification scan — that lives in the
+// Founder section).
 
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -17,22 +18,29 @@ import styles from "./WhyImperium.module.css";
 function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
   if (media === "map") {
     return (
-      <figure className={styles.mapPlaceholder} data-testid="map-placeholder">
-        <img
-          src="/images/map/italy-gulf-routes.svg"
-          alt="Route illustration showing Italy to UAE and the Gulf"
-          style={{ width: "100%", height: "auto" }}
+      <figure className={styles.mapFigure} data-testid="map-media">
+        <Image
+          src="/images/map/italy-gulf-routes.png"
+          alt="Illustrated route map from Italy to the UAE and the Gulf"
+          width={1536}
+          height={1024}
+          loading="lazy"
+          className={styles.mapImage}
         />
       </figure>
     );
   }
   if (media === "stamp") {
     return (
-      <figure className={styles.stampSlot} data-testid="stamp-placeholder">
-        <span className={styles.stampCircle}>Made in Italy</span>
-        <figcaption className={styles.placeholderCaption}>
-          Official stamp artwork to follow
-        </figcaption>
+      <figure className={styles.stampSlot} data-testid="stamp-media">
+        <Image
+          src="/images/stamp/made-in-italy-stamp.png"
+          alt="100% Made in Italy certification stamp"
+          width={462}
+          height={432}
+          loading="lazy"
+          className={styles.stampImage}
+        />
       </figure>
     );
   }

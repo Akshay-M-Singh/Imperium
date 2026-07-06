@@ -68,63 +68,28 @@
   }
 }
 
-/* --- Map placeholder (Italy → UAE + Gulf) -------------------------------- */
+/* --- Map media (Italy → UAE + Gulf route artwork) ------------------------ */
 
-.mapPlaceholder {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  gap: var(--space-sm);
-  aspect-ratio: 4 / 3;
-  border: 1px solid color-mix(in srgb, var(--color-sabbia) 30%, transparent);
-  background-color: var(--color-pietra);
-  text-align: center;
-  padding: var(--space-lg);
+.mapFigure {
+  margin: 0;
 }
 
-.mapPoint {
-  font-family: var(--font-serif);
-  font-size: var(--text-h3);
-  line-height: var(--leading-h3);
-  color: var(--color-carbone);
+.mapImage {
+  inline-size: 100%;
+  block-size: auto;
 }
 
-.mapArrow {
-  font-size: var(--text-subheadline);
-  color: var(--color-oro-antico);
-}
+/* --- Made in Italy stamp --------------------------------------------------- */
 
-/* --- Stamp placeholder ---------------------------------------------------- */
-
+/* The stamp PNG has an opaque pure-white background that blends into the
+   Gesso section band — do not place it on any other background. */
 .stampSlot {
+  margin: 0;
   display: grid;
   justify-items: center;
-  gap: var(--space-sm);
 }
 
-.stampCircle {
-  display: grid;
-  place-content: center;
-  inline-size: 180px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--color-sabbia) 40%, transparent);
-  font-family: var(--font-sans);
-  font-size: var(--text-eyebrow);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
-  text-align: center;
-  color: var(--color-sabbia);
-  padding: var(--space-sm);
-}
-
-/* --- Shared placeholder caption -------------------------------------------- */
-
-.placeholderCaption {
-  font-family: var(--font-sans);
-  font-size: var(--text-eyebrow);
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
-  color: var(--color-sabbia);
+.stampImage {
+  inline-size: min(200px, 48vw);
+  block-size: auto;
 }
