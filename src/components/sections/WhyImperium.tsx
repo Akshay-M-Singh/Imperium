@@ -18,14 +18,11 @@ function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
   if (media === "map") {
     return (
       <figure className={styles.mapPlaceholder} data-testid="map-placeholder">
-        <span className={styles.mapPoint}>Italy</span>
-        <span className={styles.mapArrow} aria-hidden="true">
-          ↓
-        </span>
-        <span className={styles.mapPoint}>UAE + the Gulf</span>
-        <figcaption className={styles.placeholderCaption}>
-          Route illustration in production
-        </figcaption>
+        <img
+          src="/images/map/italy-gulf-routes.svg"
+          alt="Route illustration showing Italy to UAE and the Gulf"
+          style={{ width: "100%", height: "auto" }}
+        />
       </figure>
     );
   }

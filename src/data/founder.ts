@@ -22,7 +22,7 @@ export const founder: FounderData = {
     "Imperium is more than a textile supplier. It's a carefully curated expression of Italian excellence.",
   ],
   portrait: {
-    src: "/images/about/sofia-portrait.svg",
+    src: "/images/about/sofia-portrait.png",
     alt: "Sofia Mazza, Founder of Imperium Italian Textile",
     caption: "Sofia Mazza, Founder",
   },
