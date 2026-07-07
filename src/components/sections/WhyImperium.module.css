@@ -64,7 +64,7 @@
   }
 
   .textOnly .text {
-    grid-column: 6 / -1;
+    grid-column: 1 / 6;
   }
 }
 
@@ -90,6 +90,6 @@
 }
 
 .stampImage {
-  inline-size: min(200px, 48vw);
+  inline-size: min(240px, 55vw);
   block-size: auto;
 }
