@@ -13,13 +13,16 @@ import styles from "./FabricCard.module.css";
 
 export interface FabricCardProps {
   collection: CollectionCard;
+  /** "stack" = image above text (default). "spread" = editorial panel,
+   *  image beside text — used by the desktop pinned showcase. */
+  layout?: "stack" | "spread";
 }
 
-export function FabricCard({ collection }: FabricCardProps) {
+export function FabricCard({ collection, layout = "stack" }: FabricCardProps) {
   const { tagline, tagAccent, title, body, cta, image } = collection;
 
   return (
-    <TiltCard className={styles.card}>
+    <TiltCard className={cn(styles.card, layout === "spread" && styles.spread)}>
       <article className={styles.article}>
         <div className={styles.imageWrap}>
           <TiltCardImage>
@@ -29,6 +32,7 @@ export function FabricCard({ collection }: FabricCardProps) {
               width={400}
               height={500}
               loading="lazy"
+              sizes="(min-width: 1024px) 460px, 76vw"
               className={styles.image}
             />
           </TiltCardImage>

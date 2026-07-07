@@ -69,10 +69,6 @@
   font-weight: var(--font-weight-regular);
   line-height: var(--leading-body);
   color: var(--color-ardesia);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .cta {
@@ -92,5 +88,39 @@
 @media (hover: hover) and (pointer: fine) {
   .card:hover .ctaInner a {
     background-size: 100% 1px;
+  }
+}
+
+/* Spread layout — editorial panel for the desktop pinned showcase:
+   image beside text so the full composition fits the pinned viewport.
+   --panel-image-h is set by Collections.module.css on the track.
+
+   Note: TiltCard renders a `.surface` wrapper (block-level motion.div)
+   between the `.card`/`.spread` root and `.article` (display: contents).
+   `.card`'s own flex-direction never reaches `.imageWrap`/`.content`
+   because `.surface` — not `.card` — is their real flex/box parent; it is
+   `.card`'s only child, so `.spread > div` addresses it without coupling
+   to TiltCard's internal class names. */
+@media (min-width: 1024px) {
+  .spread {
+    align-items: center;
+  }
+
+  .spread > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .spread .imageWrap {
+    flex: 0 0 auto;
+    block-size: var(--panel-image-h, 480px);
+    inline-size: calc(var(--panel-image-h, 480px) * 4 / 5);
+  }
+
+  .spread .content {
+    inline-size: min(320px, 36ch);
+    padding-block-start: 0;
   }
 }

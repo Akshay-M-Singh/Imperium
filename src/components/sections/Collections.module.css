@@ -1,11 +1,140 @@
-/* Collections — DESIGN.md §9.04. Three collection cards in an Embla carousel. */
+/* Collections — scroll-driven horizontal showcase.
+   Small screens / reduced motion: native scroll-snap swipe row.
+   ≥1024px with motion allowed: the outer section is taller than the
+   viewport, the inner viewport pins via position: sticky, and vertical
+   scroll progress translates the track (transform only — no horizontal
+   scrollbar, no hijacked events). */
+
+.outer {
+  position: relative;
+  background-color: var(--color-pietra);
+}
+
+.viewport {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding-block: var(--subsection-padding-y);
+}
 
 .header {
-  margin-block-end: var(--space-md);
+  inline-size: 100%;
+  max-inline-size: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin-mobile);
+}
+
+.track {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-inline: var(--grid-margin-mobile);
+  /* room for the TiltCard hover shadow/focus ring */
+  padding-block: var(--space-xs);
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-blu-notte);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.panel {
+  flex: 0 0 auto;
+  inline-size: min(76vw, 340px);
+  scroll-snap-align: center;
+}
+
+.progressTrack {
+  display: none;
 }
 
 @media (min-width: 768px) {
   .header {
-    margin-block-end: var(--space-lg);
+    padding-inline: var(--grid-margin-tablet);
+  }
+
+  .track {
+    padding-inline: var(--grid-margin-tablet);
+    gap: var(--space-lg);
+  }
+
+  .panel {
+    inline-size: min(44vw, 400px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding-inline: var(--grid-margin-desktop);
+  }
+
+  .track {
+    /* Drives the spread card's image size (FabricCard.module.css). */
+    --panel-image-h: clamp(340px, 52vh, 560px);
+    /* Align the first/last panel with the section's content edge. */
+    --track-inset: max(var(--grid-margin-desktop), calc((100vw - var(--max-content-width)) / 2));
+    padding-inline: var(--track-inset);
+    gap: var(--space-xl);
+  }
+
+  .panel {
+    inline-size: auto;
+    scroll-snap-align: start;
+  }
+}
+
+/* Pinned mode — wide screens that also allow motion. Reduced-motion
+   desktop visitors keep the scroll-snap row above (no pin, no transform). */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .viewport {
+    position: sticky;
+    inset-block-start: 0;
+    block-size: 100dvh;
+    overflow: hidden;
+    justify-content: center;
+    gap: var(--space-xl);
+    padding-block: 0;
+    padding-block-start: var(--nav-height);
+  }
+
+  .track {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .progressTrack {
+    display: block;
+    position: absolute;
+    inset-block-end: clamp(24px, 4vh, 48px);
+    inset-inline-start: 50%;
+    translate: -50% 0;
+    inline-size: min(320px, 30vw);
+    block-size: 2px;
+    background-color: color-mix(in srgb, var(--color-sabbia) 35%, transparent);
+  }
+
+  .progressFill {
+    inline-size: 100%;
+    block-size: 100%;
+    transform-origin: left center;
+    background-color: var(--color-oro-antico);
+  }
+}
+
+@media (min-width: 1440px) {
+  .header {
+    padding-inline: var(--grid-margin-desktop-xl);
+  }
+
+  .track {
+    --track-inset: max(var(--grid-margin-desktop-xl), calc((100vw - var(--max-content-width)) / 2));
   }
 }
