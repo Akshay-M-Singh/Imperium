@@ -31,6 +31,7 @@ await page.waitForTimeout(6000);
 // still as pixels. This capture is meant to be a background-only asset
 // (Task 3 re-renders that same nav/content as live DOM on top of it), so
 // hide every sibling of the silk-hero wrapper before freezing the frame.
+/* eslint-disable no-undef -- runs in browser context via page.evaluate() */
 await page.evaluate(() => {
   const canvas = document.querySelector('[data-testid="silk-hero"] canvas');
   const wrap = canvas?.closest('[data-testid="silk-hero"]');
@@ -44,6 +45,7 @@ await page.evaluate(() => {
     if (!section || !el.contains(section)) el.style.visibility = "hidden";
   });
 });
+/* eslint-enable no-undef */
 
 // Screenshot the viewport-sized `.wrap` element (`overflow: hidden`), not
 // the raw <canvas> — the canvas's own backing buffer is intentionally
