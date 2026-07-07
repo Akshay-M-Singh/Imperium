@@ -14,15 +14,6 @@ export const ROUTES = {
   contact: "/contact",
 } as const;
 
-// Embla configuration (MOTION_SPEC.md §3.5).
-export const EMBLA_OPTIONS = {
-  loop: false,
-  align: "start" as const,
-  dragFree: false,
-  containScroll: "trimSnaps" as const,
-  slidesToScroll: 1,
-};
-
 // Spring presets are re-exported from lib/motion.ts (single source of truth).
 // Duration tokens mirror --motion-duration-* in globals.css for JS consumers.
 export const MOTION_DURATIONS = {
