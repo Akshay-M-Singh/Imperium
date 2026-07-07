@@ -39,8 +39,8 @@ if (typeof globalThis.IntersectionObserver === "undefined") {
     IntersectionObserverStub as unknown as typeof IntersectionObserver;
 }
 
-// jsdom does not implement ResizeObserver. Embla Carousel relies on it to
-// measure the viewport and slides. Install a no-op stub so render never throws.
+// jsdom does not implement ResizeObserver. Collections' pinned-scroll showcase
+// uses it to measure track travel distance. Install a no-op stub so render never throws.
 if (typeof globalThis.ResizeObserver === "undefined") {
   class ResizeObserverStub {
     observe() {}
