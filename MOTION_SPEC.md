@@ -15,7 +15,7 @@ The motion language of this site is **restrained but alive**. The references are
 2. **No animation without a purpose.** Motion exists to communicate state, draw attention, or provide feedback. Decorative motion (parallax, particles, scroll-jacking) is excluded.
 3. **Restraint over expressiveness.** When in doubt, do less. The site's motion budget is 130KB of JS, not 130KB of behaviours.
 4. **Reduced motion is non-negotiable.** `prefers-reduced-motion: reduce` is not a degraded experience — it is a complete, considered alternative.
-5. **Performance is a feature.** Every motion runs on the compositor (CSS) or through `useMotionValue` (Framer's render-bypass). React reconciliation is never the bottleneck.
+5. **Performance is a feature.** Every motion runs on the compositor (CSS) or through `useMotionValue` (Framer's render-bypass). React reconciliation is NEVER the bottleneck.
 
 ---
 
