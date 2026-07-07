@@ -130,9 +130,9 @@ export function Contact(): ReactNode {
               <p>
                 <TextLink href={`mailto:${contact.email}`}>{contact.email}</TextLink>
               </p>
-              <p className={styles.whatsapp}>
+              <div className={styles.whatsapp}>
                 <WhatsAppButton />
-              </p>
+              </div>
               <p>
                 <a href={SITE.instagram} className={styles.instagram}>
                   {contact.instagramLinkLabel} → {contact.instagramHandle}
