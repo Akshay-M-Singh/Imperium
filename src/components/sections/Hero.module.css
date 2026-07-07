@@ -9,12 +9,49 @@
   background-color: #a89374;
 }
 
+/* Static backdrop with a one-shot settle. The animation ends at scale(1)
+   exactly, so the browser re-rasterizes the layer unscaled and the image
+   renders pixel-sharp once the entrance completes. */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  overflow: hidden;
+}
+
+.backdropImage {
+  object-fit: cover;
+  object-position: center;
+  animation: hero-settle 2600ms var(--motion-ease-out) both;
+}
+
+@keyframes hero-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Overlay fades to its final opacity instead of appearing instantly. */
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, var(--color-hero-gradient), transparent 60%);
   opacity: 0.4;
   z-index: calc(var(--z-base) + 1);
+  animation: hero-overlay 1400ms var(--motion-ease-standard) both;
+  animation-delay: 200ms;
+}
+
+@keyframes hero-overlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
 }
 
 /* Silk Hero scroll coupling (design spec §3.8): the bottom slice dissolves
@@ -50,14 +87,14 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
   animation: hero-enter 800ms var(--motion-ease-out) both;
-  animation-delay: 0ms;
+  animation-delay: 700ms;
 }
 
 .logo {
   margin: 0;
   opacity: 0;
   animation: hero-enter 1000ms var(--motion-ease-out) both;
-  animation-delay: 80ms;
+  animation-delay: 950ms;
 }
 
 .logoImage {
@@ -103,7 +140,7 @@
   max-inline-size: 540px;
   opacity: 0;
   animation: hero-enter 800ms var(--motion-ease-out) both;
-  animation-delay: 200ms;
+  animation-delay: 1250ms;
 }
 
 .ctaGroup {
@@ -114,7 +151,7 @@
   margin-block-start: var(--space-xs);
   opacity: 0;
   animation: hero-enter 800ms var(--motion-ease-out) both;
-  animation-delay: 320ms;
+  animation-delay: 1500ms;
 }
 
 .textLink {
@@ -159,7 +196,7 @@
   inline-size: 1px;
   block-size: 40px;
   background-color: rgba(255, 255, 255, 0.4);
-  animation: hero-pulse 2s ease-in-out infinite;
+  animation: hero-pulse 2s ease-in-out 2600ms 3;
 }
 
 @keyframes hero-enter {
@@ -191,5 +228,23 @@
 @media (max-width: 767px) {
   .content {
     gap: var(--space-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdropImage,
+  .overlay,
+  .eyebrow,
+  .logo,
+  .tagline,
+  .ctaGroup,
+  .scrollLine {
+    animation: none;
+  }
+
+  .logo,
+  .tagline,
+  .ctaGroup {
+    opacity: 1;
   }
 }
