@@ -223,6 +223,13 @@ These must be resolved before launch:
 - [x] Silk Hero resting-frame poster export (hero-collections-refinement plan, Task 2) — `public/images/hero/hero-still.jpg` (3840×2160) captured via `scripts/capture-hero-still.mjs`. **Scope note for future readers of `silk.config.ts`'s "first-pass, needs calibration" comments:** the task was originally scoped as "raise two config dials only" (`drape.foldDepth`, `weave.amplitude`), but that proved insufficient — the pre-existing 4-octave fold sum in `silk.vert.ts`'s `staticDrape()` tops out at ~4.9 cycles across the plane, a hard frequency ceiling no amount of amplitude scaling can raise, so the still kept reading as soft/flat rather than as creased fabric. Human-authorized a small, additive GLSL edit (two higher-frequency octaves in `staticDrape()`, plus reducing `drape.plateauFlatten` 0.85→0.6) to actually add crease-edge definition — see `.superpowers/sdd/task-2-report.md` for the full root-cause trace and before/after evidence. The real fix for this class of "still reads as blurry" issue lives in the vertex shader's fold-frequency construction, not in `silk.config.ts`'s dials.
 - [ ] Silk Hero authored tileable weave normal map (~512px) to replace the current procedural in-shader stand-in
 - [ ] Silk Hero real-device thermal + Lighthouse CLS pass (MOTION_SPEC.md §6 "Silk Hero-specific" checklist)
+- Hero still (`/images/hero/hero-still.jpg`) is a 4K capture of the silk shader's
+  resting frame (scripts/capture-hero-still.mjs). A real hero photograph from the
+  client remains requested and is a one-line swap in Hero.tsx.
+- Silk WebGL module retained in src/components/silk/ but unmounted from Hero
+  (client direction 2026-07-07: hero must be static after entrance). three.js
+  deps retained pending a removal decision.
+- Collection fabric PNGs are 627×627; client re-exports at ≥1200px still requested.
 
 ### Risks / blockers for Phase 6
 
