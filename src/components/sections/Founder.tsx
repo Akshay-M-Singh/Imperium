@@ -54,6 +54,7 @@ export function Founder() {
                       alt={founder.certification.caption}
                       fill
                       loading="lazy"
+                      sizes="(min-width: 1024px) 340px, 80vw"
                       className={styles.certImage}
                     />
                   </div>
