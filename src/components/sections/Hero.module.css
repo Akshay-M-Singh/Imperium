@@ -6,15 +6,7 @@
   min-block-size: 100svh;
   overflow: hidden;
   isolation: isolate;
-}
-
-.video {
-  position: absolute;
-  inset: 0;
-  block-size: 100%;
-  inline-size: 100%;
-  object-fit: cover;
-  z-index: var(--z-base);
+  background-color: #a89374;
 }
 
 .overlay {
@@ -22,6 +14,18 @@
   inset: 0;
   background: linear-gradient(to top, var(--color-hero-gradient), transparent 60%);
   opacity: 0.4;
+  z-index: calc(var(--z-base) + 1);
+}
+
+/* Silk Hero scroll coupling (design spec §3.8): the bottom slice dissolves
+   into Pietra so the silk appears laid onto the page's linen ground —
+   the section seam becomes an art moment instead of a hard cut. */
+.dissolve {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 12%;
+  background: linear-gradient(to bottom, transparent, var(--color-pietra));
   z-index: calc(var(--z-base) + 1);
 }
 

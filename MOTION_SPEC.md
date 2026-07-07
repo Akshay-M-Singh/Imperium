@@ -447,6 +447,16 @@ Before each component ships, verify against this list:
 - [ ] Animation runs on the compositor (transform, opacity) — no `top`, `left`, `width` animations
 - [ ] Keyboard navigation works without motion playing (Tab through TiltCards: focus ring is visible, tilt is not required to indicate focus)
 
+### Silk Hero-specific (§3.8)
+
+- [x] Canvas is `aria-hidden` and `pointer-events: none` — decorative layer only, never a keyboard/focus target
+- [x] Reduced motion renders the identical static composition (poster), not "the same but frozen mid-frame"
+- [x] Rendering pauses on `webglcontextlost`, when scrolled offscreen, and when the tab is hidden — not just visually paused, no wasted GPU cycles
+- [x] Kill switch (`NEXT_PUBLIC_SILK_HERO=off`) verified to force the poster with no WebGL import at all
+- [ ] Real-device thermal check (iPhone Safari, Android Chrome) — not yet run
+- [ ] Lighthouse CLS on `/` with the live canvas mounted — poster and canvas share the same layout box, expected zero, not yet measured
+- [ ] Contrast of hero text over the calm zone re-measured against the live shader (not just the poster) once art direction is calibrated
+
 ---
 
 *Motion is a language. Every transition is a sentence. The site should speak fluently, not loudly.*
