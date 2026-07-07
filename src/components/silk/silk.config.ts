@@ -28,12 +28,12 @@ export const SILK_CONFIG = {
     // think"). Needs live recalibration against reference photography at
     // the Phase 2 client checkpoint (spec §10.2); this is not a final
     // tuned number.
-    foldDepth: 0.07, // in heightfield units (see SilkPlane's world scale)
+    foldDepth: 0.1, // in heightfield units (see SilkPlane's world scale)
     foldDirectionDeg: 34, // sweep angle, bottom-left -> top-right
     weightBias: 0.35, // 0 = even, 1 = fully weighted to the lower third
     plateauRadius: 0.28, // normalized radius around the wordmark, in UV space
     plateauSoftness: 0.22,
-    plateauFlatten: 0.85, // 0 = no effect, 1 = fully flat inside the radius
+    plateauFlatten: 0.6, // 0 = no effect, 1 = fully flat inside the radius
   },
 
   // --- Idle drift (§3.6) — slow procedural life, never performing.
@@ -100,7 +100,7 @@ export const SILK_CONFIG = {
     // shaders/lighting.ts), not this term. Still needs calibration
     // against real weave reference photography.
     frequency: 60,
-    amplitude: 0.04, // fraction of the lighting normal
+    amplitude: 0.07, // fraction of the lighting normal
     moireFadeStart: 0.6, // screen-space frequency where fade-out begins
   },
 
