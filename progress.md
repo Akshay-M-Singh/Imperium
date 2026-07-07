@@ -1,9 +1,9 @@
 # Imperium Italian Textile — Build Progress Tracker
 
 **Project root:** `/Users/akshaymsingh/Documents/Liberate/Imperium`  
-**Last updated:** 2026-07-05  
+**Last updated:** 2026-07-07  
 **Completed phases:** 1, 2, 3, 4, 5  
-**Next phase:** 6 — Polish + Performance + Launch
+**Next phase:** 6 — Polish + Performance + Launch (in progress: Silk Hero Experience, `docs/superpowers/specs/2026-07-07-silk-hero-experience-design.md`)
 
 ## Quality gate status (last verified)
 
@@ -24,6 +24,8 @@ Build output: `/` route 25.2 kB (gzipped), First Load JS 169 kB (uncompressed). 
 Phases 1–5 are complete. The site now includes the full premium touchpoint layer on localhost: cursor-aware TiltCards, MagneticButton CTAs, animated form focus ring, ValidationMorph feedback, and the Embla carousel for collections. All motion respects `prefers-reduced-motion` and touch devices.
 
 Phase 6 is the final polish, performance audit, and launch block.
+
+**2026-07-07 — Silk Hero Experience:** the hero's never-sourced background video is replaced by a live, cursor-reactive WebGL silk simulation (`src/components/silk/`). This is a scoped, documented exception to the Three.js/WebGL exclusion in `TECHNICAL_ARCHITECTURE.md` (hero only — see that file's amended row) and adds a new §3.8 to `MOTION_SPEC.md`. Bundle impact (~+180–200 kB gz) is accepted per the spec; every fallback path (no WebGL, reduced motion, save-data, `NEXT_PUBLIC_SILK_HERO=off`) renders a static poster of the shader's own resting frame, so the site never depends on WebGL. Decisions D-S1–D-S6 proceeded on the spec's stated defaults (no video ever existed to preserve; white-on-champagne kept; live sim on mobile with idle-only fallback; Lenis deferred; Akshay named shader co-owner). Sofia's three checkpoints (§10 of the spec) are still outstanding and should happen before this ships to production content review, independent of this code landing on `main`.
 
 ---
 
@@ -185,7 +187,7 @@ Phase 6.B is production-only:
 
 These must be resolved before launch:
 
-- [ ] Hero video MP4 (desktop + mobile) and poster JPEG
+- [x] Hero video MP4 (desktop + mobile) and poster JPEG — **superseded 2026-07-07**: replaced entirely by the silk hero WebGL experience (`docs/superpowers/specs/2026-07-07-silk-hero-experience-design.md`, D-S1); no video was ever sourced, and this line item is closed by removing the requirement, not by fulfilling it. Removes a videography line from the client's budget.
 - [x] Client wordmark logo — derived transparent asset via `scripts/derive-brand-assets.mjs`, `SITE.logoSrc` set (2026-07-06)
 - [x] Italy→Gulf route illustration in the Why Imperium map slot (2026-07-06)
 - [x] Made in Italy stamp artwork in the Why Imperium stamp slot (2026-07-06)

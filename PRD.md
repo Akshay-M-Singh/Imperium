@@ -189,6 +189,8 @@ Each block below: purpose → content inputs → proposed copy → acceptance cr
 
 **Amended (client, 2026-07-04):** hero is logo-led — the wordmark renders large inside the `<h1>` with the tagline directly beneath; the headline candidates above are retired for V1. No establishment year anywhere.
 
+**Amended 2026-07-07 (`docs/superpowers/specs/2026-07-07-silk-hero-experience-design.md`, D-S1):** asset A-5 (hero video) is **retired, not fulfilled** — no video was ever sourced (progress.md 2.5). The hero visual is instead a live, cursor-reactive WebGL silk simulation continuing the existing champagne field. This removes a videography line item from the client's budget and closes A-5 in the table below by replacement. Sofia's sign-off on this substitution is checkpoint 1 of that spec (§10) and is still outstanding — recorded here so it isn't lost, independent of the code shipping to `main`.
+
 ### 6.3 Origin Map ("Our reach")
 
 - **Purpose:** provenance made visual — Italy at the centre, the Gulf as destination.
@@ -361,17 +363,17 @@ The `/ar` redirect in `next.config.ts` anticipates the Arabic option ✅ (projec
 
 ## 10. Asset Pipeline
 
-| ID  | Asset                                                        | Spec (see DESIGN.md §6–7)                   | Owner                | Needed by          | Interim placeholder                   |
-| --- | ------------------------------------------------------------ | ------------------------------------------- | -------------------- | ------------------ | ------------------------------------- |
-| A-1 | Logo files + single-colour/on-ivory review                   | SVG preferred                               | Sofia → team review  | Phase 2            | wordmark set in Cormorant             |
-| A-2 | Fabric photography ≥ 3 (one per collection)                  | 4:5, 2× res, warm, consistent background    | Sofia / photographer | Phase 3 fine-tune  | licensed stock (never past launch)    |
-| A-3 | Sofia portrait                                               | 3:4, editorial warmth                       | photographer         | Phase 4 fine-tune  | fabric texture + caption              |
-| A-4 | Origin-map illustration                                      | hand-drawn line style, SVG                  | illustrator          | Phase 3 fine-tune  | programmatic SVG                      |
-| A-5 | Hero video 15–20 s + poster                                  | H.264, ≤8 MB desktop / ≤4 MB mobile 9:16    | Sofia / videographer | Phase 2 fine-tune  | high-res fabric still                 |
-| A-6 | Made in Italy certification scan                             | legible, croppable to ≤200 px width         | Sofia                | Phase 4            | text mention **only if B-4 verifies** |
-| A-7 | OG image 1200×630                                            | fabric close-up + wordmark                  | team from A-2        | Phase 6.A          | none (omit tag until real)            |
-| A-8 | Favicons + touch icons (webmanifest already references them) | standard set from logo                      | team from A-1        | Phase 6.A          | none                                  |
-| A-9 | Fonts: Cormorant Garamond + DM Sans WOFF2 subsets            | via `scripts/subset-fonts.sh`; OFL, no cost | team                 | Phase 1 completion | Inter (current, must not launch)      |
+| ID  | Asset                                                                                                                    | Spec (see DESIGN.md §6–7)                   | Owner                    | Needed by          | Interim placeholder                                 |
+| --- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- | ------------------------ | ------------------ | --------------------------------------------------- |
+| A-1 | Logo files + single-colour/on-ivory review                                                                               | SVG preferred                               | Sofia → team review      | Phase 2            | wordmark set in Cormorant                           |
+| A-2 | Fabric photography ≥ 3 (one per collection)                                                                              | 4:5, 2× res, warm, consistent background    | Sofia / photographer     | Phase 3 fine-tune  | licensed stock (never past launch)                  |
+| A-3 | Sofia portrait                                                                                                           | 3:4, editorial warmth                       | photographer             | Phase 4 fine-tune  | fabric texture + caption                            |
+| A-4 | Origin-map illustration                                                                                                  | hand-drawn line style, SVG                  | illustrator              | Phase 3 fine-tune  | programmatic SVG                                    |
+| A-5 | ~~Hero video 15–20 s + poster~~ **Retired 2026-07-07** — superseded by the silk hero WebGL shader; no video asset needed | H.264, ≤8 MB desktop / ≤4 MB mobile 9:16    | ~~Sofia / videographer~~ | Phase 2 fine-tune  | high-res fabric still (now: rendered shader poster) |
+| A-6 | Made in Italy certification scan                                                                                         | legible, croppable to ≤200 px width         | Sofia                    | Phase 4            | text mention **only if B-4 verifies**               |
+| A-7 | OG image 1200×630                                                                                                        | fabric close-up + wordmark                  | team from A-2            | Phase 6.A          | none (omit tag until real)                          |
+| A-8 | Favicons + touch icons (webmanifest already references them)                                                             | standard set from logo                      | team from A-1            | Phase 6.A          | none                                                |
+| A-9 | Fonts: Cormorant Garamond + DM Sans WOFF2 subsets                                                                        | via `scripts/subset-fonts.sh`; OFL, no cost | team                     | Phase 1 completion | Inter (current, must not launch)                    |
 
 **Photography is the make-or-break asset.** The review of Sofia's existing photos (resolution, background consistency, lighting) is a discovery-phase task and feeds the D-13 budget question — commission new photography early if they don't hold up.
 
