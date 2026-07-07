@@ -60,21 +60,20 @@ describe("Hero", () => {
     expect(sample).toHaveAttribute("href", "#contact");
   });
 
-  it("renders a video element with a poster pointing at a hero image", () => {
+  it("mounts the Silk Hero background layer with a poster image", () => {
     render(<Hero />);
-    const video = document.querySelector("video");
-    expect(video).not.toBeNull();
-    expect(video).toHaveAttribute("poster");
-    const poster = video!.getAttribute("poster") ?? "";
-    expect(poster).toMatch(/\/images\/hero\/hero-(desktop|mobile)\.svg$/);
+    expect(screen.getByTestId("silk-hero")).toBeInTheDocument();
+    const poster = document.querySelector('img[alt=""]');
+    expect(poster).not.toBeNull();
+    expect(poster!.getAttribute("src") ?? "").toMatch(
+      /\/images\/hero\/hero-(desktop|mobile)\.svg$/,
+    );
   });
 
-  it("does not attach a video src under reduced motion (static poster)", () => {
+  it("renders the silk poster under reduced motion (no live WebGL canvas attempted)", () => {
     installMatchMedia(true);
     render(<Hero />);
-    const video = document.querySelector("video");
-    expect(video).not.toBeNull();
-    expect(video).toHaveAttribute("poster");
-    expect(video).not.toHaveAttribute("src");
+    expect(screen.getByTestId("silk-hero")).toBeInTheDocument();
+    expect(document.querySelector("canvas")).toBeNull();
   });
 });
