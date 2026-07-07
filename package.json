@@ -21,6 +21,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "capture:hero": "node scripts/capture-hero-still.mjs",
     "prepare": "husky || true"
   },
   "lint-staged": {

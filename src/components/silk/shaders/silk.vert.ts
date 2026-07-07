@@ -44,6 +44,33 @@ export const silkVertexShader = /* glsl */ `
     folds *= uFoldDepth;
     folds += fbm2d(uv * 3.0, 2.0, 0.5) * uFoldDepth * 0.35;
 
+    // Crease detail (added, human-authorized deviation from "config dials
+    // only" — see silk/README.md "Known gaps" / progress.md notes). The
+    // 4-term sum above tops out at ~4.9 cycles across the plane: however
+    // much uFoldDepth scales it, that low a frequency can only ever read
+    // as broad, soft rolling hills, never a sharp-edged crease — amplitude
+    // deepens a smooth curve, it doesn't add the higher-frequency content
+    // a defined fold edge needs. A pure sine octave here is a function of
+    // coord alone (1D along the fold direction), so pushing its
+    // frequency up on its own just produces perfectly parallel repeating
+    // stripes ("corduroy"), not an organic crease — tried and rejected.
+    // Instead: one modest sine octave a bit above the existing range for
+    // a directional crease, plus a genuinely 2D, non-periodic fbm layer
+    // (reusing the same fbm2d already used for the base drape's
+    // irregularity, just at a higher frequency) so the fine detail breaks
+    // up into organic creasing instead of a regular repeat. fbm2d is
+    // 3-octave (lacunarity^2 growth), and SilkPlane's mesh is a fixed
+    // 160x160 grid (SilkPlane.tsx) — an earlier attempt at (uv*8.0, 2.4,
+    // ...) put the noise's own highest internal octave at ~46 cycles
+    // across the plane, well past what 160 segments can interpolate
+    // smoothly, which showed up as visible per-vertex faceting rather
+    // than organic texture. Keeping lacunarity at the base drape's own
+    // 2.0 and the frequency multiplier modest keeps the highest octave
+    // (~7.0 x 2.0^2 = 28 cycles) inside a range the mesh renders cleanly.
+    float creaseFold = sin(coord * 6.5 * 6.28318530718 + 0.6) * 0.18;
+    folds += creaseFold * uFoldDepth;
+    folds += fbm2d(uv * 7.0, 2.0, 0.5) * uFoldDepth * 0.2;
+
     // Weight bias toward the lower third (uv.y == 0 is the bottom edge).
     float weight = mix(1.0, 1.0 + uWeightBias, smoothstep(1.0, 0.0, uv.y));
     folds *= weight;
