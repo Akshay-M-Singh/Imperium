@@ -60,20 +60,16 @@ describe("Hero", () => {
     expect(sample).toHaveAttribute("href", "#contact");
   });
 
-  it("mounts the Silk Hero background layer with a poster image", () => {
-    render(<Hero />);
-    expect(screen.getByTestId("silk-hero")).toBeInTheDocument();
-    const poster = document.querySelector('img[alt=""]');
-    expect(poster).not.toBeNull();
-    expect(poster!.getAttribute("src") ?? "").toMatch(
-      /\/images\/hero\/hero-(desktop|mobile)\.svg$/,
-    );
+  it("renders the static hero backdrop image", () => {
+    const { container } = render(<Hero />);
+    const backdrop = container.querySelector('img[src*="hero-still"]');
+    expect(backdrop).toBeInTheDocument();
+    // Decorative: must be hidden from the accessibility tree.
+    expect(backdrop).toHaveAttribute("alt", "");
   });
 
-  it("renders the silk poster under reduced motion (no live WebGL canvas attempted)", () => {
-    installMatchMedia(true);
+  it("does not mount the silk WebGL experience", () => {
     render(<Hero />);
-    expect(screen.getByTestId("silk-hero")).toBeInTheDocument();
-    expect(document.querySelector("canvas")).toBeNull();
+    expect(screen.queryByTestId("silk-hero")).toBeNull();
   });
 });
