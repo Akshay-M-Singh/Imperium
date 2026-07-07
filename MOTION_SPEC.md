@@ -334,6 +334,19 @@ const options: EmblaOptionsType = {
 
 ---
 
+### 3.8 SilkHero (added 2026-07-07)
+
+**Amendment note:** the hero's background layer is a live WebGL silk simulation (`src/components/silk/`), specified in full in `docs/superpowers/specs/2026-07-07-silk-hero-experience-design.md`. This is the codebase's first WebGL subsystem and a scoped exception to `TECHNICAL_ARCHITECTURE.md`'s Three.js exclusion (hero only). It is documented here because it is motion, not because the general exclusion is lifted elsewhere.
+
+- **What it is:** a fullscreen R3F canvas behind the untouched hero DOM (eyebrow, wordmark, tagline, CTAs, entry cascade unchanged). An art-directed resting drape, idle drift/breath, one cinematic entry tension-wave, and cursor/touch-reactive deformation with over-damped inertia.
+- **Reduced-motion contract:** identical to every other component in this spec — `useReducedMotion` gates it, and the fallback is not "less of the same," it's a complete static frame: a rendered poster of the shader's own resting pose (same composition, same palette), so `prefers-reduced-motion` users see the exact art direction, minus motion. No idle drift, no entry wave, no cursor deformation, no time advance in the shader loop.
+- **Other gates that resolve to the same static poster:** no WebGL2 support, `save-data`/slow connection (reusing the Hero's existing sniff), and the `NEXT_PUBLIC_SILK_HERO` kill switch. The site never depends on WebGL to render a complete hero.
+- **Performance boundary:** rendering pauses via `useIntersectionObserver` when the hero scrolls offscreen and on `visibilitychange` (tab hidden) — this is accessibility/thermal hygiene, not a performance optimization pass (the spec explicitly deprioritizes bundle/GPU optimization elsewhere).
+- **Zero re-render discipline preserved:** cursor and scroll values are smoothed through Framer `useSpring` motion values and written into shader uniforms inside `useFrame`, never into React state — consistent with §5's "Performance Boundaries."
+- **Fallback table entry:** Hero silk background → live shader with cursor deformation | Static poster render of the same resting-drape composition, no motion.
+
+---
+
 ## 4. Reduced-Motion Strategy
 
 `prefers-reduced-motion: reduce` is a first-class concern. Every motion site in this codebase must have a defined reduced-motion behavior.
