@@ -127,6 +127,10 @@
     transform-origin: left center;
     background-color: var(--color-oro-antico);
   }
+
+  [dir="rtl"] .progressFill {
+    transform-origin: right center;
+  }
 }
 
 @media (min-width: 1440px) {

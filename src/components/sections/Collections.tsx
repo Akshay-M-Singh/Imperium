@@ -77,7 +77,7 @@ export function Collections({ locale = "en" }: { locale?: Locale }) {
             <SectionHeader
               eyebrow={collectionsSection[locale].eyebrow}
               headline={collectionsSection[locale].headline}
-              subline="Four curated collections — each one a different way of working with Italian craft."
+              subline={collectionsSection[locale].subline}
               id="collections-heading"
             />
           </div>
