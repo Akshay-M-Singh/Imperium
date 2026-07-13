@@ -5,13 +5,14 @@
 
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import type { Locale } from "@/lib/i18n";
 import { Section } from "@/components/layout/Section";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { StatBlock } from "@/components/ui/StatBlock";
 import { stats } from "@/data/stats";
 import styles from "./StatsStrip.module.css";
 
-export function StatsStrip() {
+export function StatsStrip({ locale = "en" }: { locale?: Locale }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -19,7 +20,7 @@ export function StatsStrip() {
     <Section id="stats" background="gesso" dense>
       <ScrollReveal amount={0.3}>
         <div ref={ref} className={styles.grid} role="list">
-          {stats.map((stat) => (
+          {stats[locale].map((stat) => (
             <div key={stat.label} className={styles.cell} role="listitem">
               <StatBlock
                 value={stat.value}
