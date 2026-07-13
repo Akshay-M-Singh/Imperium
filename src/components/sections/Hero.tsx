@@ -1,9 +1,9 @@
 // Hero — full-viewport brand opening (DESIGN.md §9.02, amended by client
 // direction: the wordmark logo leads inside the h1, with the brand
-// tagline directly beneath). Background amended 2026-07-07: the live Silk
-// WebGL canvas is retired from this mount (module kept in src/components/
-// silk/, recoverable) in favour of a 4K still of the shader's resting
-// frame — the hero is fully static once the entrance cascade completes.
+// tagline directly beneath). Background: client-supplied hero photograph
+// (2026-07-14, replacing the silk-shader still; the Silk WebGL module is
+// kept in src/components/silk/, recoverable). The hero is fully static
+// once the entrance cascade completes.
 
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -16,7 +16,7 @@ export function Hero() {
     <section className={styles.section} aria-labelledby="hero-heading">
       <div className={styles.backdrop} aria-hidden="true">
         <Image
-          src="/images/hero/hero-still.jpg"
+          src="/images/hero/hero.jpg"
           alt=""
           fill
           priority
