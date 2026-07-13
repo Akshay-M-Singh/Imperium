@@ -62,7 +62,7 @@ describe("Hero", () => {
 
   it("renders the static hero backdrop image", () => {
     const { container } = render(<Hero />);
-    const backdrop = container.querySelector('img[src*="hero-still"]');
+    const backdrop = container.querySelector('img[src*="hero.jpg"]');
     expect(backdrop).toBeInTheDocument();
     // Decorative: must be hidden from the accessibility tree.
     expect(backdrop).toHaveAttribute("alt", "");
