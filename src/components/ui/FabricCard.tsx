@@ -8,6 +8,7 @@ import Image from "next/image";
 import type { CollectionCard } from "@/types/collections";
 import { TiltCard, TiltCardImage } from "@/components/motion/TiltCard";
 import { TextLink } from "./TextLink";
+import { Arrow } from "./Arrow";
 import { cn } from "@/lib/utils";
 import styles from "./FabricCard.module.css";
 
@@ -45,7 +46,9 @@ export function FabricCard({ collection, layout = "stack" }: FabricCardProps) {
           <p className={styles.body}>{body}</p>
           <div className={styles.cta}>
             <span className={styles.ctaInner}>
-              <TextLink href={cta.href}>{cta.label} →</TextLink>
+              <TextLink href={cta.href}>
+                {cta.label} <Arrow />
+              </TextLink>
             </span>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { contact } from "@/data/contact";
 import { waLink } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { Arrow } from "./Arrow";
 import styles from "./WhatsAppButton.module.css";
 
 export interface WhatsAppButtonProps {
@@ -18,7 +19,6 @@ export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): Re
   }
 
   const href = waLink(number, contact.whatsappPrefill);
-  const label = `${contact.whatsappButtonLabel} →`;
 
   if (fixedMobile) {
     return (
@@ -30,7 +30,7 @@ export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): Re
         aria-label={contact.whatsappButtonLabel}
       >
         <span className={styles.indicator} aria-hidden="true" />
-        {label}
+        {contact.whatsappButtonLabel} <Arrow />
       </a>
     );
   }
@@ -44,7 +44,7 @@ export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): Re
         rel="noopener noreferrer"
         aria-label={contact.whatsappButtonLabel}
       >
-        {label}
+        {contact.whatsappButtonLabel} <Arrow />
       </a>
     </MagneticButton>
   );
