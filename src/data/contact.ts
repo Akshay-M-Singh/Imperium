@@ -33,7 +33,7 @@ export const contact: ContactData = {
   subline:
     "Tell us what you're making. We'll bring samples, prices and timelines to the conversation.",
   location: "Dubai, UAE · Italy",
-  email: "hello@imperiumitaliantextile.com",
+  email: "imperium.italian.textile@gmail.com",
   instagramHandle: "@imperiumitaliantextile",
   whatsappButtonLabel: "Chat on WhatsApp",
   whatsappPrefill: "Hello Imperium — I'd like to ask about fabrics.",
