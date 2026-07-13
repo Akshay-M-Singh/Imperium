@@ -14,6 +14,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FormField } from "@/components/ui/FormField";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { TextLink } from "@/components/ui/TextLink";
+import { Arrow } from "@/components/ui/Arrow";
 import { Button } from "@/components/ui/Button";
 import { ValidationMorph } from "@/components/motion/ValidationMorph";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
@@ -135,7 +136,7 @@ export function Contact(): ReactNode {
               </div>
               <p>
                 <a href={SITE.instagram} className={styles.instagram}>
-                  {contact.instagramLinkLabel} → {contact.instagramHandle}
+                  {contact.instagramLinkLabel} <Arrow /> {contact.instagramHandle}
                 </a>
               </p>
             </address>

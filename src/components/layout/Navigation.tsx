@@ -8,6 +8,7 @@ import Link from "next/link";
 import { navigation } from "@/data/navigation";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { Arrow } from "@/components/ui/Arrow";
 import styles from "./Navigation.module.css";
 
 export function Navigation() {
@@ -57,7 +58,7 @@ export function Navigation() {
           </nav>
           <div className={styles.desktopActions}>
             <a href={navigation.cta.href} className={styles.cta}>
-              {navigation.cta.label} <span aria-hidden="true">→</span>
+              {navigation.cta.label} <Arrow />
             </a>
             <span
               className={styles.lang}
@@ -112,7 +113,7 @@ export function Navigation() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Chat on WhatsApp <span aria-hidden="true">→</span>
+          Chat on WhatsApp <Arrow />
         </a>
       </div>
     </>

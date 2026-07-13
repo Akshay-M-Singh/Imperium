@@ -8,6 +8,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { Arrow } from "@/components/ui/Arrow";
 import { SITE } from "@/lib/site";
 import styles from "./Hero.module.css";
 
@@ -59,7 +60,7 @@ export function Hero() {
             </Button>
           </MagneticButton>
           <a href="#contact" className={styles.textLink}>
-            Request a sample →
+            Request a sample <Arrow />
           </a>
         </div>
       </div>
