@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "../globals.css";
 import { isIndexingAllowed } from "@/app/robots";
 import { Footer } from "@/components/layout";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { LOCALES, DEFAULT_LOCALE, dirFor, isLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com"),
@@ -38,9 +39,23 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
+export const dynamicParams = false;
+
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   return (
-    <html lang="en">
+    <html lang={locale} dir={dirFor(locale)}>
       <body>
         {/* React 19 hoists these to <head>. Preload only the two dominant
             text faces (Architecture §6.6); the rest load on demand. */}
