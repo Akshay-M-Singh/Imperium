@@ -73,6 +73,24 @@ export default async function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {locale === "ar" && (
+          <>
+            <link
+              rel="preload"
+              href="/fonts/Amiri-Regular.woff2"
+              as="font"
+              type="font/woff2"
+              crossOrigin="anonymous"
+            />
+            <link
+              rel="preload"
+              href="/fonts/IBMPlexSansArabic-Regular.woff2"
+              as="font"
+              type="font/woff2"
+              crossOrigin="anonymous"
+            />
+          </>
+        )}
         {children}
         <Footer />
         <WhatsAppButton fixedMobile />
