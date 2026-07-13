@@ -12,9 +12,9 @@ export const SITE = {
   logoSrc: "/images/logo/imperium-wordmark.png" as string | null,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com",
   email: "hello@imperiumitaliantextile.com",
-  // Placeholder until Sofia's WhatsApp Business number is confirmed (Phase 4.17).
-  // Replaced during the Phase 4 fine-tune pass. wa.me links work with this format.
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "971500000000",
+  // Client-confirmed WhatsApp Business number (2026-07-14), digits-only
+  // wa.me format. Env var overrides for per-environment testing.
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "971544844082",
   instagram: "https://instagram.com/imperiumitaliantextile",
   instagramHandle: "@imperiumitaliantextile",
   location: "Dubai, UAE · Italy",
