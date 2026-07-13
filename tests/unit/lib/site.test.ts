@@ -15,3 +15,17 @@ describe("SITE brand configuration", () => {
     expect(SITE.logoSrc === null || typeof SITE.logoSrc === "string").toBe(true);
   });
 });
+
+describe("SITE.whatsapp", () => {
+  it("is the confirmed WhatsApp Business number", () => {
+    // Client-confirmed 2026-07-14. If this changes, update .env.example
+    // and the Vercel env var NEXT_PUBLIC_WHATSAPP_NUMBER too.
+    expect(SITE.whatsapp).toBe("971544844082");
+  });
+
+  it("is digits-only so raw wa.me interpolation stays valid", () => {
+    // Navigation.tsx and Footer.tsx build `https://wa.me/${SITE.whatsapp}`
+    // without waLink()'s sanitising — the stored value must be clean.
+    expect(SITE.whatsapp).toMatch(/^\d{10,15}$/);
+  });
+});
