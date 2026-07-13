@@ -4,10 +4,10 @@ import type { NavigationData } from "@/types/navigation";
 // Typed copy file → maps 1:1 to V2 Sanity schema.
 
 export const navigation: NavigationData = {
+  // Pezzi Unici / Hospitality removed by client decision (2026-07-14):
+  // they were collection names duplicating the #collections anchor.
   links: [
     { label: "Fabrics", href: "#collections" },
-    { label: "Pezzi Unici", href: "#collections" },
-    { label: "Hospitality", href: "#collections" },
     { label: "About", href: "#founder" },
     { label: "Contact", href: "#contact" },
   ],
