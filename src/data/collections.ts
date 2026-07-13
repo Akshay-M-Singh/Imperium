@@ -12,17 +12,19 @@ import type { Locale } from "@/lib/i18n";
 
 export const collectionsSection: Record<
   Locale,
-  { eyebrow: string; headline: string; carouselAria: string }
+  { eyebrow: string; headline: string; carouselAria: string; subline: string }
 > = {
   en: {
     eyebrow: "Our collections",
     headline: "Fabric with a story.",
     carouselAria: "Collection panels",
+    subline: "Four curated collections — each one a different way of working with Italian craft.",
   },
   ar: {
     eyebrow: "مجموعاتنا",
     headline: "أقمشة تحمل قصة.",
     carouselAria: "لوحات المجموعات",
+    subline: "أربع مجموعات مختارة — كل واحدة طريقة مختلفة للتعامل مع الحرفة الإيطالية.",
   },
 };
 
