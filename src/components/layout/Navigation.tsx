@@ -6,12 +6,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { navigation } from "@/data/navigation";
+import { ui } from "@/data/ui";
+import type { Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Arrow } from "@/components/ui/Arrow";
 import styles from "./Navigation.module.css";
 
-export function Navigation() {
+export function Navigation({ locale = "en" }: { locale?: Locale }) {
+  const nav = navigation[locale];
+  const t = ui[locale].nav;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -45,32 +49,32 @@ export function Navigation() {
     <>
       <header className={cn(styles.header, scrolled && styles.scrolled)}>
         <div className={styles.row}>
-          <Link href="/" className={styles.wordmark} aria-label="Imperium Italian Textile — home">
+          <Link href="/" className={styles.wordmark} aria-label={t.homeAria}>
             <span className={styles.wordmarkName}>{SITE.name}</span>
           </Link>
 
-          <nav aria-label="Primary" className={styles.desktopNav}>
-            {navigation.links.map((link) => (
+          <nav aria-label={t.primaryAria} className={styles.desktopNav}>
+            {nav.links.map((link) => (
               <a key={`${link.href}-${link.label}`} href={link.href} className={styles.desktopLink}>
                 {link.label}
               </a>
             ))}
           </nav>
           <div className={styles.desktopActions}>
-            <a href={navigation.cta.href} className={styles.cta}>
-              {navigation.cta.label} <Arrow />
+            <a href={nav.cta.href} className={styles.cta}>
+              {nav.cta.label} <Arrow />
             </a>
             <span
               className={styles.lang}
               aria-label="Language: English selected, Arabic unavailable"
             >
               <span className={styles.langActive} data-active="true">
-                {navigation.languageToggle.en}
+                {nav.languageToggle.en}
               </span>
               <span className={styles.langSep} aria-hidden="true">
                 ·
               </span>
-              <span className={styles.langInactive}>{navigation.languageToggle.ar}</span>
+              <span className={styles.langInactive}>{nav.languageToggle.ar}</span>
             </span>
           </div>
         </div>
@@ -79,7 +83,7 @@ export function Navigation() {
       <button
         type="button"
         className={styles.hamburger}
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? t.closeMenu : t.openMenu}
         aria-expanded={open}
         aria-controls="mobile-menu"
         data-open={open ? "true" : "false"}
@@ -95,8 +99,8 @@ export function Navigation() {
         aria-hidden={!open}
         inert={!open}
       >
-        <nav aria-label="Primary" className={styles.mobileNav}>
-          {navigation.links.map((link) => (
+        <nav aria-label={t.primaryAria} className={styles.mobileNav}>
+          {nav.links.map((link) => (
             <a
               key={`${link.href}-${link.label}`}
               href={link.href}
@@ -113,7 +117,7 @@ export function Navigation() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Chat on WhatsApp <Arrow />
+          {t.overlayWhatsApp} <Arrow />
         </a>
       </div>
     </>

@@ -21,14 +21,14 @@ describe("Navigation", () => {
   });
 
   it("renders the three nav links in both the desktop nav and mobile overlay", () => {
-    expect(navigation.links.map((l) => l.label)).toEqual(["Fabrics", "About", "Contact"]);
+    expect(navigation.en.links.map((l) => l.label)).toEqual(["Fabrics", "About", "Contact"]);
     const { container } = render(<Navigation />);
     const navs = container.querySelectorAll('nav[aria-label="Primary"]');
     expect(navs).toHaveLength(2);
     const [desktopNav, mobileNav] = navs;
-    expect(desktopNav!.querySelectorAll("a")).toHaveLength(navigation.links.length);
-    expect(mobileNav!.querySelectorAll("a")).toHaveLength(navigation.links.length);
-    for (const link of navigation.links) {
+    expect(desktopNav!.querySelectorAll("a")).toHaveLength(navigation.en.links.length);
+    expect(mobileNav!.querySelectorAll("a")).toHaveLength(navigation.en.links.length);
+    for (const link of navigation.en.links) {
       const desktop = desktopNav!.querySelectorAll("a");
       expect(Array.from(desktop).some((a) => a.textContent === link.label)).toBe(true);
       const mobile = mobileNav!.querySelectorAll("a");
@@ -39,19 +39,25 @@ describe("Navigation", () => {
   it("renders the Request Samples CTA pointing at its href", () => {
     render(<Navigation />);
     const cta = screen.getByRole("link", { name: /Request Samples/i });
-    expect(cta).toHaveAttribute("href", navigation.cta.href);
+    expect(cta).toHaveAttribute("href", navigation.en.cta.href);
   });
 
   it("renders the EN · AR toggle with English marked active", () => {
     render(<Navigation />);
     const toggle = screen.getByLabelText("Language: English selected, Arabic unavailable");
-    const en = screen.getByText(navigation.languageToggle.en);
-    const ar = screen.getByText(navigation.languageToggle.ar);
+    const en = screen.getByText(navigation.en.languageToggle.en);
+    const ar = screen.getByText(navigation.en.languageToggle.ar);
     const sep = screen.getByText("·");
     expect(toggle).toContainElement(en);
     expect(toggle).toContainElement(ar);
     expect(toggle).toContainElement(sep);
     expect(en).toHaveAttribute("data-active", "true");
+  });
+
+  it("renders Arabic labels when locale is ar", () => {
+    render(<Navigation locale="ar" />);
+    const links = screen.getAllByText(navigation.ar.links[0]!.label);
+    expect(links.length).toBeGreaterThan(0);
   });
 
   it("renders the hamburger button with aria-expanded false initially", () => {
