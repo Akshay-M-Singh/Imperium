@@ -29,6 +29,11 @@
   transform: scale(0.97);
 }
 
+.button:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-gesso);
+  outline-offset: var(--focus-outline-offset);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
     background-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
