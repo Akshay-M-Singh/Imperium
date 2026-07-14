@@ -16,13 +16,21 @@ import { whyImperium, type WhyImperiumItem } from "@/data/pillars";
 import type { Locale } from "@/lib/i18n";
 import styles from "./WhyImperium.module.css";
 
-function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
+function MediaSlot({
+  media,
+  mapAlt,
+  stampAlt,
+}: {
+  media: WhyImperiumItem["media"];
+  mapAlt: string;
+  stampAlt: string;
+}): ReactNode {
   if (media === "map") {
     return (
       <figure className={styles.mapFigure} data-testid="map-media">
         <Image
           src="/images/map/italy-gulf-routes.png"
-          alt="Illustrated route map from Italy to the UAE and the Gulf"
+          alt={mapAlt}
           width={1536}
           height={1024}
           loading="lazy"
@@ -36,7 +44,7 @@ function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
       <figure className={styles.stampSlot} data-testid="stamp-media">
         <Image
           src="/images/stamp/made-in-italy-stamp.png"
-          alt="100% Made in Italy certification stamp"
+          alt={stampAlt}
           width={462}
           height={432}
           loading="lazy"
@@ -79,7 +87,11 @@ export function WhyImperium({ locale = "en" }: { locale?: Locale }) {
               </div>
               {item.media ? (
                 <div className={styles.media}>
-                  <MediaSlot media={item.media} />
+                  <MediaSlot
+                    media={item.media}
+                    mapAlt={whyImperium[locale].mapAlt}
+                    stampAlt={whyImperium[locale].stampAlt}
+                  />
                 </div>
               ) : null}
             </div>

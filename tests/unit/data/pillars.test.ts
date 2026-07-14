@@ -38,4 +38,13 @@ describe("whyImperium data", () => {
       "لسوق الفخامة في الخليج",
     ]);
   });
+
+  it("has locale-keyed alt text for the map and stamp media slots", () => {
+    expect(whyImperium.en.mapAlt).toBe("Illustrated route map from Italy to the UAE and the Gulf");
+    expect(whyImperium.en.stampAlt).toBe("100% Made in Italy certification stamp");
+    expect(whyImperium.ar.mapAlt).toBe("خريطة توضيحية لمسار الشحن من إيطاليا إلى الإمارات والخليج");
+    expect(whyImperium.ar.stampAlt).toBe("ختم شهادة صُنِع في إيطاليا 100%");
+    expect(whyImperium.ar.mapAlt).not.toBe(whyImperium.en.mapAlt);
+    expect(whyImperium.ar.stampAlt).not.toBe(whyImperium.en.stampAlt);
+  });
 });
