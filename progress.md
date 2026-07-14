@@ -226,10 +226,22 @@ These must be resolved before launch:
 - [ ] Silk Hero real-device thermal + Lighthouse CLS pass (MOTION_SPEC.md §6 "Silk Hero-specific" checklist)
 - Hero still (`/images/hero/hero-still.jpg`) is a 4K capture of the silk shader's
   resting frame (scripts/capture-hero-still.mjs). A real hero photograph from the
-  client remains requested and is a one-line swap in Hero.tsx.
+  client remains requested and is a one-line swap in Hero.tsx. **Superseded
+  2026-07-15**: the client hero photo landed (2026-07-14) but at 1555×1012 —
+  below the ≥3840×2160 sharpness floor for a fullscreen Retina hero — so it was
+  replaced by an interactive silk fabric WebGL background rendered from a
+  deterministic offline still (`scripts/render-silk-still.mjs`, client-selected
+  "corner drape" variant) with cursor-driven deformation
+  (`src/components/silk/fabric/`, spec
+  `docs/superpowers/specs/2026-07-14-silk-hero-interactive-background-design.md`).
+  Quality verified via `node scripts/verify-silk-quality.mjs` (resolution/no-stretch
+  matrix) plus a real, non-headless GPU measurement (60fps on this Mac).
 - Silk WebGL module retained in src/components/silk/ but unmounted from Hero
   (client direction 2026-07-07: hero must be static after entrance). three.js
-  deps retained pending a removal decision.
+  deps retained pending a removal decision. The **new** texture-based silk
+  fabric layer in src/components/silk/fabric/ (2026-07-15) is a separate,
+  mounted module — see above — and reuses `useSilkPointer`/`useSilkSimulation`
+  from this retired module but not its procedural shaders.
 - Collection fabric PNGs are 627×627; client re-exports at ≥1200px still requested.
 
 ### Risks / blockers for Phase 6
