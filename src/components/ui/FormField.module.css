@@ -60,6 +60,15 @@
   box-shadow: 0 1px 0 0 var(--color-blu-notte); /* 2px-equivalent underline, no layout shift */
 }
 
+/* Windows High Contrast Mode strips box-shadow/border-color changes, so the
+   underline above becomes invisible. Restore a real outline in that mode. */
+@media (forced-colors: active) {
+  .input:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+}
+
 .input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -106,6 +115,13 @@ select.input:disabled {
 
 .inputError:focus-visible {
   box-shadow: 0 1px 0 0 var(--color-error);
+}
+
+@media (forced-colors: active) {
+  .inputError:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
 }
 
 /* One-time pulse line that runs when an error appears. */
