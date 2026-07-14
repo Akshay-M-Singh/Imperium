@@ -38,7 +38,12 @@ function installMatchMedia(matches: boolean) {
 describe("SilkHero", () => {
   beforeEach(() => {
     installMatchMedia(false);
-    vi.mocked(getWebglCapability).mockReturnValue({ webgl2: true, halfFloatFbo: true });
+    vi.mocked(getWebglCapability).mockReturnValue({
+      webgl2: true,
+      halfFloatFbo: true,
+      maxTextureSize: 16384,
+      maxAnisotropy: 16,
+    });
   });
 
   afterEach(() => {
@@ -52,7 +57,12 @@ describe("SilkHero", () => {
   });
 
   it("falls back to the static poster when WebGL2 is unavailable", () => {
-    vi.mocked(getWebglCapability).mockReturnValue({ webgl2: false, halfFloatFbo: false });
+    vi.mocked(getWebglCapability).mockReturnValue({
+      webgl2: false,
+      halfFloatFbo: false,
+      maxTextureSize: 0,
+      maxAnisotropy: 0,
+    });
     render(<SilkHero />);
     expect(screen.queryByTestId("mock-silk-canvas")).not.toBeInTheDocument();
   });
