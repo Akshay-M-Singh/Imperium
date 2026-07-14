@@ -53,12 +53,16 @@
 }
 
 .certification {
+  /* Full-width credential band (client feedback 2026-07-14): spans both
+     grid columns so it centers under portrait + bio, not inside the bio
+     column. On mobile the grid is single-column, so this is a no-op. */
+  grid-column: 1 / -1;
   text-align: center;
 }
 
 .certImageWrap {
   position: relative;
-  max-inline-size: min(340px, 100%);
+  max-inline-size: min(560px, 100%);
   /* Matches the scan (2502×1770) so object-fit: cover crops nothing —
      it's a document; its border must stay intact. */
   aspect-ratio: 2502 / 1770;
@@ -84,7 +88,7 @@
 .certPlaceholder {
   display: grid;
   place-content: center;
-  max-inline-size: 200px;
+  max-inline-size: 280px;
   aspect-ratio: 3 / 2;
   margin-inline: auto;
   margin-block-end: var(--space-sm);

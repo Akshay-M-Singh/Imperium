@@ -43,33 +43,33 @@ export function Founder({ locale = "en" }: { locale?: Locale }) {
             </div>
 
             <PullQuote quote={copy.quote} attribution={copy.quoteAttribution} />
+          </div>
 
-            <div className={styles.certification}>
-              {copy.certification.src ? (
-                <>
-                  <div className={styles.certImageWrap}>
-                    <Image
-                      src={copy.certification.src}
-                      alt={copy.certification.caption}
-                      fill
-                      loading="lazy"
-                      sizes="(min-width: 1024px) 340px, 80vw"
-                      className={styles.certImage}
-                    />
-                  </div>
-                  <p className={styles.certCaption}>{copy.certification.caption}</p>
-                </>
-              ) : (
-                <>
-                  <div className={styles.certPlaceholder} data-testid="certification-placeholder">
-                    <span className={styles.certPlaceholderLabel}>
-                      {copy.certificationPlaceholderLabel}
-                    </span>
-                  </div>
-                  <p className={styles.certCaption}>{copy.certification.caption}</p>
-                </>
-              )}
-            </div>
+          <div className={styles.certification}>
+            {copy.certification.src ? (
+              <>
+                <div className={styles.certImageWrap}>
+                  <Image
+                    src={copy.certification.src}
+                    alt={copy.certification.caption}
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 560px, 90vw"
+                    className={styles.certImage}
+                  />
+                </div>
+                <p className={styles.certCaption}>{copy.certification.caption}</p>
+              </>
+            ) : (
+              <>
+                <div className={styles.certPlaceholder} data-testid="certification-placeholder">
+                  <span className={styles.certPlaceholderLabel}>
+                    {copy.certificationPlaceholderLabel}
+                  </span>
+                </div>
+                <p className={styles.certCaption}>{copy.certification.caption}</p>
+              </>
+            )}
           </div>
         </div>
       </Section>
