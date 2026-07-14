@@ -162,5 +162,3 @@ export const contact: Record<Locale, ContactData> = {
     },
   },
 };
-
-export default contact;
