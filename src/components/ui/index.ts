@@ -7,3 +7,4 @@ export { StatBlock, type StatBlockProps } from "./StatBlock";
 export { PullQuote, type PullQuoteProps } from "./PullQuote";
 export { FormField, type FormFieldProps, type FormFieldType } from "./FormField";
 export { WhatsAppButton, type WhatsAppButtonProps } from "./WhatsAppButton";
+export { EmailButton, type EmailButtonProps } from "./EmailButton";
