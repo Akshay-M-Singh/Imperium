@@ -3,13 +3,13 @@ import { whyImperium } from "@/data/pillars";
 
 describe("whyImperium data", () => {
   it("has exactly three items — no fourth pillar survives", () => {
-    expect(whyImperium.items).toHaveLength(3);
-    expect(JSON.stringify(whyImperium)).not.toMatch(/always available/i);
-    expect(JSON.stringify(whyImperium)).not.toMatch(/partner, not a catalogue/i);
+    expect(whyImperium.en.items).toHaveLength(3);
+    expect(JSON.stringify(whyImperium.en)).not.toMatch(/always available/i);
+    expect(JSON.stringify(whyImperium.en)).not.toMatch(/partner, not a catalogue/i);
   });
 
   it("carries the client-approved headings in order", () => {
-    expect(whyImperium.items.map((i) => i.heading)).toEqual([
+    expect(whyImperium.en.items.map((i) => i.heading)).toEqual([
       "Direct From the Source",
       "Made in Italy Expertise",
       "For the Gulf's Luxury Market",
@@ -17,12 +17,34 @@ describe("whyImperium data", () => {
   });
 
   it("reserves media placeholders for map and stamp", () => {
-    expect(whyImperium.items[0]!.media).toBe("map");
-    expect(whyImperium.items[1]!.media).toBe("stamp");
-    expect(whyImperium.items[2]!.media).toBeNull();
+    expect(whyImperium.en.items[0]!.media).toBe("map");
+    expect(whyImperium.en.items[1]!.media).toBe("stamp");
+    expect(whyImperium.en.items[2]!.media).toBeNull();
   });
 
   it("speaks to the Gulf, not Dubai-only, in item 3", () => {
-    expect(whyImperium.items[2]!.paragraphs.join(" ")).toMatch(/Gulf/);
+    expect(whyImperium.en.items[2]!.paragraphs.join(" ")).toMatch(/Gulf/);
+  });
+
+  it("has exactly three AR items with matching media slots", () => {
+    expect(whyImperium.ar.items).toHaveLength(3);
+    expect(whyImperium.ar.items.map((i) => i.media)).toEqual(["map", "stamp", null]);
+  });
+
+  it("carries the AR headings in order", () => {
+    expect(whyImperium.ar.items.map((i) => i.heading)).toEqual([
+      "من المصدر مباشرة",
+      "خبرة معتمدة في «صُنِع في إيطاليا»",
+      "لسوق الفخامة في الخليج",
+    ]);
+  });
+
+  it("has locale-keyed alt text for the map and stamp media slots", () => {
+    expect(whyImperium.en.mapAlt).toBe("Illustrated route map from Italy to the UAE and the Gulf");
+    expect(whyImperium.en.stampAlt).toBe("100% Made in Italy certification stamp");
+    expect(whyImperium.ar.mapAlt).toBe("خريطة توضيحية لمسار الشحن من إيطاليا إلى الإمارات والخليج");
+    expect(whyImperium.ar.stampAlt).toBe("ختم شهادة صُنِع في إيطاليا 100%");
+    expect(whyImperium.ar.mapAlt).not.toBe(whyImperium.en.mapAlt);
+    expect(whyImperium.ar.stampAlt).not.toBe(whyImperium.en.stampAlt);
   });
 });

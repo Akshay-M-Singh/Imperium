@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Collections } from "@/components/sections/Collections";
+import { collectionsSection } from "@/data/collections";
 
 describe("Collections", () => {
   const original = window.matchMedia;
@@ -55,6 +56,14 @@ describe("Collections", () => {
     for (const link of links) {
       expect(link).toHaveAttribute("href", "#contact");
     }
+  });
+
+  it("renders Arabic section strings when locale is ar", () => {
+    render(<Collections locale="ar" />);
+    expect(screen.getByText(collectionsSection.ar.headline)).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: collectionsSection.ar.carouselAria }),
+    ).toBeInTheDocument();
   });
 
   it("unmounts cleanly", () => {

@@ -8,10 +8,15 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { Arrow } from "@/components/ui/Arrow";
 import { SITE } from "@/lib/site";
+import { ui } from "@/data/ui";
+import type { Locale } from "@/lib/i18n";
 import styles from "./Hero.module.css";
 
-export function Hero() {
+export function Hero({ locale = "en" }: { locale?: Locale }) {
+  const t = ui[locale].hero;
+
   return (
     <section className={styles.section} aria-labelledby="hero-heading">
       <div className={styles.backdrop} aria-hidden="true">
@@ -30,7 +35,7 @@ export function Hero() {
       <div className={styles.dissolve} aria-hidden="true" />
 
       <div className={styles.content}>
-        <span className={styles.eyebrow}>Made in Italy</span>
+        <span className={styles.eyebrow}>{t.eyebrow}</span>
 
         <h1 id="hero-heading" className={styles.logo}>
           {SITE.logoSrc ? (
@@ -50,16 +55,16 @@ export function Hero() {
           )}
         </h1>
 
-        <p className={styles.tagline}>{SITE.tagline}</p>
+        <p className={styles.tagline}>{t.tagline}</p>
 
         <div className={styles.ctaGroup}>
           <MagneticButton>
             <Button variant="ghost-light" href="#collections">
-              Explore our fabrics
+              {t.ctaPrimary}
             </Button>
           </MagneticButton>
           <a href="#contact" className={styles.textLink}>
-            Request a sample →
+            {t.ctaSecondary} <Arrow />
           </a>
         </div>
       </div>

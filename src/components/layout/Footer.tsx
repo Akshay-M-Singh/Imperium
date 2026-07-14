@@ -4,20 +4,26 @@
 
 import { SITE } from "@/lib/site";
 import { navigation } from "@/data/navigation";
+import { ui } from "@/data/ui";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
-const footerLinks = [...navigation.links, { label: "Privacy Policy", href: "/privacy" }];
+export function Footer({ locale = "en" }: { locale?: Locale }) {
+  const t = ui[locale].footer;
+  const footerLinks = [
+    ...navigation[locale].links,
+    { label: t.privacyPolicy, href: switchLocalePath("/privacy", locale) },
+  ];
 
-export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.topRow}>
           <p className={styles.wordmark}>{SITE.name}</p>
-          <p className={styles.tagline}>{SITE.tagline}</p>
+          <p className={styles.tagline}>{ui[locale].hero.tagline}</p>
         </div>
 
-        <nav aria-label="Footer" className={styles.middleRow}>
+        <nav aria-label={t.aria} className={styles.middleRow}>
           <ul className={styles.linkList}>
             {footerLinks.map((link) => (
               <li key={link.href + link.label}>
@@ -30,7 +36,9 @@ export function Footer() {
         </nav>
 
         <div className={styles.bottomRow}>
-          <p className={styles.legal}>© {SITE.name}. All rights reserved.</p>
+          <p className={styles.legal}>
+            © {SITE.name}. {t.rightsReserved}
+          </p>
           <div className={styles.socials}>
             <a
               href={SITE.instagram}
@@ -49,7 +57,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className={styles.socialLink}
             >
-              WhatsApp
+              {t.whatsapp}
             </a>
           </div>
         </div>

@@ -166,8 +166,23 @@
   color: var(--color-sabbia);
 }
 
+.langActive,
+.langInactive {
+  text-decoration: none;
+}
+
 .langActive {
   color: var(--color-carbone);
+}
+
+.langInactive {
+  color: inherit;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .langInactive:hover {
+    color: var(--color-carbone);
+  }
 }
 
 /* --- Mobile hamburger ----------------------------------------------------- */

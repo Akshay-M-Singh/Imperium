@@ -13,15 +13,24 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { whyImperium, type WhyImperiumItem } from "@/data/pillars";
+import type { Locale } from "@/lib/i18n";
 import styles from "./WhyImperium.module.css";
 
-function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
+function MediaSlot({
+  media,
+  mapAlt,
+  stampAlt,
+}: {
+  media: WhyImperiumItem["media"];
+  mapAlt: string;
+  stampAlt: string;
+}): ReactNode {
   if (media === "map") {
     return (
       <figure className={styles.mapFigure} data-testid="map-media">
         <Image
           src="/images/map/italy-gulf-routes.png"
-          alt="Illustrated route map from Italy to the UAE and the Gulf"
+          alt={mapAlt}
           width={1536}
           height={1024}
           loading="lazy"
@@ -35,7 +44,7 @@ function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
       <figure className={styles.stampSlot} data-testid="stamp-media">
         <Image
           src="/images/stamp/made-in-italy-stamp.png"
-          alt="100% Made in Italy certification stamp"
+          alt={stampAlt}
           width={462}
           height={432}
           loading="lazy"
@@ -47,17 +56,17 @@ function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
   return null;
 }
 
-export function WhyImperium() {
+export function WhyImperium({ locale = "en" }: { locale?: Locale }) {
   return (
     <ScrollReveal amount={0.15}>
       <Section id="why-imperium" background="gesso" ariaLabelledby="why-imperium-heading">
         <SectionHeader
           id="why-imperium-heading"
-          eyebrow={whyImperium.eyebrow}
-          headline={whyImperium.headline}
+          eyebrow={whyImperium[locale].eyebrow}
+          headline={whyImperium[locale].headline}
         />
         <div className={styles.rows}>
-          {whyImperium.items.map((item, index) => (
+          {whyImperium[locale].items.map((item, index) => (
             <div
               key={item.number}
               data-row={item.number}
@@ -78,7 +87,11 @@ export function WhyImperium() {
               </div>
               {item.media ? (
                 <div className={styles.media}>
-                  <MediaSlot media={item.media} />
+                  <MediaSlot
+                    media={item.media}
+                    mapAlt={whyImperium[locale].mapAlt}
+                    stampAlt={whyImperium[locale].stampAlt}
+                  />
                 </div>
               ) : null}
             </div>

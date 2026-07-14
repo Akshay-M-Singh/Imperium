@@ -199,6 +199,54 @@
   src: url("/fonts/DMSans-Medium.woff2") format("woff2");
 }
 
+/* --- Arabic faces (AR locale only; Latin faces remain for brand names) --- */
+
+@font-face {
+  font-family: "Amiri";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Amiri-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Amiri";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Amiri-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/IBMPlexSansArabic-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/IBMPlexSansArabic-Medium.woff2") format("woff2");
+}
+
+/* Arabic locale: prepend Arabic faces to the token stacks. Latin faces
+   stay in the chain so brand names (Imperium, Tessuti Italiani…) keep
+   their editorial voice inside Arabic text. */
+html[lang="ar"] {
+  --font-serif: "Amiri", "Cormorant Garamond", "Georgia", serif;
+  --font-sans: "IBM Plex Sans Arabic", "DM Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Arabic script must never be letter-spaced — tracking breaks glyph
+   joining. Blunt on purpose: eyebrows/labels set tracking per-module. */
+html[lang="ar"] * {
+  letter-spacing: normal !important;
+}
+
 /* --- CSS Reset (minimal, modern) ----------------------------------------- */
 
 *,

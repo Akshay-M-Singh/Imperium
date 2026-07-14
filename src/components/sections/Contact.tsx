@@ -14,12 +14,15 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FormField } from "@/components/ui/FormField";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { TextLink } from "@/components/ui/TextLink";
+import { Arrow } from "@/components/ui/Arrow";
 import { Button } from "@/components/ui/Button";
 import { ValidationMorph } from "@/components/motion/ValidationMorph";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { springs } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { contact } from "@/data/contact";
+import type { ContactData } from "@/data/contact";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { submitContactForm } from "@/app/actions/contact";
 import type { ContactFormData, ContactFormResult } from "@/types/forms";
@@ -31,31 +34,31 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type FieldErrors = Partial<Record<keyof ContactFormData, string>>;
 
-function validateClient(formData: FormData): FieldErrors {
+function validateClient(formData: FormData, t: ContactData): FieldErrors {
   const errors: FieldErrors = {};
 
   const name = String(formData.get("name") ?? "").trim();
   if (!name) {
-    errors.name = "Please enter your name.";
+    errors.name = t.validation.name;
   }
 
   const email = String(formData.get("email") ?? "").trim();
   if (!email) {
-    errors.email = "Please enter your email.";
+    errors.email = t.validation.emailMissing;
   } else if (!EMAIL_REGEX.test(email)) {
-    errors.email = "Please enter a valid email address.";
+    errors.email = t.validation.emailInvalid;
   }
 
   const role = String(formData.get("role") ?? "");
   if (!role) {
-    errors.role = "Please select your role.";
+    errors.role = t.validation.roleMissing;
   }
 
   const project = String(formData.get("project") ?? "");
   if (!project) {
-    errors.project = "Please tell us about your project.";
+    errors.project = t.validation.projectMissing;
   } else if (project.trim().length < MIN_PROJECT_LENGTH) {
-    errors.project = "Please write at least 10 characters.";
+    errors.project = t.validation.projectTooShort;
   }
 
   return errors;
@@ -67,7 +70,12 @@ function vibrateOnSubmit() {
   }
 }
 
-export function Contact(): ReactNode {
+export interface ContactProps {
+  locale?: Locale;
+}
+
+export function Contact({ locale = "en" }: ContactProps): ReactNode {
+  const t = contact[locale];
   const [state, formAction, isPending] = useActionState<ContactFormResult | null, FormData>(
     async (_prevState, formData) => submitContactForm(_prevState, formData),
     null,
@@ -91,7 +99,7 @@ export function Contact(): ReactNode {
       vibrateOnSubmit();
       const form = event.currentTarget;
       const formData = new FormData(form);
-      const errors = validateClient(formData);
+      const errors = validateClient(formData, t);
       setClientErrors(errors);
 
       if (Object.keys(errors).length > 0) {
@@ -120,22 +128,22 @@ export function Contact(): ReactNode {
         <div className={styles.grid}>
           <div className={styles.content}>
             <SectionHeader
-              eyebrow={contact.eyebrow}
-              headline={contact.headline}
-              subline={contact.subline}
+              eyebrow={t.eyebrow}
+              headline={t.headline}
+              subline={t.subline}
               id="contact-heading"
             />
             <address className={styles.details}>
-              <p className={styles.location}>{contact.location}</p>
+              <p className={styles.location}>{t.location}</p>
               <p>
-                <TextLink href={`mailto:${contact.email}`}>{contact.email}</TextLink>
+                <TextLink href={`mailto:${t.email}`}>{t.email}</TextLink>
               </p>
               <div className={styles.whatsapp}>
-                <WhatsAppButton />
+                <WhatsAppButton locale={locale} />
               </div>
               <p>
                 <a href={SITE.instagram} className={styles.instagram}>
-                  {contact.instagramLinkLabel} → {contact.instagramHandle}
+                  {t.instagramLinkLabel} <Arrow /> {t.instagramHandle}
                 </a>
               </p>
             </address>
@@ -143,7 +151,7 @@ export function Contact(): ReactNode {
 
           <div className={styles.formCard}>
             <form onSubmit={handleSubmit} className={styles.form} noValidate>
-              {Object.entries(contact.formFields).map(([name, config]) => (
+              {Object.entries(t.formFields).map(([name, config]) => (
                 <FormField
                   key={name}
                   name={name}
@@ -162,6 +170,7 @@ export function Contact(): ReactNode {
                 defaultValue={Date.now()}
                 suppressHydrationWarning
               />
+              <input type="hidden" name="locale" value={locale} />
               <input
                 type="text"
                 name={HONEYPOT_NAME}
@@ -196,7 +205,7 @@ export function Contact(): ReactNode {
                           exit={{ opacity: 0 }}
                           transition={reduced ? { duration: 0 } : { duration: 0.3 }}
                         >
-                          <ValidationMorph state="success" message="Thank you" />
+                          <ValidationMorph state="success" message={t.validation.thankYou} />
                         </motion.span>
                       ) : isPending ? (
                         <motion.span
@@ -207,7 +216,7 @@ export function Contact(): ReactNode {
                           exit={{ opacity: 0 }}
                           transition={reduced ? { duration: 0 } : { duration: 0.3 }}
                         >
-                          {contact.loadingText}
+                          {t.loadingText}
                           <span className={styles.loadingLine} aria-hidden="true" />
                         </motion.span>
                       ) : (
@@ -219,7 +228,7 @@ export function Contact(): ReactNode {
                           exit={{ opacity: 0 }}
                           transition={reduced ? { duration: 0 } : { duration: 0.3 }}
                         >
-                          Send inquiry
+                          {t.submitLabel}
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -228,8 +237,11 @@ export function Contact(): ReactNode {
               </div>
 
               <p className={styles.formNote}>
-                {contact.consentMicrocopy.split("Privacy Policy")[0]}
-                <TextLink href="/privacy">Privacy Policy</TextLink>. {contact.formNote}
+                {t.consent.before}
+                <TextLink href={switchLocalePath("/privacy", locale)}>
+                  {t.consent.linkLabel}
+                </TextLink>
+                {t.consent.after} {t.formNote}
               </p>
             </form>
           </div>
