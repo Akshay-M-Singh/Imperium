@@ -9,11 +9,11 @@ describe("Founder", () => {
     expect(
       screen.getByRole("heading", { name: "Proudly Italian. Purposefully Global." }),
     ).toBeInTheDocument();
-    for (const paragraph of founder.bioParagraphs) {
+    for (const paragraph of founder.en.bioParagraphs) {
       expect(screen.getByText(paragraph)).toBeInTheDocument();
     }
-    expect(founder.bioParagraphs).toHaveLength(3);
-    expect(founder.bioParagraphs[0]).toMatch(/^Born and raised in Italy/);
+    expect(founder.en.bioParagraphs).toHaveLength(3);
+    expect(founder.en.bioParagraphs[0]).toMatch(/^Born and raised in Italy/);
   });
 
   it("renders the client-approved quote with attribution", () => {
@@ -38,5 +38,25 @@ describe("Founder", () => {
     expect(
       screen.getByAltText("Sofia Mazza, Founder of Imperium Italian Textile"),
     ).toBeInTheDocument();
+  });
+
+  it("renders Arabic copy, portrait alt, and quote when locale is ar", () => {
+    render(<Founder locale="ar" />);
+    expect(screen.getByRole("heading", { name: founder.ar.headline })).toBeInTheDocument();
+    for (const paragraph of founder.ar.bioParagraphs) {
+      expect(screen.getByText(paragraph)).toBeInTheDocument();
+    }
+    expect(screen.getByText(founder.ar.quote)).toBeInTheDocument();
+    expect(screen.getAllByText(founder.ar.quoteAttribution).length).toBeGreaterThan(0);
+    expect(screen.getByAltText(founder.ar.portrait.alt)).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: founder.ar.certification.caption })).toBeInTheDocument();
+  });
+
+  it("uses the locale-keyed placeholder label, not hardcoded English, when certification.src is null", () => {
+    expect(founder.en.certificationPlaceholderLabel).toBe("Image to follow");
+    expect(founder.ar.certificationPlaceholderLabel).toBe("الصورة قادمة قريبًا");
+    expect(founder.ar.certificationPlaceholderLabel).not.toBe(
+      founder.en.certificationPlaceholderLabel,
+    );
   });
 });
