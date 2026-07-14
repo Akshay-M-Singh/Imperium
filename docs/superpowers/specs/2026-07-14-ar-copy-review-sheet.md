@@ -150,7 +150,6 @@ Note: `CountUp` renders the numeral itself (40, 4, 100) unlocalized (Western Ara
 | Dubai, UAE · Italy (location)                                                                        | دبي، الإمارات العربية المتحدة · إيطاليا                                      |
 | Chat on WhatsApp (button label)                                                                      | تحدّث معنا عبر واتساب                                                        |
 | Hello Imperium — I'd like to ask about fabrics. (WhatsApp prefill text)                              | مرحبًا إمبريوم — أودّ الاستفسار عن الأقمشة.                                  |
-| Follow our journey (Instagram link label)                                                            | تابِع رحلتنا                                                                 |
 | We use your details only to respond to your inquiry. See our (consent, before-link)                  | نستخدم بياناتك للرد على استفسارك فقط. راجع                                   |
 | Privacy Policy (consent link label)                                                                  | سياسة الخصوصية                                                               |
 | . (consent, after-link)                                                                              | .                                                                            |

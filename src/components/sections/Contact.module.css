@@ -96,25 +96,6 @@
   }
 }
 
-.instagram {
-  font-size: 14px;
-  color: var(--color-sabbia);
-  text-decoration: none;
-  transition: color var(--motion-duration-fast) var(--motion-ease-out);
-}
-
-.instagram:focus-visible {
-  color: var(--color-carbone);
-  text-decoration: underline;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .instagram:hover {
-    color: var(--color-carbone);
-    text-decoration: underline;
-  }
-}
-
 .formNote {
   font-size: var(--text-caption);
   color: var(--color-sabbia);

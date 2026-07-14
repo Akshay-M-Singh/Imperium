@@ -14,7 +14,6 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FormField } from "@/components/ui/FormField";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { TextLink } from "@/components/ui/TextLink";
-import { Arrow } from "@/components/ui/Arrow";
 import { Button } from "@/components/ui/Button";
 import { ValidationMorph } from "@/components/motion/ValidationMorph";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
@@ -23,7 +22,6 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { contact } from "@/data/contact";
 import type { ContactData } from "@/data/contact";
 import { switchLocalePath, type Locale } from "@/lib/i18n";
-import { SITE } from "@/lib/site";
 import { submitContactForm } from "@/app/actions/contact";
 import type { ContactFormData, ContactFormResult } from "@/types/forms";
 import styles from "./Contact.module.css";
@@ -141,11 +139,6 @@ export function Contact({ locale = "en" }: ContactProps): ReactNode {
               <div className={styles.whatsapp}>
                 <WhatsAppButton locale={locale} />
               </div>
-              <p>
-                <a href={SITE.instagram} className={styles.instagram}>
-                  {t.instagramLinkLabel} <Arrow /> {t.instagramHandle}
-                </a>
-              </p>
             </address>
           </div>
 
