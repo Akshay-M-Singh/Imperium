@@ -19,6 +19,8 @@ export interface ContactData {
   email: string;
   whatsappButtonLabel: string;
   whatsappPrefill: string;
+  emailButtonLabel: string;
+  emailSubjectPrefill: string;
   consent: { before: string; linkLabel: string; after: string };
   formNote: string;
   loadingText: string;
@@ -55,6 +57,8 @@ export const contact: Record<Locale, ContactData> = {
     email: "imperium.italian.textile@gmail.com",
     whatsappButtonLabel: "Chat on WhatsApp",
     whatsappPrefill: "Hello Imperium — I'd like to ask about fabrics.",
+    emailButtonLabel: "Email Us",
+    emailSubjectPrefill: "Fabric inquiry — Imperium Italian Textile",
     consent: {
       before: "We use your details only to respond to your inquiry. See our ",
       linkLabel: "Privacy Policy",
@@ -109,6 +113,8 @@ export const contact: Record<Locale, ContactData> = {
     email: "imperium.italian.textile@gmail.com",
     whatsappButtonLabel: "تحدّث معنا عبر واتساب",
     whatsappPrefill: "مرحبًا إمبريوم — أودّ الاستفسار عن الأقمشة.",
+    emailButtonLabel: "راسلنا عبر البريد الإلكتروني",
+    emailSubjectPrefill: "استفسار عن الأقمشة — Imperium Italian Textile",
     consent: {
       before: "نستخدم بياناتك للرد على استفسارك فقط. راجع ",
       linkLabel: "سياسة الخصوصية",

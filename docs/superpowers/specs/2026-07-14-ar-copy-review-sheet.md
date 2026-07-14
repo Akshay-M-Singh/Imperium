@@ -158,6 +158,8 @@ Note: `CountUp` renders the numeral itself (40, 4, 100) unlocalized (Western Ara
 | Thank you. We'll be in touch shortly. (success state)                                                | شكرًا لك. سنتواصل معك قريبًا.                                                |
 | Something went wrong. Please try WhatsApp or email us directly. (error state)                        | حدث خطأ ما. يُرجى المحاولة عبر واتساب أو مراسلتنا مباشرة بالبريد الإلكتروني. |
 | **Send inquiry** (`submitLabel` — submit button)                                                     | **إرسال الاستفسار**                                                          |
+| Email Us (email button label)                                                                        | راسلنا عبر البريد الإلكتروني                                                 |
+| Fabric inquiry — Imperium Italian Textile (email subject prefill)                                    | استفسار عن الأقمشة — Imperium Italian Textile                                |
 
 ### Validation messages
 

@@ -1,0 +1,37 @@
+/* EmailButton — direct email channel pill; mirrors WhatsAppButton's inline
+   variant in the brand's Blu Notte (WhatsApp green stays WhatsApp's). */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-block-size: 56px;
+  padding-inline: var(--space-lg);
+  border: 1px solid var(--color-blu-notte);
+  border-radius: 100px;
+  background-color: var(--color-blu-notte);
+  color: var(--color-gesso);
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform 100ms var(--motion-ease-out);
+  touch-action: manipulation;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+    border-color: color-mix(in srgb, var(--color-blu-notte) 90%, black);
+  }
+}

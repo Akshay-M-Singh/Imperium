@@ -29,7 +29,10 @@
   color: var(--color-ardesia);
 }
 
-.whatsapp {
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
   margin-block-start: var(--space-xs);
 }
 

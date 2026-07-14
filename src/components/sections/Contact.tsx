@@ -13,6 +13,7 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FormField } from "@/components/ui/FormField";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { EmailButton } from "@/components/ui/EmailButton";
 import { TextLink } from "@/components/ui/TextLink";
 import { Button } from "@/components/ui/Button";
 import { ValidationMorph } from "@/components/motion/ValidationMorph";
@@ -136,8 +137,9 @@ export function Contact({ locale = "en" }: ContactProps): ReactNode {
               <p>
                 <TextLink href={`mailto:${t.email}`}>{t.email}</TextLink>
               </p>
-              <div className={styles.whatsapp}>
+              <div className={styles.channels}>
                 <WhatsAppButton locale={locale} />
+                <EmailButton locale={locale} />
               </div>
             </address>
           </div>
