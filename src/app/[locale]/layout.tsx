@@ -3,35 +3,37 @@ import "../globals.css";
 import { isIndexingAllowed } from "@/app/robots";
 import { Footer } from "@/components/layout";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { seo } from "@/data/seo";
 import { LOCALES, DEFAULT_LOCALE, dirFor, isLocale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com"),
-  title: {
-    default: "Imperium Italian Textile — Premium Italian Fabrics, Delivered to the Gulf",
-    template: "%s · Imperium Italian Textile",
-  },
-  description:
-    "Premium Italian fabrics sourced from Italy's finest mills and delivered to the Gulf's most discerning tailors, designers and hospitality groups.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Imperium Italian Textile",
-    description:
-      "Premium Italian fabrics sourced from Italy's finest mills and delivered to the Gulf's most discerning tailors, designers and hospitality groups.",
-    type: "website",
-    locale: "en_AE",
-    siteName: "Imperium Italian Textile",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-  robots: {
-    index: isIndexingAllowed(),
-    follow: isIndexingAllowed(),
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const s = seo[locale].home;
+  const siteName = locale === "ar" ? "إمبريوم للأقمشة الإيطالية" : "Imperium Italian Textile";
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://imperiumitaliantextile.com"),
+    title: { default: s.title, template: `%s · ${siteName}` },
+    description: s.description,
+    alternates: {
+      canonical: locale === "ar" ? "/ar" : "/",
+      languages: { en: "/", ar: "/ar", "x-default": "/" },
+    },
+    openGraph: {
+      title: s.ogTitle ?? s.title,
+      description: s.ogDescription ?? s.description,
+      type: "website",
+      locale: locale === "ar" ? "ar_AE" : "en_AE",
+      siteName,
+    },
+    twitter: { card: "summary_large_image" },
+    robots: { index: isIndexingAllowed(), follow: isIndexingAllowed() },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#FAF8F3",
