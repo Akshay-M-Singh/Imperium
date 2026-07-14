@@ -13,6 +13,7 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { whyImperium, type WhyImperiumItem } from "@/data/pillars";
+import type { Locale } from "@/lib/i18n";
 import styles from "./WhyImperium.module.css";
 
 function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
@@ -47,17 +48,17 @@ function MediaSlot({ media }: { media: WhyImperiumItem["media"] }): ReactNode {
   return null;
 }
 
-export function WhyImperium() {
+export function WhyImperium({ locale = "en" }: { locale?: Locale }) {
   return (
     <ScrollReveal amount={0.15}>
       <Section id="why-imperium" background="gesso" ariaLabelledby="why-imperium-heading">
         <SectionHeader
           id="why-imperium-heading"
-          eyebrow={whyImperium.eyebrow}
-          headline={whyImperium.headline}
+          eyebrow={whyImperium[locale].eyebrow}
+          headline={whyImperium[locale].headline}
         />
         <div className={styles.rows}>
-          {whyImperium.items.map((item, index) => (
+          {whyImperium[locale].items.map((item, index) => (
             <div
               key={item.number}
               data-row={item.number}
