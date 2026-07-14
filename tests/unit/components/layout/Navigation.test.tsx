@@ -20,15 +20,29 @@ describe("Navigation", () => {
     expect(container.textContent).not.toMatch(/Est\.|20\d\d/);
   });
 
+  it("keeps the wordmark home link scoped to the current locale", () => {
+    const { unmount } = render(<Navigation />);
+    expect(screen.getByRole("link", { name: "Imperium Italian Textile — home" })).toHaveAttribute(
+      "href",
+      "/",
+    );
+    unmount();
+
+    render(<Navigation locale="ar" />);
+    expect(
+      screen.getByRole("link", { name: "إمبريوم للأقمشة الإيطالية — الصفحة الرئيسية" }),
+    ).toHaveAttribute("href", "/ar");
+  });
+
   it("renders the three nav links in both the desktop nav and mobile overlay", () => {
-    expect(navigation.links.map((l) => l.label)).toEqual(["Fabrics", "About", "Contact"]);
+    expect(navigation.en.links.map((l) => l.label)).toEqual(["Fabrics", "About", "Contact"]);
     const { container } = render(<Navigation />);
     const navs = container.querySelectorAll('nav[aria-label="Primary"]');
     expect(navs).toHaveLength(2);
     const [desktopNav, mobileNav] = navs;
-    expect(desktopNav!.querySelectorAll("a")).toHaveLength(navigation.links.length);
-    expect(mobileNav!.querySelectorAll("a")).toHaveLength(navigation.links.length);
-    for (const link of navigation.links) {
+    expect(desktopNav!.querySelectorAll("a")).toHaveLength(navigation.en.links.length);
+    expect(mobileNav!.querySelectorAll("a")).toHaveLength(navigation.en.links.length);
+    for (const link of navigation.en.links) {
       const desktop = desktopNav!.querySelectorAll("a");
       expect(Array.from(desktop).some((a) => a.textContent === link.label)).toBe(true);
       const mobile = mobileNav!.querySelectorAll("a");
@@ -39,19 +53,56 @@ describe("Navigation", () => {
   it("renders the Request Samples CTA pointing at its href", () => {
     render(<Navigation />);
     const cta = screen.getByRole("link", { name: /Request Samples/i });
-    expect(cta).toHaveAttribute("href", navigation.cta.href);
+    expect(cta).toHaveAttribute("href", navigation.en.cta.href);
   });
 
-  it("renders the EN · AR toggle with English marked active", () => {
-    render(<Navigation />);
-    const toggle = screen.getByLabelText("Language: English selected, Arabic unavailable");
-    const en = screen.getByText(navigation.languageToggle.en);
-    const ar = screen.getByText(navigation.languageToggle.ar);
-    const sep = screen.getByText("·");
-    expect(toggle).toContainElement(en);
-    expect(toggle).toContainElement(ar);
-    expect(toggle).toContainElement(sep);
-    expect(en).toHaveAttribute("data-active", "true");
+  it("renders EN/AR toggle links (desktop + mobile) with English marked active via aria-current", () => {
+    const { container } = render(<Navigation />);
+    // Mobile overlay markup is aria-hidden/inert until opened, so query the
+    // DOM directly rather than via role (same pattern as the nav-links test).
+    const enLinks = Array.from(
+      container.querySelectorAll<HTMLAnchorElement>('a[aria-label="Switch to English"]'),
+    );
+    const arLinks = Array.from(
+      container.querySelectorAll<HTMLAnchorElement>('a[aria-label="التبديل إلى العربية"]'),
+    );
+    expect(enLinks).toHaveLength(2);
+    expect(arLinks).toHaveLength(2);
+    for (const link of enLinks) {
+      expect(link).toHaveAttribute("aria-current", "true");
+      expect(link).toHaveAttribute("data-active", "true");
+      expect(link).toHaveAttribute("href", "/");
+    }
+    for (const link of arLinks) {
+      expect(link).not.toHaveAttribute("aria-current");
+      expect(link).not.toHaveAttribute("data-active");
+      expect(link).toHaveAttribute("href", "/ar");
+    }
+  });
+
+  it("renders Arabic labels when locale is ar, and marks the AR toggle active", () => {
+    const { container } = render(<Navigation locale="ar" />);
+    const links = screen.getAllByText(navigation.ar.links[0]!.label);
+    expect(links.length).toBeGreaterThan(0);
+
+    const enLinks = Array.from(
+      container.querySelectorAll<HTMLAnchorElement>('a[aria-label="Switch to English"]'),
+    );
+    const arLinks = Array.from(
+      container.querySelectorAll<HTMLAnchorElement>('a[aria-label="التبديل إلى العربية"]'),
+    );
+    expect(enLinks).toHaveLength(2);
+    expect(arLinks).toHaveLength(2);
+    // AR toggle should now be active; EN toggle should point back to "/" and
+    // not be marked current.
+    for (const link of arLinks) {
+      expect(link).toHaveAttribute("aria-current", "true");
+      expect(link).toHaveAttribute("href", "/ar");
+    }
+    for (const link of enLinks) {
+      expect(link).toHaveAttribute("href", "/");
+      expect(link).not.toHaveAttribute("aria-current");
+    }
   });
 
   it("renders the hamburger button with aria-expanded false initially", () => {
