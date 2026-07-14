@@ -31,6 +31,10 @@
 
 .label[data-floating="true"] {
   color: var(--color-blu-notte);
+  /* Keep the floated label one line so the fixed -16px lift always clears the
+     field; otherwise the long textarea label wraps and its 2nd line overlaps
+     the typed text (measured +16px overlap at a 360px card). */
+  white-space: nowrap;
 }
 
 [dir="rtl"] .label {
@@ -85,11 +89,12 @@ input.input {
   padding-block: var(--space-sm);
 }
 
-/* Textarea keeps newlines and grows with content. */
+/* Textarea keeps newlines and grows with content. Extra top padding lets the
+   first typed line clear the floated label; bottom stays 16px for the resize handle. */
 textarea.input {
   min-block-size: 120px;
   resize: vertical;
-  padding-block: var(--space-sm);
+  padding-block: var(--space-md) var(--space-sm);
 }
 
 /* Custom-styled select with a small downward chevron. */
