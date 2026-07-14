@@ -1,0 +1,28 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.canvasHidden,
+.canvasReady {
+  position: absolute;
+  inset: 0;
+  transition: opacity 600ms ease;
+}
+
+.canvasHidden {
+  opacity: 0;
+}
+
+.canvasReady {
+  opacity: 1;
+}
