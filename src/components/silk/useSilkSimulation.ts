@@ -42,9 +42,21 @@ const FBO_SETTINGS = {
   wrapT: THREE.ClampToEdgeWrapping,
 } as const;
 
-export function useSilkSimulation(pointerRef: React.RefObject<SilkPointerState>) {
+export interface SilkTouchConfig {
+  simResolution: number;
+  waveSpeed: number;
+  damping: number;
+  brushRadius: number;
+  brushElongation: number;
+  brushStrength: number;
+}
+
+export function useSilkSimulation(
+  pointerRef: React.RefObject<SilkPointerState>,
+  touch: SilkTouchConfig = SILK_CONFIG.touch,
+) {
   const { gl } = useThree();
-  const resolution = SILK_CONFIG.touch.simResolution;
+  const resolution = touch.simResolution;
 
   const targetA = useFBO(resolution, resolution, FBO_SETTINGS);
   const targetB = useFBO(resolution, resolution, FBO_SETTINGS);
@@ -63,17 +75,17 @@ export function useSilkSimulation(pointerRef: React.RefObject<SilkPointerState>)
   useEffect(() => {
     simScene.add(simMesh);
     simMaterial.uTexel.set(1 / resolution, 1 / resolution);
-    simMaterial.uWaveSpeed = SILK_CONFIG.touch.waveSpeed;
-    simMaterial.uDamping = SILK_CONFIG.touch.damping;
-    simMaterial.uBrushRadius = SILK_CONFIG.touch.brushRadius;
-    simMaterial.uBrushElongation = SILK_CONFIG.touch.brushElongation;
-    simMaterial.uBrushStrength = SILK_CONFIG.touch.brushStrength;
+    simMaterial.uWaveSpeed = touch.waveSpeed;
+    simMaterial.uDamping = touch.damping;
+    simMaterial.uBrushRadius = touch.brushRadius;
+    simMaterial.uBrushElongation = touch.brushElongation;
+    simMaterial.uBrushStrength = touch.brushStrength;
     return () => {
       simScene.remove(simMesh);
       simMesh.geometry.dispose();
       simMaterial.dispose();
     };
-  }, [simScene, simMesh, simMaterial, resolution]);
+  }, [simScene, simMesh, simMaterial, resolution, touch]);
 
   useFrame((_state, delta) => {
     const dt = Math.min(delta, 1 / 30);
