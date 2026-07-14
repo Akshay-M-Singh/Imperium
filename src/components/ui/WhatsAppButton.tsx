@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { SITE } from "@/lib/site";
 import { contact } from "@/data/contact";
+import type { Locale } from "@/lib/i18n";
 import { waLink } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { MagneticButton } from "@/components/motion/MagneticButton";
@@ -10,15 +11,20 @@ import styles from "./WhatsAppButton.module.css";
 export interface WhatsAppButtonProps {
   /** Render as the fixed mobile bar. Defaults to inline. */
   fixedMobile?: boolean;
+  locale?: Locale;
 }
 
-export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): ReactNode {
+export function WhatsAppButton({
+  fixedMobile = false,
+  locale = "en",
+}: WhatsAppButtonProps): ReactNode {
   const number = SITE.whatsapp;
   if (!number) {
     return null;
   }
 
-  const href = waLink(number, contact.whatsappPrefill);
+  const t = contact[locale];
+  const href = waLink(number, t.whatsappPrefill);
 
   if (fixedMobile) {
     return (
@@ -27,10 +33,10 @@ export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): Re
         className={styles.fixed}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={contact.whatsappButtonLabel}
+        aria-label={t.whatsappButtonLabel}
       >
         <span className={styles.indicator} aria-hidden="true" />
-        {contact.whatsappButtonLabel} <Arrow />
+        {t.whatsappButtonLabel} <Arrow />
       </a>
     );
   }
@@ -42,9 +48,9 @@ export function WhatsAppButton({ fixedMobile = false }: WhatsAppButtonProps): Re
         className={cn(styles.button, styles.inline)}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={contact.whatsappButtonLabel}
+        aria-label={t.whatsappButtonLabel}
       >
-        {contact.whatsappButtonLabel} <Arrow />
+        {t.whatsappButtonLabel} <Arrow />
       </a>
     </MagneticButton>
   );

@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { contact } from "@/data/contact";
+import { isLocale, DEFAULT_LOCALE } from "@/lib/i18n";
 import { sendContactEmail } from "@/lib/email";
 import type { ContactFormData, ContactFormResult } from "@/types/forms";
 
@@ -10,7 +11,12 @@ const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const MIN_FILL_MS = 3000;
 
-const ROLE_VALUES = new Set((contact.formFields.role?.options ?? []).map((option) => option.value));
+// Role option values are the wire format and are identical across locales
+// (Task 11 brief); read them from the English data regardless of the
+// submitting visitor's locale.
+const ROLE_VALUES = new Set(
+  (contact.en.formFields.role?.options ?? []).map((option) => option.value),
+);
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^[\d\s+]*$/;
@@ -36,13 +42,17 @@ export async function submitContactForm(
   _prevState: unknown,
   formData: FormData,
 ): Promise<ContactFormResult> {
+  const rawLocale = String(formData.get("locale") ?? "");
+  const locale = isLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
+  const v = contact[locale].validation;
+
   const rawTimestamp = String(formData.get("formTimestamp") ?? "");
   const timestamp = Number(rawTimestamp);
   if (!rawTimestamp || Number.isNaN(timestamp) || Date.now() - timestamp < MIN_FILL_MS) {
     return {
       ok: false,
-      error: "Please take a moment before submitting.",
-      fieldErrors: { formTimestamp: "Submitted too quickly." },
+      error: v.tooFast,
+      fieldErrors: { formTimestamp: v.tooFastField },
     };
   }
 
@@ -64,7 +74,7 @@ export async function submitContactForm(
     if (recent.length >= RATE_LIMIT_MAX) {
       return {
         ok: false,
-        error: "Too many submissions. Please try again later.",
+        error: v.tooMany,
       };
     }
     recent.push(now);
@@ -78,42 +88,42 @@ export async function submitContactForm(
   const rawName = String(formData.get("name") ?? "");
   const name = singleLine(stripControlChars(rawName));
   if (name.length === 0 || name.length > 100) {
-    fieldErrors.name = "Please enter your name.";
+    fieldErrors.name = v.name;
   }
 
   const rawEmail = String(formData.get("email") ?? "");
   const email = singleLine(rawEmail);
   if (email.length === 0 || email.length > 254 || !EMAIL_REGEX.test(email)) {
-    fieldErrors.email = "Please enter a valid email address.";
+    fieldErrors.email = v.emailInvalid;
   }
 
   const rawCompany = String(formData.get("company") ?? "");
   const company = singleLine(stripControlChars(rawCompany));
   if (company.length > 100) {
-    fieldErrors.company = "Company name is too long.";
+    fieldErrors.company = v.companyTooLong;
   }
 
   const rawPhone = String(formData.get("phone") ?? "");
   const phone = singleLine(rawPhone);
   if (phone.length > 20 || (phone.length > 0 && !PHONE_REGEX.test(phone))) {
-    fieldErrors.phone = "Please enter a valid phone number.";
+    fieldErrors.phone = v.phoneInvalid;
   }
 
   const role = String(formData.get("role") ?? "");
   if (!ROLE_VALUES.has(role)) {
-    fieldErrors.role = "Please select a valid role.";
+    fieldErrors.role = v.roleInvalid;
   }
 
   const rawProject = String(formData.get("project") ?? "");
   const project = stripControlCharsKeepNewlines(rawProject);
   if (project.trim().length < 10 || project.length > 5000) {
-    fieldErrors.project = "Please tell us more about your project (10–5000 characters).";
+    fieldErrors.project = v.projectLength;
   }
 
   if (Object.keys(fieldErrors).length > 0) {
     return {
       ok: false,
-      error: "Please check the highlighted fields.",
+      error: v.checkFields,
       fieldErrors,
     };
   }
