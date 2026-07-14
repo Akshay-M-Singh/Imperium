@@ -8,6 +8,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/`,
       changeFrequency: "monthly",
       priority: 1,
+      alternates: {
+        languages: { en: `${baseUrl}/`, ar: `${baseUrl}/ar` },
+      },
+    },
+    {
+      url: `${baseUrl}/ar`,
+      changeFrequency: "monthly",
+      priority: 1,
+      alternates: {
+        languages: { en: `${baseUrl}/`, ar: `${baseUrl}/ar` },
+      },
     },
   ];
 }
