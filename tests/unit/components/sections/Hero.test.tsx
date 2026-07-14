@@ -60,12 +60,13 @@ describe("Hero", () => {
     expect(sample).toHaveAttribute("href", "#contact");
   });
 
-  it("renders the static hero backdrop image", () => {
-    const { container } = render(<Hero />);
-    const backdrop = container.querySelector('img[src*="hero.jpg"]');
+  it("renders the interactive silk hero backdrop", () => {
+    render(<Hero />);
+    const backdrop = screen.getByTestId("silk-fabric-background");
     expect(backdrop).toBeInTheDocument();
-    // Decorative: must be hidden from the accessibility tree.
-    expect(backdrop).toHaveAttribute("alt", "");
+    // Poster fallback img inside it: decorative, hidden from a11y tree.
+    const poster = backdrop.querySelector("img");
+    expect(poster).toHaveAttribute("alt", "");
   });
 
   it("does not mount the silk WebGL experience", () => {
