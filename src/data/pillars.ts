@@ -21,6 +21,10 @@ export interface WhyImperiumItem {
 export interface WhyImperiumData {
   eyebrow: string;
   headline: string;
+  /** Alt text for the item-01 "map" media slot (Italy → Gulf route artwork). */
+  mapAlt: string;
+  /** Alt text for the item-02 "stamp" media slot (Made in Italy badge). */
+  stampAlt: string;
   items: WhyImperiumItem[];
 }
 
@@ -28,6 +32,8 @@ export const whyImperium: Record<Locale, WhyImperiumData> = {
   en: {
     eyebrow: "Why Imperium",
     headline: "Not just fabric. A guarantee of origin.",
+    mapAlt: "Illustrated route map from Italy to the UAE and the Gulf",
+    stampAlt: "100% Made in Italy certification stamp",
     items: [
       {
         number: "01",
@@ -59,6 +65,8 @@ export const whyImperium: Record<Locale, WhyImperiumData> = {
   ar: {
     eyebrow: "لماذا إمبريوم",
     headline: "ليست مجرد أقمشة، بل ضمان للمنشأ.",
+    mapAlt: "خريطة توضيحية لمسار الشحن من إيطاليا إلى الإمارات والخليج",
+    stampAlt: "ختم شهادة صُنِع في إيطاليا 100%",
     items: [
       {
         number: "01",

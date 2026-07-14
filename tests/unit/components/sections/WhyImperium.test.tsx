@@ -43,4 +43,12 @@ describe("WhyImperium", () => {
       expect(screen.getByRole("heading", { level: 3, name: item.heading })).toBeInTheDocument();
     }
   });
+
+  it("uses locale-keyed alt text for the map and stamp images, not hardcoded English", () => {
+    render(<WhyImperium locale="ar" />);
+    expect(screen.getByRole("img", { name: whyImperium.ar.mapAlt })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: whyImperium.ar.stampAlt })).toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: whyImperium.en.mapAlt })).toBeNull();
+    expect(screen.queryByRole("img", { name: whyImperium.en.stampAlt })).toBeNull();
+  });
 });
