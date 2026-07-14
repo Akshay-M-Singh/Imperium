@@ -54,3 +54,6 @@ yarn-error.log*
 
 # Local git worktrees
 .worktrees/
+
+# Ephemeral silk quality verification screenshots
+verification/
