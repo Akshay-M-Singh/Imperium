@@ -16,4 +16,12 @@ describe("getWebglCapability", () => {
     const second = getWebglCapability();
     expect(second).toBe(first);
   });
+
+  it("returns numeric texture limits even when WebGL2 is unavailable (jsdom)", () => {
+    const cap = getWebglCapability();
+    // jsdom has no WebGL: the probe must fall back, not throw.
+    expect(cap.webgl2).toBe(false);
+    expect(cap.maxTextureSize).toBe(0);
+    expect(cap.maxAnisotropy).toBe(0);
+  });
 });
