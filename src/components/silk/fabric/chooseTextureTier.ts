@@ -25,8 +25,10 @@ export function chooseTextureTier(
   const allowed = tiers.filter((t) => t.width <= maxTextureSize);
   if (allowed.length === 0) return tiers[0];
 
+  let largest: TextureTier = allowed[0] ?? tiers[0];
   for (const tier of allowed) {
     if (tier.width >= needed) return tier;
+    largest = tier;
   }
-  return allowed[allowed.length - 1];
+  return largest;
 }
