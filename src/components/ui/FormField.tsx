@@ -82,9 +82,7 @@ export function FormField({
   } else if (type === "select") {
     control = (
       <select {...commonProps} defaultValue="">
-        <option value="" disabled hidden>
-          {label}
-        </option>
+        <option value="" disabled hidden></option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
