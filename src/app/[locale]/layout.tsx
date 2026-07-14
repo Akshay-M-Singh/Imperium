@@ -92,8 +92,8 @@ export default async function RootLayout({
           </>
         )}
         {children}
-        <Footer />
-        <WhatsAppButton fixedMobile />
+        <Footer locale={locale} />
+        <WhatsAppButton fixedMobile locale={locale} />
       </body>
     </html>
   );
