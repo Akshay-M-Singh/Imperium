@@ -5,9 +5,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navigation } from "@/data/navigation";
 import { ui } from "@/data/ui";
-import type { Locale } from "@/lib/i18n";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Arrow } from "@/components/ui/Arrow";
@@ -16,6 +17,7 @@ import styles from "./Navigation.module.css";
 export function Navigation({ locale = "en" }: { locale?: Locale }) {
   const nav = navigation[locale];
   const t = ui[locale].nav;
+  const pathname = usePathname() ?? "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -64,17 +66,28 @@ export function Navigation({ locale = "en" }: { locale?: Locale }) {
             <a href={nav.cta.href} className={styles.cta}>
               {nav.cta.label} <Arrow />
             </a>
-            <span
-              className={styles.lang}
-              aria-label="Language: English selected, Arabic unavailable"
-            >
-              <span className={styles.langActive} data-active="true">
+            <span className={styles.lang}>
+              <Link
+                href={switchLocalePath(pathname, "en")}
+                className={locale === "en" ? styles.langActive : styles.langInactive}
+                data-active={locale === "en" ? "true" : undefined}
+                aria-label={t.switchToEn}
+                aria-current={locale === "en" ? "true" : undefined}
+              >
                 {nav.languageToggle.en}
-              </span>
+              </Link>
               <span className={styles.langSep} aria-hidden="true">
                 ·
               </span>
-              <span className={styles.langInactive}>{nav.languageToggle.ar}</span>
+              <Link
+                href={switchLocalePath(pathname, "ar")}
+                className={locale === "ar" ? styles.langActive : styles.langInactive}
+                data-active={locale === "ar" ? "true" : undefined}
+                aria-label={t.switchToAr}
+                aria-current={locale === "ar" ? "true" : undefined}
+              >
+                {nav.languageToggle.ar}
+              </Link>
             </span>
           </div>
         </div>
@@ -111,6 +124,31 @@ export function Navigation({ locale = "en" }: { locale?: Locale }) {
             </a>
           ))}
         </nav>
+        <span className={styles.lang}>
+          <Link
+            href={switchLocalePath(pathname, "en")}
+            className={locale === "en" ? styles.langActive : styles.langInactive}
+            data-active={locale === "en" ? "true" : undefined}
+            aria-label={t.switchToEn}
+            aria-current={locale === "en" ? "true" : undefined}
+            onClick={() => setOpen(false)}
+          >
+            {nav.languageToggle.en}
+          </Link>
+          <span className={styles.langSep} aria-hidden="true">
+            ·
+          </span>
+          <Link
+            href={switchLocalePath(pathname, "ar")}
+            className={locale === "ar" ? styles.langActive : styles.langInactive}
+            data-active={locale === "ar" ? "true" : undefined}
+            aria-label={t.switchToAr}
+            aria-current={locale === "ar" ? "true" : undefined}
+            onClick={() => setOpen(false)}
+          >
+            {nav.languageToggle.ar}
+          </Link>
+        </span>
         <a
           className={styles.whatsappCta}
           href={`https://wa.me/${SITE.whatsapp}`}

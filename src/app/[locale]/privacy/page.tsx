@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SITE } from "@/lib/site";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
 };
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+
   return (
     <main id="main">
       <Section>
@@ -19,7 +23,13 @@ export default function PrivacyPage() {
             subline={`${SITE.name} respects your privacy. This policy explains how we handle the information you share with us.`}
           />
 
-          <div className={styles.body}>
+          {locale === "ar" && (
+            <p lang="ar" className={styles.body}>
+              سياسة الخصوصية متاحة حاليًا باللغة الإنجليزية فقط.
+            </p>
+          )}
+
+          <div lang="en" dir="ltr" className={styles.body}>
             <p>
               We collect only the information you voluntarily provide through our contact form —
               your name, email address, company, phone number, role, and project details. We use
