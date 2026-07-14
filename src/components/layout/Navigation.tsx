@@ -51,7 +51,11 @@ export function Navigation({ locale = "en" }: { locale?: Locale }) {
     <>
       <header className={cn(styles.header, scrolled && styles.scrolled)}>
         <div className={styles.row}>
-          <Link href="/" className={styles.wordmark} aria-label={t.homeAria}>
+          <Link
+            href={locale === "ar" ? "/ar" : "/"}
+            className={styles.wordmark}
+            aria-label={t.homeAria}
+          >
             <span className={styles.wordmarkName}>{SITE.name}</span>
           </Link>
 

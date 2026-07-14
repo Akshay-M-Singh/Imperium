@@ -5,14 +5,14 @@
 import { SITE } from "@/lib/site";
 import { navigation } from "@/data/navigation";
 import { ui } from "@/data/ui";
-import type { Locale } from "@/lib/i18n";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import styles from "./Footer.module.css";
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {
   const t = ui[locale].footer;
   const footerLinks = [
     ...navigation[locale].links,
-    { label: t.privacyPolicy, href: locale === "ar" ? "/ar/privacy" : "/privacy" },
+    { label: t.privacyPolicy, href: switchLocalePath("/privacy", locale) },
   ];
 
   return (

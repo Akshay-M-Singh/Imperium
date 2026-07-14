@@ -22,7 +22,7 @@ import { springs } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { contact } from "@/data/contact";
 import type { ContactData } from "@/data/contact";
-import type { Locale } from "@/lib/i18n";
+import { switchLocalePath, type Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { submitContactForm } from "@/app/actions/contact";
 import type { ContactFormData, ContactFormResult } from "@/types/forms";
@@ -238,7 +238,7 @@ export function Contact({ locale = "en" }: ContactProps): ReactNode {
 
               <p className={styles.formNote}>
                 {t.consent.before}
-                <TextLink href={locale === "ar" ? "/ar/privacy" : "/privacy"}>
+                <TextLink href={switchLocalePath("/privacy", locale)}>
                   {t.consent.linkLabel}
                 </TextLink>
                 {t.consent.after} {t.formNote}

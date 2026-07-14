@@ -20,6 +20,20 @@ describe("Navigation", () => {
     expect(container.textContent).not.toMatch(/Est\.|20\d\d/);
   });
 
+  it("keeps the wordmark home link scoped to the current locale", () => {
+    const { unmount } = render(<Navigation />);
+    expect(screen.getByRole("link", { name: "Imperium Italian Textile — home" })).toHaveAttribute(
+      "href",
+      "/",
+    );
+    unmount();
+
+    render(<Navigation locale="ar" />);
+    expect(
+      screen.getByRole("link", { name: "إمبريوم للأقمشة الإيطالية — الصفحة الرئيسية" }),
+    ).toHaveAttribute("href", "/ar");
+  });
+
   it("renders the three nav links in both the desktop nav and mobile overlay", () => {
     expect(navigation.en.links.map((l) => l.label)).toEqual(["Fabrics", "About", "Contact"]);
     const { container } = render(<Navigation />);
