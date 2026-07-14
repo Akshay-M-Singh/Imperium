@@ -54,6 +54,22 @@ describe("FormField", () => {
     expect(screen.getByRole("option", { name: "Designer" })).toBeInTheDocument();
   });
 
+  it("does not duplicate the field label as the select's placeholder text", () => {
+    render(
+      <FormField
+        name="role"
+        label="Your role"
+        type="select"
+        options={[{ value: "tailor", label: "Tailor" }]}
+      />,
+    );
+    const select = screen.getByLabelText("Your role") as HTMLSelectElement;
+    const placeholder = select.querySelector('option[value=""]');
+    expect(placeholder).not.toBeNull();
+    // The placeholder option must be empty so it doesn't echo the floating label.
+    expect(placeholder?.textContent).toBe("");
+  });
+
   it("exposes aria-invalid and error message when an error is provided", () => {
     render(<FormField name="email" label="Email" error="Invalid email" />);
     const input = screen.getByLabelText("Email");
