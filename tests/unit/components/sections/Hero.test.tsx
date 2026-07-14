@@ -72,4 +72,9 @@ describe("Hero", () => {
     render(<Hero />);
     expect(screen.queryByTestId("silk-hero")).toBeNull();
   });
+
+  it("renders Arabic hero copy when locale is ar", () => {
+    render(<Hero locale="ar" />);
+    expect(screen.getByText("صُنِع في إيطاليا")).toBeInTheDocument();
+  });
 });

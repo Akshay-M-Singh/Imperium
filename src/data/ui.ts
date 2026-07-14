@@ -19,6 +19,12 @@ export interface UiStrings {
     privacyPolicy: string;
     whatsapp: string;
   };
+  hero: {
+    eyebrow: string;
+    tagline: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
 }
 
 export const ui: Record<Locale, UiStrings> = {
@@ -38,6 +44,12 @@ export const ui: Record<Locale, UiStrings> = {
       privacyPolicy: "Privacy Policy",
       whatsapp: "WhatsApp",
     },
+    hero: {
+      eyebrow: "Made in Italy",
+      tagline: "Premium Italian fabrics · Delivered to the Gulf",
+      ctaPrimary: "Explore our fabrics",
+      ctaSecondary: "Request a sample",
+    },
   },
   ar: {
     nav: {
@@ -54,6 +66,12 @@ export const ui: Record<Locale, UiStrings> = {
       rightsReserved: "جميع الحقوق محفوظة.",
       privacyPolicy: "سياسة الخصوصية",
       whatsapp: "واتساب",
+    },
+    hero: {
+      eyebrow: "صُنِع في إيطاليا",
+      tagline: "أقمشة إيطالية فاخرة · تصل إلى الخليج",
+      ctaPrimary: "اكتشف أقمشتنا",
+      ctaSecondary: "اطلب عيّنة",
     },
   },
 };
