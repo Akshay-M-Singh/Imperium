@@ -2,8 +2,15 @@
 // add only (a) small clamped vertex displacement from the wave sim +
 // idle drift and (b) a lighting-only "delta sheen" from the deformation
 // normals. No blur, grain, or post of any kind (client brief hard rule).
+//
+// Built with drei's `shaderMaterial` (matching ../SilkMaterial.ts's
+// established convention, not a raw `THREE.ShaderMaterial` subclass with
+// `.uniforms.x.value` access) — it generates plain-property uniform
+// setters, which is both simpler for a learner-maintained codebase and
+// avoids fighting `noUncheckedIndexedAccess` on every uniform read/write.
 
 import * as THREE from "three";
+import { shaderMaterial } from "@react-three/drei";
 
 const vertexShader = /* glsl */ `
   uniform sampler2D uSimTexture;
@@ -101,33 +108,34 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-export class SilkFabricMaterial extends THREE.ShaderMaterial {
-  constructor() {
-    super({
-      vertexShader,
-      fragmentShader,
-      uniforms: {
-        uMap: { value: null },
-        uSimTexture: { value: null },
-        uSimEnabled: { value: 0 },
-        uSimTexel: { value: 1 / 256 },
-        uTime: { value: 0 },
-        uDisplacement: { value: 0 },
-        uInPlaneTug: { value: 0 },
-        uIdleAmplitude: { value: 0 },
-        uIdlePeriods: { value: new THREE.Vector2(31, 53) },
-        uUvScale: { value: new THREE.Vector2(1, 1) },
-        uUvOffset: { value: new THREE.Vector2(0, 0) },
-        uSheenStrength: { value: 0 },
-        uSheenPower: { value: 14 },
-        uNormalScale: { value: 2.4 },
-        uHeightShade: { value: 0.35 },
-        uLightAzimuth: { value: -2.35 },
-        uSheenMigration: { value: 0.003 },
-        uCalmCenter: { value: new THREE.Vector2(0.5, 0.55) },
-        uCalmRadius: { value: 0.3 },
-        uCalmFactor: { value: 0.7 },
-      },
-    });
-  }
-}
+export const SilkFabricMaterial = shaderMaterial(
+  {
+    uMap: null as THREE.Texture | null,
+    uSimTexture: null as THREE.Texture | null,
+    uSimEnabled: 0,
+    uSimTexel: 1 / 256,
+    uTime: 0,
+    uDisplacement: 0,
+    uInPlaneTug: 0,
+    uIdleAmplitude: 0,
+    uIdlePeriods: new THREE.Vector2(31, 53),
+    uUvScale: new THREE.Vector2(1, 1),
+    uUvOffset: new THREE.Vector2(0, 0),
+    uSheenStrength: 0,
+    uSheenPower: 14,
+    uNormalScale: 2.4,
+    uHeightShade: 0.35,
+    uLightAzimuth: -2.35,
+    uSheenMigration: 0.003,
+    uCalmCenter: new THREE.Vector2(0.5, 0.55),
+    uCalmRadius: 0.3,
+    uCalmFactor: 0.7,
+  },
+  vertexShader,
+  fragmentShader,
+  (material) => {
+    if (material) {
+      material.toneMapped = false;
+    }
+  },
+);
