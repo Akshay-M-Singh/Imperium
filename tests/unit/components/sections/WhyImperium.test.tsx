@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { WhyImperium } from "@/components/sections/WhyImperium";
+import { whyImperium } from "@/data/pillars";
 
 describe("WhyImperium", () => {
   it("renders exactly the three client-approved principles", () => {
@@ -33,5 +34,13 @@ describe("WhyImperium", () => {
     const rows = container.querySelectorAll("[data-row]");
     expect(rows).toHaveLength(3);
     expect(rows[1]!.className).toMatch(/reversed/);
+  });
+
+  it("renders Arabic headings and headline when locale is ar", () => {
+    render(<WhyImperium locale="ar" />);
+    expect(screen.getByRole("heading", { name: whyImperium.ar.headline })).toBeInTheDocument();
+    for (const item of whyImperium.ar.items) {
+      expect(screen.getByRole("heading", { level: 3, name: item.heading })).toBeInTheDocument();
+    }
   });
 });
