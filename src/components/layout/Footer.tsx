@@ -20,7 +20,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
       <div className={styles.inner}>
         <div className={styles.topRow}>
           <p className={styles.wordmark}>{SITE.name}</p>
-          <p className={styles.tagline}>{SITE.tagline}</p>
+          <p className={styles.tagline}>{ui[locale].hero.tagline}</p>
         </div>
 
         <nav aria-label={t.aria} className={styles.middleRow}>
