@@ -7,9 +7,12 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PullQuote } from "@/components/ui/PullQuote";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { founder } from "@/data/founder";
+import type { Locale } from "@/lib/i18n";
 import styles from "./Founder.module.css";
 
-export function Founder() {
+export function Founder({ locale = "en" }: { locale?: Locale }) {
+  const copy = founder[locale];
+
   return (
     <ScrollReveal amount={0.25}>
       <Section id="founder" ariaLabelledby="founder-heading">
@@ -17,55 +20,53 @@ export function Founder() {
           <div className={styles.left}>
             <div className={styles.imageWrap}>
               <Image
-                src={founder.portrait.src}
-                alt={founder.portrait.alt}
+                src={copy.portrait.src}
+                alt={copy.portrait.alt}
                 width={600}
                 height={800}
                 loading="lazy"
                 className={styles.image}
               />
             </div>
-            <p className={styles.caption}>{founder.portrait.caption}</p>
+            <p className={styles.caption}>{copy.portrait.caption}</p>
           </div>
 
           <div className={styles.right}>
-            <SectionHeader
-              eyebrow={founder.eyebrow}
-              headline={founder.headline}
-              id="founder-heading"
-            />
+            <SectionHeader eyebrow={copy.eyebrow} headline={copy.headline} id="founder-heading" />
 
             <div className={styles.bio}>
-              {founder.bioParagraphs.map((paragraph, index) => (
+              {copy.bioParagraphs.map((paragraph, index) => (
                 <p key={index} className={styles.bioParagraph}>
                   {paragraph}
                 </p>
               ))}
             </div>
 
-            <PullQuote quote={founder.quote} attribution={founder.quoteAttribution} />
+            <PullQuote quote={copy.quote} attribution={copy.quoteAttribution} />
 
             <div className={styles.certification}>
-              {founder.certification.src ? (
+              {copy.certification.src ? (
                 <>
                   <div className={styles.certImageWrap}>
                     <Image
-                      src={founder.certification.src}
-                      alt={founder.certification.caption}
+                      src={copy.certification.src}
+                      alt={copy.certification.caption}
                       fill
                       loading="lazy"
                       sizes="(min-width: 1024px) 340px, 80vw"
                       className={styles.certImage}
                     />
                   </div>
-                  <p className={styles.certCaption}>{founder.certification.caption}</p>
+                  <p className={styles.certCaption}>{copy.certification.caption}</p>
                 </>
               ) : (
                 <>
                   <div className={styles.certPlaceholder} data-testid="certification-placeholder">
-                    <span className={styles.certPlaceholderLabel}>Image to follow</span>
+                    <span className={styles.certPlaceholderLabel}>
+                      {copy.certificationPlaceholderLabel}
+                    </span>
                   </div>
-                  <p className={styles.certCaption}>{founder.certification.caption}</p>
+                  <p className={styles.certCaption}>{copy.certification.caption}</p>
                 </>
               )}
             </div>
