@@ -17,10 +17,10 @@ export interface ContactData {
   subline: string;
   location: string;
   email: string;
-  instagramHandle: string;
   whatsappButtonLabel: string;
   whatsappPrefill: string;
-  instagramLinkLabel: string;
+  emailButtonLabel: string;
+  emailSubjectPrefill: string;
   consent: { before: string; linkLabel: string; after: string };
   formNote: string;
   loadingText: string;
@@ -55,10 +55,10 @@ export const contact: Record<Locale, ContactData> = {
       "Tell us what you're making. We'll bring samples, prices and timelines to the conversation.",
     location: "Dubai, UAE · Italy",
     email: "imperium.italian.textile@gmail.com",
-    instagramHandle: "@imperiumitaliantextile",
     whatsappButtonLabel: "Chat on WhatsApp",
     whatsappPrefill: "Hello Imperium — I'd like to ask about fabrics.",
-    instagramLinkLabel: "Follow our journey",
+    emailButtonLabel: "Email Us",
+    emailSubjectPrefill: "Fabric inquiry — Imperium Italian Textile",
     consent: {
       before: "We use your details only to respond to your inquiry. See our ",
       linkLabel: "Privacy Policy",
@@ -111,10 +111,10 @@ export const contact: Record<Locale, ContactData> = {
     subline: "أخبرنا بما تصنعه، وسنأتي إلى الحوار بالعيّنات والأسعار والجداول الزمنية.",
     location: "دبي، الإمارات العربية المتحدة · إيطاليا",
     email: "imperium.italian.textile@gmail.com",
-    instagramHandle: "@imperiumitaliantextile",
     whatsappButtonLabel: "تحدّث معنا عبر واتساب",
     whatsappPrefill: "مرحبًا إمبريوم — أودّ الاستفسار عن الأقمشة.",
-    instagramLinkLabel: "تابِع رحلتنا",
+    emailButtonLabel: "راسلنا عبر البريد الإلكتروني",
+    emailSubjectPrefill: "استفسار عن الأقمشة — Imperium Italian Textile",
     consent: {
       before: "نستخدم بياناتك للرد على استفسارك فقط. راجع ",
       linkLabel: "سياسة الخصوصية",

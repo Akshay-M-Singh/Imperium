@@ -33,6 +33,10 @@
   color: var(--color-blu-notte);
 }
 
+[dir="rtl"] .label {
+  transform-origin: right center;
+}
+
 .input {
   width: 100%;
   border: none;
@@ -48,7 +52,21 @@
 }
 
 .input:focus-visible {
+  /* Underline-only design (DESIGN.md §9.08): the global focus rectangle
+     strikes through the floated label, so the underline below + the
+     AnimatedFocusRing are the focus indicator for these fields. */
+  outline: none;
   border-bottom-color: var(--color-blu-notte);
+  box-shadow: 0 1px 0 0 var(--color-blu-notte); /* 2px-equivalent underline, no layout shift */
+}
+
+/* Windows High Contrast Mode strips box-shadow/border-color changes, so the
+   underline above becomes invisible. Restore a real outline in that mode. */
+@media (forced-colors: active) {
+  .input:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
 }
 
 .input:disabled {
@@ -93,6 +111,17 @@ select.input:disabled {
 .inputError,
 .inputError:focus-visible {
   border-bottom-color: var(--color-error);
+}
+
+.inputError:focus-visible {
+  box-shadow: 0 1px 0 0 var(--color-error);
+}
+
+@media (forced-colors: active) {
+  .inputError:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
 }
 
 /* One-time pulse line that runs when an error appears. */
