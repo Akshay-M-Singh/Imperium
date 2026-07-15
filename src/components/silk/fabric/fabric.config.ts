@@ -17,9 +17,23 @@ export const SILK_FABRIC_CONFIG = {
   },
   motion: {
     displacementCeiling: 0.022, // fraction of viewport height, hard clamp
-    inPlaneTug: 0.14, // XY drag as a fraction of Z displacement (fabric tension read)
+    inPlaneTug: 0.5, // XY drag as a fraction of Z displacement (fabric tension read)
+    // The camera is near-orthographic, so vertex-space Z/tug motion is nearly
+    // invisible on screen. The VISIBLE deformation comes from warpStrength
+    // below — the fragment shader offsets its texture sampling by the sim
+    // height-gradient, so the photographic silk genuinely folds/shifts under
+    // the cursor (displacement mapping) rather than only catching a highlight.
+    warpStrength: 0.05, // max texture-UV offset as a fraction of the visible image
+    idleWarp: 0.0016, // whisper of ambient warp at rest (keep tiny — no swimming)
     brushRadius: 0.24, // sim-UV; ≈260 CSS px on a 1080p viewport (brief: 200-350)
-    brushStrength: 0.55,
+    brushStrength: 1.0, // amplitude of the fold pushed in under a moving cursor
+    // waveSpeed/damping kept close to the original, verified-stable values --
+    // pushing propagation speed up and damping down together risks a
+    // numerically unstable heightfield (visible as a jagged/serrated fold
+    // edge no downstream clamp can fix, since the noise is baked into the
+    // simulation texture itself, not just how it's displayed).
+    waveSpeed: 0.055, // membrane propagation; CFL-safe (< 0.707 · dx/dt) at res 256
+    damping: 3.2, // still over-damped — tension + settle, never bounce/rings
     settleSeconds: 2.2, // over-damped; no bounce, no rings
     idleAmplitude: 0.16, // fraction of displacementCeiling
     idlePeriodsSec: [31, 53] as const, // non-integer ratio — no visible loop

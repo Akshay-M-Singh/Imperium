@@ -22,8 +22,8 @@ const POINTER_SPRING = { stiffness: 55, damping: 18, mass: 0.6 };
 
 const FABRIC_TOUCH = {
   simResolution: 256,
-  waveSpeed: 0.05,
-  damping: 3.4, // over-damped: no bounce, no rings (brief hard rule)
+  waveSpeed: SILK_FABRIC_CONFIG.motion.waveSpeed,
+  damping: SILK_FABRIC_CONFIG.motion.damping, // over-damped: no bounce, no rings (brief hard rule)
   brushRadius: SILK_FABRIC_CONFIG.motion.brushRadius,
   brushElongation: 2.6,
   brushStrength: SILK_FABRIC_CONFIG.motion.brushStrength,

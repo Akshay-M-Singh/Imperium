@@ -31,6 +31,8 @@ export function SilkFabricPlane({ texture, simTextureRef, simEnabled }: SilkFabr
     // World units: viewport.height is the visible height at z=0.
     material.uDisplacement = viewport.height * motion.displacementCeiling;
     material.uInPlaneTug = motion.inPlaneTug;
+    material.uWarpStrength = motion.warpStrength;
+    material.uIdleWarp = motion.idleWarp;
     material.uIdleAmplitude = viewport.height * motion.displacementCeiling * motion.idleAmplitude;
     material.uIdlePeriods.set(motion.idlePeriodsSec[0], motion.idlePeriodsSec[1]);
     material.uSheenStrength = sheen.strength;
