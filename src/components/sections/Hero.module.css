@@ -1,74 +1,14 @@
-/* Hero — DESIGN.md §9.02. Uses 100dvh, not 100vh (MOTION_SPEC.md §5). */
-
 .section {
   position: relative;
   block-size: 100dvh;
   min-block-size: 100svh;
   overflow: hidden;
   isolation: isolate;
-  background-color: #a89374;
-}
-
-/* Static backdrop with a one-shot settle. The animation ends at scale(1)
-   exactly, so the browser re-rasterizes the layer unscaled and the image
-   renders pixel-sharp once the entrance completes. */
-.backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: var(--z-base);
-  overflow: hidden;
-}
-
-.backdropImage {
-  object-fit: cover;
-  object-position: center;
-  animation: hero-settle 2600ms var(--motion-ease-out) both;
-}
-
-@keyframes hero-settle {
-  from {
-    transform: scale(1.06);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-/* Overlay fades to its final opacity instead of appearing instantly. */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--color-hero-gradient), transparent 60%);
-  opacity: 0.4;
-  z-index: calc(var(--z-base) + 1);
-  animation: hero-overlay 1400ms var(--motion-ease-standard) both;
-  animation-delay: 200ms;
-}
-
-@keyframes hero-overlay {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.4;
-  }
-}
-
-/* Silk Hero scroll coupling (design spec §3.8): the bottom slice dissolves
-   into Pietra so the silk appears laid onto the page's linen ground —
-   the section seam becomes an art moment instead of a hard cut. */
-.dissolve {
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  block-size: 12%;
-  background: linear-gradient(to bottom, transparent, var(--color-pietra));
-  z-index: calc(var(--z-base) + 1);
 }
 
 .content {
   position: relative;
-  z-index: calc(var(--z-base) + 2);
+  z-index: var(--z-base);
   block-size: 100%;
   display: flex;
   flex-direction: column;
@@ -85,7 +25,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   animation: hero-enter 800ms var(--motion-ease-out) both;
   animation-delay: 700ms;
 }
@@ -101,8 +41,6 @@
   display: block;
   inline-size: min(480px, 80vw);
   block-size: auto;
-  /* The derived wordmark is brown-on-transparent; render it white over
-     the dark video/poster ground. */
   filter: brightness(0) invert(1);
 }
 
@@ -188,14 +126,14 @@
   inset-inline: 0;
   display: flex;
   justify-content: center;
-  z-index: calc(var(--z-base) + 2);
+  z-index: var(--z-base);
 }
 
 .scrollLine {
   display: block;
   inline-size: 1px;
   block-size: 40px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.55);
   animation: hero-pulse 2s ease-in-out 2600ms 3;
 }
 
@@ -232,8 +170,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .backdropImage,
-  .overlay,
   .eyebrow,
   .logo,
   .tagline,

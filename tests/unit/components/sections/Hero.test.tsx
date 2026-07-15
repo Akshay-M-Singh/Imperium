@@ -60,16 +60,11 @@ describe("Hero", () => {
     expect(sample).toHaveAttribute("href", "#contact");
   });
 
-  it("renders the static hero backdrop image", () => {
+  it("renders a decorative still backdrop when WebGL is unavailable", () => {
     const { container } = render(<Hero />);
-    const backdrop = container.querySelector('img[src*="hero-still"]');
+    const backdrop = container.querySelector('img[src*="silk-still"]');
     expect(backdrop).toBeInTheDocument();
-    // Decorative: must be hidden from the accessibility tree.
     expect(backdrop).toHaveAttribute("alt", "");
-  });
-
-  it("does not mount the silk WebGL experience", () => {
-    render(<Hero />);
     expect(screen.queryByTestId("silk-hero")).toBeNull();
   });
 });

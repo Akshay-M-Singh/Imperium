@@ -47,6 +47,7 @@
   font-size: 18px;
   line-height: 1;
   color: var(--color-carbone);
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 @media (max-width: 767px) {
@@ -138,6 +139,7 @@
   color: var(--color-blu-notte);
   transition:
     background-color var(--motion-duration-fast) var(--motion-ease-out),
+    border-color var(--motion-duration-fast) var(--motion-ease-out),
     color var(--motion-duration-fast) var(--motion-ease-out),
     transform 160ms var(--motion-ease-out);
 }
@@ -164,10 +166,12 @@
   font-weight: var(--font-weight-regular);
   font-size: 12px;
   color: var(--color-sabbia);
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 .langActive {
   color: var(--color-carbone);
+  transition: color var(--motion-duration-fast) var(--motion-ease-out);
 }
 
 /* --- Mobile hamburger ----------------------------------------------------- */
@@ -297,4 +301,47 @@
   .whatsappCta:hover {
     background-color: color-mix(in srgb, var(--color-whatsapp) 90%, black);
   }
+}
+
+.header[data-on-dark="true"] .wordmarkName {
+  color: var(--color-gesso);
+}
+
+.header[data-on-dark="true"] .desktopLink {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.header[data-on-dark="true"] .desktopLink:hover {
+  color: var(--color-gesso);
+}
+
+.header[data-on-dark="true"] .cta {
+  border-color: var(--color-gesso);
+  color: var(--color-gesso);
+}
+
+.header[data-on-dark="true"] .cta:hover {
+  background-color: var(--color-gesso);
+  color: var(--color-carbone);
+}
+
+.header[data-on-dark="true"] .lang {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.header[data-on-dark="true"] .langActive {
+  color: var(--color-gesso);
+}
+
+.header.scrolled .wordmarkName {
+  color: var(--color-carbone);
+}
+
+.header.scrolled .desktopLink {
+  color: var(--color-ardesia);
+}
+
+.header.scrolled .cta {
+  border-color: var(--color-blu-notte);
+  color: var(--color-blu-notte);
 }

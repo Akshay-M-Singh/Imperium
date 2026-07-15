@@ -1,8 +1,5 @@
 "use client";
 
-// Navigation — fixed site header (DESIGN.md §9.01, Roadmap Phase 2.1/2.2).
-// Transparent → opaque scroll transition; desktop nav + mobile overlay.
-
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { navigation } from "@/data/navigation";
@@ -13,16 +10,18 @@ import styles from "./Navigation.module.css";
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [onDark, setOnDark] = useState(false);
 
-  // Transparent → opaque on scroll > 100px (DESIGN.md §9.01).
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+      setOnDark(window.scrollY < window.innerHeight);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the overlay on Escape.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -32,7 +31,6 @@ export function Navigation() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Lock body scroll while the overlay is open.
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -42,7 +40,10 @@ export function Navigation() {
 
   return (
     <>
-      <header className={cn(styles.header, scrolled && styles.scrolled)}>
+      <header
+        className={cn(styles.header, scrolled && styles.scrolled)}
+        data-on-dark={onDark ? "true" : undefined}
+      >
         <div className={styles.row}>
           <Link href="/" className={styles.wordmark} aria-label="Imperium Italian Textile — home">
             <span className={styles.wordmarkName}>{SITE.name}</span>
