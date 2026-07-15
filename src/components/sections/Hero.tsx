@@ -1,34 +1,14 @@
-// Hero — full-viewport brand opening (DESIGN.md §9.02, amended by client
-// direction: the wordmark logo leads inside the h1, with the brand
-// tagline directly beneath). Background amended 2026-07-07: the live Silk
-// WebGL canvas is retired from this mount (module kept in src/components/
-// silk/, recoverable) in favour of a 4K still of the shader's resting
-// frame — the hero is fully static once the entrance cascade completes.
-
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { IridescentSilkHero } from "@/components/silk/IridescentSilkHero";
 import { SITE } from "@/lib/site";
 import styles from "./Hero.module.css";
 
 export function Hero() {
   return (
     <section className={styles.section} aria-labelledby="hero-heading">
-      <div className={styles.backdrop} aria-hidden="true">
-        <Image
-          src="/images/hero/hero-still.jpg"
-          alt=""
-          fill
-          priority
-          quality={90}
-          sizes="100vw"
-          className={styles.backdropImage}
-        />
-      </div>
-
-      <div className={styles.overlay} aria-hidden="true" />
-      <div className={styles.dissolve} aria-hidden="true" />
-
+      <IridescentSilkHero />
       <div className={styles.content}>
         <span className={styles.eyebrow}>Made in Italy</span>
 
