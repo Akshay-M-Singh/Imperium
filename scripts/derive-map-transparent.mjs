@@ -8,10 +8,15 @@
 // Output (served, referenced by WhyImperium.tsx:32):
 //   public/images/map/italy-gulf-routes-v2.png
 //
-// Technique: chroma key. The checkerboard is neutral (chroma ~ 0); the gold
-// artwork (landmasses, routes, dots, ITALY / UAE·GULF labels) is warm and
-// saturated (chroma high). Alpha ramps from 0 below T_LOW to 255 above
-// T_HIGH; RGB is preserved. Deterministic: same input -> same output.
+// Technique: background-connected flood fill. The checkerboard is neutral
+// (chroma <= T_LOW); the gold artwork (landmasses, routes, dots, ITALY /
+// UAE·GULF labels) is warm and saturated, so it never satisfies isNeutral.
+// The fill seeds from the four image corners and only clears alpha (0) on
+// neutral pixels reachable from the border without crossing artwork -- so
+// enclosed landmass interiors (fully surrounded by non-neutral pixels) can't
+// be hollowed out even if they happen to be neutral-coloured. Every other
+// pixel keeps its original alpha (255, opaque). Binary alpha, no ramp; RGB is
+// preserved. Deterministic: same input -> same output.
 //
 // Usage: node scripts/derive-map-transparent.mjs [--verify-dir <dir>]
 
@@ -22,8 +27,7 @@ import path from "node:path";
 const SRC = "assets/map/italy-gulf-routes-raw.png";
 const OUT = "public/images/map/italy-gulf-routes-v2.png";
 
-const T_LOW = 10; // chroma <= this  -> fully transparent (background)
-const T_HIGH = 30; // chroma >= this -> fully opaque (artwork)
+const T_LOW = 10; // chroma <= this -> neutral (background), eligible for the flood fill
 
 const verifyDirIdx = process.argv.indexOf("--verify-dir");
 const verifyDir = verifyDirIdx !== -1 ? process.argv[verifyDirIdx + 1] : null;
@@ -62,7 +66,7 @@ while (stack.length) {
 // (leave every non-background pixel at its original alpha 255)
 
 await sharp(data, { raw: { width, height, channels } }).png().toFile(OUT);
-console.log(`wrote ${OUT} (${width}x${height}, chroma-keyed)`);
+console.log(`wrote ${OUT} (${width}x${height}, flood-filled from corners)`);
 
 if (verifyDir) {
   await mkdir(verifyDir, { recursive: true });
