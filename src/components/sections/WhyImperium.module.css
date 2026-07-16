@@ -35,6 +35,13 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--leading-subheadline);
   color: var(--color-carbone);
+  /* Client request 2026-07-16: underline the three row headings.
+     Fine gold line, generous offset — restraint over decoration. */
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-oro-antico);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-skip-ink: auto;
 }
 
 .body {
