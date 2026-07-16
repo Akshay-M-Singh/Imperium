@@ -51,4 +51,12 @@ describe("WhyImperium", () => {
     expect(screen.queryByRole("img", { name: whyImperium.en.mapAlt })).toBeNull();
     expect(screen.queryByRole("img", { name: whyImperium.en.stampAlt })).toBeNull();
   });
+
+  it("serves the 2026-07-16 replacement map artwork, not the retired first version", () => {
+    render(<WhyImperium />);
+    const map = screen.getByRole("img", {
+      name: /route map from Italy to the UAE and the Gulf/i,
+    });
+    expect(map.getAttribute("src")).toContain("italy-gulf-routes-v2.png");
+  });
 });
