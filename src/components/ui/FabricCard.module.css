@@ -20,6 +20,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* iOS: a long-press image preview/callout on the card photo cancels the
+     Collections row's scroll pan — suppress it (fix for unreliable mobile
+     swipe, 2026-07-16). */
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .content {
