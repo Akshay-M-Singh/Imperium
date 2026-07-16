@@ -9,6 +9,13 @@
 // smooth gradient, and every pixel outside the rect is untouched.
 // Deterministic: same input → same output. PNG in, PNG out (lossless).
 //
+// NOTE (2026-07-16): the unredacted source `made-in-italy-certification.png`
+// has been removed from the working tree for privacy, so this script no longer
+// runs as-is (SRC below is absent). Its DOB/birthplace redaction is already
+// baked into the committed `made-in-italy-diploma.png`. The place-of-issue
+// ("Roma") redaction was added separately in `scripts/redact-cert-location.mjs`,
+// which operates on the committed diploma directly. Kept here for provenance.
+//
 // Usage: node scripts/redact-certification.mjs [--verify-dir <dir>]
 //   --verify-dir also writes before/after zoom crops for visual review.
 
