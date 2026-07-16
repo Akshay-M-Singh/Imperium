@@ -244,6 +244,16 @@ These must be resolved before launch:
   from this retired module but not its procedural shaders.
 - Collection fabric PNGs are 627×627; client re-exports at ≥1200px still requested.
 
+**2026-07-16 (branch `fix/map-cert-swipe-why-imperium`, plan `docs/superpowers/plans/2026-07-16-map-cert-swipe-why-imperium.md`):**
+
+- [x] Why Imperium route map swapped to client's new artwork (`italy-gulf-routes-v2.png`) — note: delivered PNG has no real alpha channel despite being called "transparent background" (opaque near-white corners happen to match the Gesso band; revisit if the section background ever changes).
+- [x] Diploma DOB/birthplace line seamlessly redacted (`scripts/redact-certification.mjs`, visually verified via before/after/control crops) — reissued as `made-in-italy-diploma.png`, old unredacted file removed from the working tree and both locales' `founder.ts`.
+- [ ] **Purge unredacted diploma from git history** (`git-filter-repo`/BFG + force push — needs Akshay's coordination; out of scope for this plan by user decision).
+- [x] Mobile Collections swipe: iOS long-press image callout suppressed, TiltCard touch press-scale removed. **Real-device confirmation still pending** — plan's Step 7 checkpoint was not completed (user unavailable in-session); re-test on a phone and report back — if still sticky, apply the snap-relaxation or vertical-stack fallback documented in the plan's Task 3 Steps 8–9.
+- [x] Why Imperium row headings underlined in gold (`text-underline-offset: 0.3em`, not live-tuned — no browser tool in this execution session).
+- [x] Why Imperium item 01 gained a competitive direct-sourcing sentence (EN+AR, no price mention) — **EN sentence awaiting Sofia's sign-off**; AR is a machine draft added to `docs/superpowers/specs/2026-07-14-ar-copy-review-sheet.md` (native-review gate applies).
+- **Found and fixed (unrelated to this plan's scope but a real hazard):** a stray leftover git worktree (`.claude/worktrees/agent-a6548e3c4aee855b7`, branch `fix/silk-hero-visible-cloth-warp`) had a `next dev` server running since 2026-07-15, bound to the LAN, serving the pre-redaction unredacted diploma. Killed and restarted correctly from this branch. The worktree itself was left in place (may be in-progress work, not this plan's to remove) — recommend cleaning it up (`git worktree remove`) once confirmed unneeded, and being careful not to leave dev servers bound to `0.0.0.0` running unattended on shared networks in the future.
+
 ### Risks / blockers for Phase 6
 
 | #   | Risk                                                   | Mitigation                                                               |
