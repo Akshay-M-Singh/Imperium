@@ -29,7 +29,7 @@ function MediaSlot({
     return (
       <figure className={styles.mapFigure} data-testid="map-media">
         <Image
-          src="/images/map/italy-gulf-routes.png"
+          src="/images/map/italy-gulf-routes-v2.png"
           alt={mapAlt}
           width={1536}
           height={1024}
