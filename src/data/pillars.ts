@@ -40,7 +40,7 @@ export const whyImperium: Record<Locale, WhyImperiumData> = {
         heading: "Direct From the Source",
         paragraphs: [
           "We buy from the mills, not from middlemen — and we visit them. Every collection begins in Italy, in conversations on factory floors with the people who weave what we sell.",
-          "From those mills, fabric travels one route: Italy to the UAE and across the Gulf. One partner, one chain of custody, nothing anonymous between the loom and your project.",
+          "From those mills, fabric travels one route: Italy to the UAE and across the Gulf. One partner, one chain of custody, nothing anonymous between the loom and your project. And with no one in between, that provenance comes with an edge — sourcing direct keeps us genuinely competitive.",
         ],
         media: "map",
       },
@@ -73,7 +73,7 @@ export const whyImperium: Record<Locale, WhyImperiumData> = {
         heading: "من المصدر مباشرة",
         paragraphs: [
           "نشتري من المصانع لا من الوسطاء — ونزورها بأنفسنا. كل مجموعة تبدأ في إيطاليا، من حوارات في صالات الإنتاج مع من ينسجون ما نبيعه.",
-          "من تلك المصانع يسلك القماش طريقًا واحدًا: من إيطاليا إلى الإمارات وعبر الخليج. شريك واحد، وسلسلة عهدة واحدة، ولا شيء مجهول بين النول ومشروعك.",
+          "من تلك المصانع يسلك القماش طريقًا واحدًا: من إيطاليا إلى الإمارات وعبر الخليج. شريك واحد، وسلسلة عهدة واحدة، ولا شيء مجهول بين النول ومشروعك. ولأن لا وسيط بيننا وبين المصانع، يتحول هذا المنشأ إلى أفضلية — فالتوريد المباشر يجعلنا في موقع تنافسي حقيقي.",
         ],
         media: "map",
       },
