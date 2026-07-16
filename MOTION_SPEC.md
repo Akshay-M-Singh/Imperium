@@ -114,7 +114,7 @@ export const childReveal = {
 | CTA underline | hidden | drawn left-to-right | CSS transition 400ms `--motion-ease-out` |
 
 **Touch behavior:**
-- On `touchstart`: scale 0.98, shadow elevation (no tilt — no cursor)
+- Touch: no press effect (removed 2026-07-16 — the press-scale transform on the touched card could cancel the Collections row's native scroll gesture on iOS Safari; suppressed together with the iOS long-press image callout).
 - On `touchend`: spring back to resting state
 - `touch-action: pan-y` so vertical page scroll still works
 

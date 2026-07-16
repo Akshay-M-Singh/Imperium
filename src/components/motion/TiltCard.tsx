@@ -2,16 +2,11 @@
 
 // TiltCard — cursor-aware 3D tilt for fabric cards (MOTION_SPEC.md §3.1).
 // Max ±4° rotateX / ±8° rotateY, image scale 1.05, two-layer shadow elevation.
-// Touch: scale 0.98 + shadow, no tilt. Reduced motion: static.
+// Touch: no interaction (the former press-scale was removed 2026-07-16 —
+// animating a transform on the touched element could cancel the Collections
+// row's scroll gesture on iOS Safari). Reduced motion: static.
 
-import {
-  createContext,
-  useContext,
-  useRef,
-  type MouseEvent,
-  type ReactNode,
-  type TouchEvent,
-} from "react";
+import { createContext, useContext, useRef, type MouseEvent, type ReactNode } from "react";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { springs } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -50,13 +45,11 @@ export function TiltCard({ children, className }: TiltCardProps): ReactNode {
 
   // Raw interaction values (updated on events, never in React state).
   const hover = useMotionValue(0);
-  const pressed = useMotionValue(0);
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
   // Spring-smoothed values for all motion outputs.
   const hoverSpring = useSpring(hover, springs.standard);
-  const pressedSpring = useSpring(pressed, springs.standard);
   const springMouseX = useSpring(mouseX, springs.standard);
   const springMouseY = useSpring(mouseY, springs.standard);
 
@@ -64,15 +57,9 @@ export function TiltCard({ children, className }: TiltCardProps): ReactNode {
   const rotateY = useTransform(springMouseX, [0, 1], [-ROTATE_Y_RANGE, ROTATE_Y_RANGE]);
   const rotateX = useTransform(springMouseY, [0, 1], [ROTATE_X_RANGE, -ROTATE_X_RANGE]);
 
-  // Touch press scale.
-  const scale = useTransform(pressedSpring, [0, 1], [1, 0.98]);
-
-  // Shadow elevation follows any active interaction (cursor hover or touch press),
-  // while the image scale responds to cursor hover only.
-  const active = useTransform([hover, pressed], (latest: number[]) => Math.max(...latest));
-  const activeSpring = useSpring(active, springs.standard);
+  // Shadow elevation follows cursor hover.
   const boxShadow = useTransform(
-    activeSpring,
+    hoverSpring,
     [0, 1],
     [
       "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)",
@@ -105,17 +92,6 @@ export function TiltCard({ children, className }: TiltCardProps): ReactNode {
     mouseY.set(0.5);
   };
 
-  const handleTouchStart = (_e: TouchEvent<HTMLDivElement>) => {
-    if (reduced) return;
-    // Do not call preventDefault() so vertical pan-y scroll keeps working.
-    pressed.set(1);
-  };
-
-  const handleTouchEnd = () => {
-    if (reduced) return;
-    pressed.set(0);
-  };
-
   return (
     <TiltCardContext.Provider value={{ hover, hoverSpring }}>
       <motion.div
@@ -125,15 +101,12 @@ export function TiltCard({ children, className }: TiltCardProps): ReactNode {
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
       >
         <motion.div
           className={styles.surface}
           style={{
             rotateX: reduced ? 0 : rotateX,
             rotateY: reduced ? 0 : rotateY,
-            scale: reduced ? 1 : scale,
           }}
         >
           {children}
