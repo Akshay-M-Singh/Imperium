@@ -47,4 +47,11 @@ describe("whyImperium data", () => {
     expect(whyImperium.ar.mapAlt).not.toBe(whyImperium.en.mapAlt);
     expect(whyImperium.ar.stampAlt).not.toBe(whyImperium.en.stampAlt);
   });
+
+  it("closes item 1 with the competitive-sourcing line, never naming price", () => {
+    expect(whyImperium.en.items[0]!.paragraphs[1]).toMatch(/competitive/i);
+    // Site-wide rule: luxury positioning never states prices (user decision 2026-07-16).
+    expect(JSON.stringify(whyImperium.en)).not.toMatch(/price|pricing/i);
+    expect(whyImperium.ar.items[0]!.paragraphs[1]).toMatch(/تنافسي/);
+  });
 });
