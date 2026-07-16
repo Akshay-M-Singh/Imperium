@@ -35,9 +35,9 @@ export const founder: Record<Locale, FounderData> = {
     quoteAttribution: "Sofia Mazza, Founder",
     certification: {
       // Client scan, integrated as-is by user decision (asset-integration
-      // spec): DOB and issue date are visible — Sofia's explicit OK
-      // recommended before launch.
-      src: "/images/certifications/made-in-italy-certification.png",
+      // spec), with the DOB/birthplace line redacted per the founder's
+      // privacy request (see scripts/redact-certification.mjs).
+      src: "/images/certifications/made-in-italy-diploma.png",
       caption: "Made in Italy Certification",
     },
     certificationPlaceholderLabel: "Image to follow",
@@ -58,7 +58,7 @@ export const founder: Record<Locale, FounderData> = {
     quote: "كل قماش أختاره لا يجسّد الحرفية الإيطالية فحسب، بل التزامي الشخصي بالتميّز أيضًا.",
     quoteAttribution: "صوفيا ماتزا، المؤسِّسة",
     certification: {
-      src: "/images/certifications/made-in-italy-certification.png",
+      src: "/images/certifications/made-in-italy-diploma.png",
       caption: "شهادة «صُنِع في إيطاليا»",
     },
     certificationPlaceholderLabel: "الصورة قادمة قريبًا",
