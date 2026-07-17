@@ -38,8 +38,8 @@ export function Hero({ locale = "en" }: { locale?: Locale }) {
             <Image
               src={SITE.logoSrc}
               alt={SITE.name}
-              width={756}
-              height={143}
+              width={1291}
+              height={252}
               priority
               className={styles.logoImage}
             />
