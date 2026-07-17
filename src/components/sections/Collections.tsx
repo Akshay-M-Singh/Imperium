@@ -87,7 +87,7 @@ export function Collections({ locale = "en" }: { locale?: Locale }) {
           ref={trackRef}
           className={styles.track}
           style={pinned ? { x } : undefined}
-          tabIndex={pinned ? undefined : 0}
+          tabIndex={isDesktop && reducedMotion ? 0 : undefined}
           role="group"
           aria-label={collectionsSection[locale].carouselAria}
         >
