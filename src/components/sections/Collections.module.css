@@ -71,6 +71,27 @@
   }
 }
 
+/* Mobile & tablet (< desktop pin breakpoint): natural vertical stack.
+   The horizontal swipe row felt unsmooth on touch — cards now stack and
+   the page scrolls normally. Desktop (>= 1024px) is unaffected: those
+   rules live in the min-width blocks below and never match here. */
+@media (max-width: 1023px) {
+  .track {
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: var(--space-xl);
+  }
+
+  .panel {
+    flex: none;
+    inline-size: 100%;
+    max-inline-size: 460px;
+    margin-inline: auto;
+    scroll-snap-align: none;
+  }
+}
+
 @media (min-width: 1024px) {
   .header {
     padding-inline: var(--grid-margin-desktop);

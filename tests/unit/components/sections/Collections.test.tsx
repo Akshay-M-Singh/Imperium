@@ -58,6 +58,15 @@ describe("Collections", () => {
     }
   });
 
+  it("does not mark the mobile stack as a focusable scroll region", () => {
+    render(<Collections />);
+    // matchMedia mock => reduced-motion on, not desktop => the mobile
+    // vertical-stack branch. The stack is not an internal scroll
+    // container, so the track must not be tab-focusable.
+    const track = screen.getByRole("group");
+    expect(track).not.toHaveAttribute("tabindex");
+  });
+
   it("renders Arabic section strings when locale is ar", () => {
     render(<Collections locale="ar" />);
     expect(screen.getByText(collectionsSection.ar.headline)).toBeInTheDocument();
