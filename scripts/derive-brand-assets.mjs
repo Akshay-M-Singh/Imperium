@@ -1,15 +1,18 @@
 // Derives the web logo from the client's opaque source PNG
-// (public/images/logo/Logo.png): pure-white canvas + #F7F8F7 plate behind
-// a brown wordmark. White is keyed out with a min-channel alpha ramp, then
-// the result is cropped to the artwork plus a small margin. Re-run when
-// the client sends new artwork:  node scripts/derive-brand-assets.mjs
+// (public/images/logo/Logo.png): a ~#F4EFEB cream canvas + ~#F8F8F6 plate
+// behind a brown wordmark with a light-gold subtitle. The light background
+// is keyed out with a min-channel alpha ramp (WHITE tuned to 237 so the
+// cream margin, min channel ~235, also clears), then the result is cropped
+// to the artwork plus a small margin. Re-run when the client sends new
+// artwork:  node scripts/derive-brand-assets.mjs
 import sharp from "sharp";
 
 const SRC = "public/images/logo/Logo.png";
 const OUT = "public/images/logo/imperium-wordmark.png";
-// Lightest channel >= WHITE → fully transparent (clears the #F7F8F7 plate);
+// Lightest channel >= WHITE → fully transparent (clears both the cream
+// canvas and the lighter plate behind it);
 // <= BLACK → fully opaque; linear ramp between (anti-aliased glyph edges).
-const WHITE = 246;
+const WHITE = 237;
 const BLACK = 140;
 const MARGIN = 12;
 
