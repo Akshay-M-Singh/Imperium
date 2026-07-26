@@ -6,6 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useWebGL2 } from "@/hooks/useWebGL2";
 import { usePointerPosition } from "@/hooks/usePointerPosition";
 import { canRenderSilkHero } from "@/lib/silkHero";
+import { SilkErrorBoundary } from "./SilkErrorBoundary";
 import styles from "./ChampagneSilkHero.module.css";
 
 const ChampagneSilkCanvas = dynamic(() => import("./ChampagneSilkCanvas"), { ssr: false });
@@ -19,13 +20,15 @@ export function ChampagneSilkHero() {
   return (
     <div className={styles.container} aria-hidden="true" data-testid="silk-hero">
       {showCanvas ? (
-        <ChampagneSilkCanvas
-          springX={springX}
-          springY={springY}
-          getTimeSinceLastMove={getTimeSinceLastMove}
-          getVelocity={getVelocity}
-          getIsIdle={getIsIdle}
-        />
+        <SilkErrorBoundary>
+          <ChampagneSilkCanvas
+            springX={springX}
+            springY={springY}
+            getTimeSinceLastMove={getTimeSinceLastMove}
+            getVelocity={getVelocity}
+            getIsIdle={getIsIdle}
+          />
+        </SilkErrorBoundary>
       ) : (
         <Image
           src="/images/hero/silk-still.jpg"

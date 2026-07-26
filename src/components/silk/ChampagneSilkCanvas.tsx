@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useImperativeHandle } from "react";
+import { useRef, useMemo } from "react";
 import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import type { MotionValue } from "framer-motion";
@@ -37,7 +37,7 @@ function DisplacementField({
   springY,
   getVelocity,
   getIsIdle,
-}: PointerData & { silkMaterialRef: React.RefObject<THREE.ShaderMaterial | null> }) {
+}: PointerData & { silkMaterialRef: React.MutableRefObject<THREE.ShaderMaterial | null> }) {
   const { gl } = useThree();
   const fboSize = useMemo(getFboSize, []);
 
@@ -147,7 +147,7 @@ function DisplacementField({
 }
 
 interface SilkPlaneProps extends PointerData {
-  silkMaterialRef: React.RefObject<THREE.ShaderMaterial | null>;
+  silkMaterialRef: React.MutableRefObject<THREE.ShaderMaterial | null>;
 }
 
 function SilkPlane({ springX, springY, getTimeSinceLastMove, silkMaterialRef }: SilkPlaneProps) {
@@ -166,13 +166,10 @@ function SilkPlane({ springX, springY, getTimeSinceLastMove, silkMaterialRef }: 
     return t;
   }, []);
 
-  useImperativeHandle(silkMaterialRef, () => {
-    return meshRef.current?.material as THREE.ShaderMaterial;
-  });
-
   useFrame((state) => {
     if (!meshRef.current) return;
     const material = meshRef.current.material as THREE.ShaderMaterial;
+    silkMaterialRef.current = material;
     const u = material.uniforms;
     if (u.uTime) u.uTime.value = state.clock.elapsedTime;
     if (u.uCursorPos) u.uCursorPos.value.set(springX.get(), springY.get());
@@ -203,7 +200,7 @@ function SilkPlane({ springX, springY, getTimeSinceLastMove, silkMaterialRef }: 
 
 export default function ChampagneSilkCanvas(props: PointerData) {
   const maxDpr = useMemo(getMaxDpr, []);
-  const silkMaterialRef = useRef<THREE.ShaderMaterial>(null);
+  const silkMaterialRef = useRef<THREE.ShaderMaterial | null>(null);
 
   return (
     <Canvas
