@@ -1,1 +1,1 @@
-export { default as IridescentSilkCanvas } from "./IridescentSilkCanvas";
+export { default as ChampagneSilkCanvas } from "./ChampagneSilkCanvas";

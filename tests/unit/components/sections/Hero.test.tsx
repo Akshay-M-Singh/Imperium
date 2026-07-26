@@ -65,6 +65,6 @@ describe("Hero", () => {
     const backdrop = container.querySelector('img[src*="silk-still"]');
     expect(backdrop).toBeInTheDocument();
     expect(backdrop).toHaveAttribute("alt", "");
-    expect(screen.queryByTestId("silk-hero")).toBeNull();
+    expect(screen.getByTestId("silk-hero")).toBeInTheDocument();
   });
 });

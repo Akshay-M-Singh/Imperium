@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { IridescentSilkHero } from "@/components/silk/IridescentSilkHero";
+import { ChampagneSilkHero } from "@/components/silk/ChampagneSilkHero";
 import { SITE } from "@/lib/site";
 import styles from "./Hero.module.css";
 
 export function Hero() {
   return (
     <section className={styles.section} aria-labelledby="hero-heading">
-      <IridescentSilkHero />
+      <ChampagneSilkHero />
       <div className={styles.content}>
         <span className={styles.eyebrow}>Made in Italy</span>
 
