@@ -6,6 +6,29 @@
   isolation: isolate;
 }
 
+/* DESIGN.md §3.5 — fabric still + scrim; mask fades the bottom edge into the
+   pietra page background so the hero dissolves into the next band. */
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--color-sabbia);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-hero-gradient);
+}
+
+.backgroundImage {
+  object-fit: cover;
+}
+
 .content {
   position: relative;
   z-index: var(--z-base);
@@ -107,16 +130,22 @@
   background-position: 0 100%;
   background-size: 0% 1px;
   padding-block-end: 2px;
-  transition: background-size var(--motion-duration-fast) var(--motion-ease-standard);
+  transition:
+    background-size var(--motion-duration-fast) var(--motion-ease-standard),
+    text-shadow var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
+/* Faux-embolden: DM Sans ships only 400/500 faces (DESIGN.md §2.2), so a
+   same-color micro text-shadow stands in for a weight bump (§5.2). */
 .textLink:focus-visible {
   background-size: 100% 1px;
+  text-shadow: 0 0 0.6px currentColor;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .textLink:hover {
     background-size: 100% 1px;
+    text-shadow: 0 0 0.6px currentColor;
   }
 }
 
@@ -133,7 +162,7 @@
   display: block;
   inline-size: 1px;
   block-size: 40px;
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: var(--color-sabbia);
   animation: hero-pulse 2s ease-in-out 2600ms 3;
 }
 

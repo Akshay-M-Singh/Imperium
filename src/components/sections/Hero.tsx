@@ -1,14 +1,25 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { ChampagneSilkHero } from "@/components/silk/ChampagneSilkHero";
+import { navigation } from "@/data/navigation";
 import { SITE } from "@/lib/site";
 import styles from "./Hero.module.css";
 
 export function Hero() {
   return (
     <section className={styles.section} aria-labelledby="hero-heading">
-      <ChampagneSilkHero />
+      {/* DESIGN.md §3.5 — static fabric background + scrim, bottom-edge fade */}
+      <div className={styles.background} aria-hidden="true">
+        <Image
+          src="/images/hero/fabric-hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={90}
+          className={styles.backgroundImage}
+        />
+      </div>
       <div className={styles.content}>
         <span className={styles.eyebrow}>Made in Italy</span>
 
@@ -38,7 +49,7 @@ export function Hero() {
               Explore our fabrics
             </Button>
           </MagneticButton>
-          <a href="#contact" className={styles.textLink}>
+          <a href={navigation.cta.href} className={styles.textLink}>
             Request a sample →
           </a>
         </div>

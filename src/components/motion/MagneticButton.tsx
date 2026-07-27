@@ -1,9 +1,12 @@
 "use client";
 
-// MagneticButton — cursor-attracted CTA translate (MOTION_SPEC.md §3.2).
-// Max 8px, spring `firm`. No-op on touch devices. Reduced motion: static.
+// MagneticButton — cursor-attracted CTA translate (DESIGN.md §7.6).
+// Max 8px within a 100px hit box, spring `firm`. No-op on touch devices.
+// Reduced motion: static. The cursor is tracked on window mousemove — there
+// is deliberately no expanded DOM hit-area, so neighbouring links keep their
+// own clicks (the old ::before overlay swallowed them).
 
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { springs } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -35,38 +38,42 @@ export function MagneticButton({ children }: MagneticButtonProps): ReactNode {
     setTouch(isTouchDevice());
   }, []);
 
-  const handleMove = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = wrapperRef.current?.getBoundingClientRect();
-    if (!rect) return;
+  useEffect(() => {
+    if (touch || reducedMotion) return;
 
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const dx = e.clientX - centerX;
-    const dy = e.clientY - centerY;
+    const handleMove = (e: globalThis.MouseEvent) => {
+      const rect = wrapperRef.current?.getBoundingClientRect();
+      if (!rect) return;
 
-    const tx = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, (dx / HIT_RADIUS) * MAX_OFFSET));
-    const ty = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, (dy / HIT_RADIUS) * MAX_OFFSET));
+      const withinHitBox =
+        e.clientX >= rect.left - HIT_RADIUS &&
+        e.clientX <= rect.right + HIT_RADIUS &&
+        e.clientY >= rect.top - HIT_RADIUS &&
+        e.clientY <= rect.bottom + HIT_RADIUS;
 
-    x.set(tx);
-    y.set(ty);
-  };
+      if (!withinHitBox) {
+        x.set(0);
+        y.set(0);
+        return;
+      }
 
-  const handleLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+
+      x.set(Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, (dx / HIT_RADIUS) * MAX_OFFSET)));
+      y.set(Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, (dy / HIT_RADIUS) * MAX_OFFSET)));
+    };
+
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, [touch, reducedMotion, x, y]);
 
   if (touch || reducedMotion) {
     return <>{children}</>;
   }
 
   return (
-    <div
-      ref={wrapperRef}
-      className={styles.wrapper}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-    >
+    <div ref={wrapperRef} className={styles.wrapper}>
       <motion.div className={styles.inner} style={{ x: springX, y: springY }}>
         {children}
       </motion.div>

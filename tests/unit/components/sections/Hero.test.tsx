@@ -60,11 +60,10 @@ describe("Hero", () => {
     expect(sample).toHaveAttribute("href", "#contact");
   });
 
-  it("renders a decorative still backdrop when WebGL is unavailable", () => {
+  it("always renders the decorative fabric backdrop", () => {
     const { container } = render(<Hero />);
-    const backdrop = container.querySelector('img[src*="silk-still"]');
+    const backdrop = container.querySelector('img[src*="fabric-hero"]');
     expect(backdrop).toBeInTheDocument();
     expect(backdrop).toHaveAttribute("alt", "");
-    expect(screen.getByTestId("silk-hero")).toBeInTheDocument();
   });
 });

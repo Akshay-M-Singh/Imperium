@@ -6,8 +6,6 @@ import type { NavigationData } from "@/types/navigation";
 export const navigation: NavigationData = {
   links: [
     { label: "Fabrics", href: "#collections" },
-    { label: "Pezzi Unici", href: "#collections" },
-    { label: "Hospitality", href: "#collections" },
     { label: "About", href: "#founder" },
     { label: "Contact", href: "#contact" },
   ],

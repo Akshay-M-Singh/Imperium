@@ -20,7 +20,7 @@ describe("Navigation", () => {
     expect(container.textContent).not.toMatch(/Est\.|20\d\d/);
   });
 
-  it("renders all five nav links in both the desktop nav and mobile overlay", () => {
+  it("renders all nav links in both the desktop nav and mobile overlay", () => {
     const { container } = render(<Navigation />);
     const navs = container.querySelectorAll('nav[aria-label="Primary"]');
     expect(navs).toHaveLength(2);

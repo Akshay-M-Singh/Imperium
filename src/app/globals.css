@@ -218,6 +218,11 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Anchor jumps must clear the fixed header (§9.01). */
+section[id] {
+  scroll-margin-block-start: var(--nav-height);
+}
+
 body {
   min-height: 100svh;
   line-height: var(--leading-body);

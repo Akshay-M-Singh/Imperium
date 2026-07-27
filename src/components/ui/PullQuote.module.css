@@ -1,9 +1,9 @@
-/* PullQuote — DESIGN.md §9.06. Centred Cormorant italic quote + Oro Antico attribution. */
+/* PullQuote — DESIGN.md §9.06. Centred Cormorant italic quote + Oro Antico attribution.
+   Vertical rhythm belongs to the parent layout (§11.1.6). */
 
 .pullQuote {
   margin: 0;
   text-align: center;
-  padding-block: 80px;
 }
 
 .quote {

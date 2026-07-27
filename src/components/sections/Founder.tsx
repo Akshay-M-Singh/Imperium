@@ -1,5 +1,5 @@
-// Founder — asymmetric 5/7 portrait + bio + pull quote + certification
-// (DESIGN.md §9.06, Roadmap Phase 4.2).
+// Founder — asymmetric 5/7 portrait + bio, then a side-by-side quote +
+// certification row with its own scroll reveal (DESIGN.md §9.06).
 
 import Image from "next/image";
 import { Section } from "@/components/layout/Section";
@@ -11,8 +11,8 @@ import styles from "./Founder.module.css";
 
 export function Founder() {
   return (
-    <ScrollReveal amount={0.25}>
-      <Section id="founder" ariaLabelledby="founder-heading">
+    <Section id="founder" ariaLabelledby="founder-heading" dense>
+      <ScrollReveal amount={0.25}>
         <div className={styles.grid}>
           <div className={styles.left}>
             <div className={styles.imageWrap}>
@@ -42,37 +42,41 @@ export function Founder() {
                 </p>
               ))}
             </div>
-
-            <PullQuote quote={founder.quote} attribution={founder.quoteAttribution} />
-
-            <div className={styles.certification}>
-              {founder.certification.src ? (
-                <>
-                  <div className={styles.certImageWrap}>
-                    <Image
-                      src={founder.certification.src}
-                      alt={founder.certification.caption}
-                      fill
-                      loading="lazy"
-                      sizes="(min-width: 1024px) 340px, 80vw"
-                      className={styles.certImage}
-                    />
-                  </div>
-                  <p className={styles.certCaption}>{founder.certification.caption}</p>
-                </>
-              ) : (
-                <>
-                  <div className={styles.certPlaceholder} data-testid="certification-placeholder">
-                    <span className={styles.certPlaceholderLabel}>Image to follow</span>
-                  </div>
-                  <p className={styles.certCaption}>{founder.certification.caption}</p>
-                </>
-              )}
-            </div>
           </div>
         </div>
-      </Section>
-    </ScrollReveal>
+      </ScrollReveal>
+
+      <ScrollReveal amount={0.25}>
+        <div className={styles.quoteRow}>
+          <PullQuote quote={founder.quote} attribution={founder.quoteAttribution} />
+
+          <div className={styles.certification}>
+            {founder.certification.src ? (
+              <>
+                <div className={styles.certImageWrap}>
+                  <Image
+                    src={founder.certification.src}
+                    alt={founder.certification.caption}
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 480px, 90vw"
+                    className={styles.certImage}
+                  />
+                </div>
+                <p className={styles.certCaption}>{founder.certification.caption}</p>
+              </>
+            ) : (
+              <>
+                <div className={styles.certPlaceholder} data-testid="certification-placeholder">
+                  <span className={styles.certPlaceholderLabel}>Image to follow</span>
+                </div>
+                <p className={styles.certCaption}>{founder.certification.caption}</p>
+              </>
+            )}
+          </div>
+        </div>
+      </ScrollReveal>
+    </Section>
   );
 }
 
