@@ -13,8 +13,8 @@
 ## Global Constraints
 
 - Branch: `fix/map-cert-swipe-why-imperium` off `main`. Commit messages follow commitlint (`feat:`/`fix:`/`docs:`/`test:`) and end with `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`.
-- **The diploma may not change visually anywhere except the DOB line** ("[redacted]"). No re-crop, no color shift, no resize. PNG stays lossless.
-- **The unredacted scan must not survive at any served path** once Task 2 lands; do not re-add it under any name. (Its presence in git _history_ is a known, separately-tracked follow-up — out of scope here.)
+- **The diploma may not change visually anywhere except the DOB line** (the founder's DOB/birthplace). No re-crop, no color shift, no resize. PNG stays lossless.
+- **The unredacted scan must not survive at any served path** once Task 2 lands; do not re-add it under any name. (It was purged from git history in the 2026-10-05 rewrite.)
 - **No price/pricing words** may enter any copy (site-wide luxury positioning rule; the new sentence is competitive-framing only).
 - Silk hero textures in `public/images/hero/silk/` are untouched and must never go through `next/image` (standing rule, not exercised by this plan).
 - Desktop (≥1024px, motion-allowed) Collections pinned showcase must be behaviorally unchanged.
@@ -129,8 +129,8 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 Create `scripts/redact-certification.mjs`:
 
 ```js
-// redact-certification — removes the "[redacted]"
-// (birthplace + DOB) line from Sofia's diploma scan, per the founder's
+// redact-certification — removes the founder's DOB/birthplace
+// line from Sofia's diploma scan, per the founder's
 // privacy request (spec: docs/superpowers/specs/
 // 2026-07-16-map-cert-swipe-why-imperium-design.md §3).
 //
@@ -202,7 +202,7 @@ Expected output: `wrote public/images/certifications/made-in-italy-diploma.png` 
 
 - [ ] **Step 3: Visually verify the redaction (Read tool on each crop)**
 
-- `zoom-after.png`: the "[redacted]" line is **gone**; "Sofia Mazza" above and "che ha partecipato…" below are intact; no visible seam, band, or tone step where the line was.
+- `zoom-after.png`: the DOB/birthplace line is **gone**; "Sofia Mazza" above and "che ha partecipato…" below are intact; no visible seam, band, or tone step where the line was.
 - `zoom-before.png` vs `zoom-after.png`: the ONLY difference is the missing line.
 - `control-before.png` vs `control-after.png`: pixel-identical to the eye (untouched region).
 - Also Read the full `made-in-italy-diploma.png` to confirm the whole diploma still reads correctly end-to-end.
@@ -662,7 +662,7 @@ On `/` desktop (1280×800) and mobile (375×812), and `/ar`:
 Append to CLAUDE.md's addenda block:
 
 ```markdown
-> **Addendum 8 (2026-07-16):** plan `docs/superpowers/plans/2026-07-16-map-cert-swipe-why-imperium.md` (branch `fix/map-cert-swipe-why-imperium`) landed four client changes: (1) the Why Imperium route map was replaced with the client's new transparent-background artwork (`/images/map/italy-gulf-routes-v2.png`; old file deleted, recoverable via git); (2) the diploma scan was **seamlessly redacted** — Sofia's DOB/birthplace line removed by the deterministic `scripts/redact-certification.mjs` and reissued as `made-in-italy-diploma.png` (old URL dead; ⚠️ the unredacted original remains in the public repo's git history — separate follow-up task, user decision 2026-07-16); (3) mobile Collections swiping was fixed by suppressing the iOS long-press image callout on card media and removing TiltCard's touch press-scale (MOTION_SPEC §3.1 amended) — [record here which conditional steps ran: snap proximity? vertical fallback?]; (4) Why Imperium row headings gained a fine gold underline and item 01 a competitive direct-sourcing sentence (no price mention by explicit client decision; AR machine draft added to the review sheet, §10 item 6 gate applies). New EN sentence still needs Sofia's sign-off.
+> **Addendum 8 (2026-07-16):** plan `docs/superpowers/plans/2026-07-16-map-cert-swipe-why-imperium.md` (branch `fix/map-cert-swipe-why-imperium`) landed four client changes: (1) the Why Imperium route map was replaced with the client's new transparent-background artwork (`/images/map/italy-gulf-routes-v2.png`; old file deleted, recoverable via git); (2) the diploma scan was **seamlessly redacted** — Sofia's DOB/birthplace line removed by the deterministic `scripts/redact-certification.mjs` and reissued as `made-in-italy-diploma.png` (old URL dead; the unredacted original was purged from the public repo's git history on 2026-10-05 by a full history rewrite (with mailmap anonymization)); (3) mobile Collections swiping was fixed by suppressing the iOS long-press image callout on card media and removing TiltCard's touch press-scale (MOTION_SPEC §3.1 amended) — [record here which conditional steps ran: snap proximity? vertical fallback?]; (4) Why Imperium row headings gained a fine gold underline and item 01 a competitive direct-sourcing sentence (no price mention by explicit client decision; AR machine draft added to the review sheet, §10 item 6 gate applies). New EN sentence still needs Sofia's sign-off.
 ```
 
 (Replace the bracketed note with what actually happened — that bracket is the only permitted placeholder, resolved at execution time.)

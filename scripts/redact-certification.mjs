@@ -1,5 +1,5 @@
-// redact-certification — removes the "[redacted]"
-// (birthplace + DOB) line from Sofia's diploma scan, per the founder's
+// redact-certification — removes the founder's DOB/birthplace
+// line from Sofia's diploma scan, per the founder's
 // privacy request (spec: docs/superpowers/specs/
 // 2026-07-16-map-cert-swipe-why-imperium-design.md §3).
 //
@@ -12,7 +12,8 @@
 // NOTE (2026-07-16): the unredacted source `made-in-italy-certification.png`
 // has been removed from the working tree for privacy, so this script no longer
 // runs as-is (SRC below is absent). Its DOB/birthplace redaction is already
-// baked into the committed `made-in-italy-diploma.png`. The place-of-issue
+// baked into the committed `made-in-italy-diploma.png`, and the unredacted
+// original was purged from git history in the 2026-10-05 rewrite. The place-of-issue
 // ("Roma") redaction was added separately in `scripts/redact-cert-location.mjs`,
 // which operates on the committed diploma directly. Kept here for provenance.
 //

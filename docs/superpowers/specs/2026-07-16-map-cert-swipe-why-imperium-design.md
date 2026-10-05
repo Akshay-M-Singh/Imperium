@@ -45,12 +45,12 @@ All four user decisions below were confirmed explicitly in the brainstorming ses
 
 ## 3. Diploma redaction (seamless, in the asset itself)
 
-**Current state:** `public/images/certifications/made-in-italy-certification.png` (2502×1770) is Sofia's real diploma and contains the line **"[redacted]"** (birthplace + DOB) centered below her name. The file is served publicly and committed to the public GitHub repo.
+**Current state:** `public/images/certifications/made-in-italy-certification.png` (2502×1770) is Sofia's real diploma and contains a line with the founder's DOB/birthplace centered below her name. The file was served publicly and committed to the public GitHub repo; the asset and the DOB/birthplace text were purged from the repo and its history on 2026-10-05 (privacy remediation).
 
 **User decisions:**
 
 - **Seamless removal** — the line disappears as if never printed; every other pixel of the diploma stays visually identical. A CSS overlay is explicitly ruled out (the PNG itself is publicly fetchable).
-- **Git history exposure is out of scope** — flagged as a separate follow-up (history rewrite via `git-filter-repo`/BFG needs Akshay's coordination and a force push). This plan only fixes the served file going forward.
+- **Git history exposure (resolved 2026-10-05)** — originally flagged as a separate follow-up; the repo history was subsequently rewritten with `git-filter-repo` and force-pushed, removing the unredacted asset and the DOB/birthplace text.
 
 **Technique (measured in this session against the actual file):**
 
