@@ -32,7 +32,7 @@ export const founder: FounderData = {
     // Client scan, integrated as-is by user decision (asset-integration
     // spec): DOB and issue date are visible — Sofia's explicit OK
     // recommended before launch.
-    src: "/images/certifications/made-in-italy-certification.png",
+    src: "/images/certifications/made-in-italy-diploma.png",
     caption: "Made in Italy Certification",
   },
 };
